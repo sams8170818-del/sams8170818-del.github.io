@@ -1,97 +1,760 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLKRØM MEDIA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BLKRØM MEDIA — film · photography · motion · post-production. Cinematic visuals, dark aesthetics, curated work." />
+
+  <!-- Social preview (optional, can update later) -->
+  <meta property="og:title" content="BLKRØM MEDIA" />
+  <meta property="og:description" content="film · photography · motion · post-production" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/hero.jpg" />
+
   <style>
-    *{box-sizing:border-box}
+    :root{
+      --bg:#000;
+      --panel:rgba(255,255,255,.04);
+      --panel2:rgba(255,255,255,.06);
+      --text:#fff;
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.55);
+      --line:rgba(255,255,255,.14);
+      --line2:rgba(255,255,255,.22);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius:18px;
+      --radius2:26px;
+      --max:1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      background:#000;
-      color:#fff;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6;
+      overflow-x:hidden;
     }
-    .hero{
-      min-height:100vh;
+
+    /* subtle film grain */
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.10;
+      mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
+
+    /* Top nav */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.82), rgba(0,0,0,.35));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{
       display:flex;
       align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:40px;
+      justify-content:space-between;
+      padding:14px 0;
+      gap:16px;
     }
-    h1{
-      letter-spacing:.2em;
-      margin:0 0 16px;
-      font-size:clamp(32px,6vw,64px);
+    .brand{
+      display:flex;
+      align-items:baseline;
+      gap:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      white-space:nowrap;
     }
-    p{
-      opacity:.75;
-      margin:8px 0;
+    .brand b{ font-weight:800; }
+    .brand span{
+      font-size:12px;
+      letter-spacing:.22em;
+      color:var(--muted2);
+      text-transform:uppercase;
     }
-    .btns{
-      margin-top:28px;
+    .links{
       display:flex;
       gap:14px;
-      justify-content:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .links a{
+      font-size:13px;
+      letter-spacing:.08em;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    .links a:hover{
+      border-color:rgba(255,255,255,.16);
+      color:#fff;
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      min-height:92vh;
+      display:flex;
+      align-items:center;
+      padding:40px 0 30px;
+      overflow:hidden;
+    }
+    .hero-bg{
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 420px at 30% 30%, rgba(255,255,255,.12), transparent 55%),
+        radial-gradient(800px 440px at 80% 20%, rgba(255,255,255,.08), transparent 60%),
+        linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.85)),
+        url("assets/hero.jpg");
+      background-size:cover;
+      background-position:center;
+      filter: contrast(1.08) saturate(.85);
+      transform: scale(1.02);
+    }
+    .hero-bg:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.88));
+    }
+
+    .hero-card{
+      position:relative;
+      max-width:820px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.55);
+      border-radius: var(--radius2);
+      padding:38px 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted2);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    .dot{
+      width:6px;height:6px;border-radius:999px;
+      background:rgba(255,255,255,.42);
+    }
+
+    h1{
+      margin:12px 0 6px;
+      font-size: clamp(34px, 6.2vw, 74px);
+      line-height:1.05;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .sub{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:16px;
+      letter-spacing:.08em;
+      text-transform:lowercase;
+    }
+    .sub strong{ color:#fff; font-weight:700; }
+
+    .cta{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
       flex-wrap:wrap;
     }
-    a{
-      color:#fff;
-      text-decoration:none;
-      border:1px solid rgba(255,255,255,.3);
-      padding:12px 18px;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
       border-radius:14px;
-      letter-spacing:.08em;
+      border:1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.04);
+      font-size:13px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.45);
+      background: rgba(255,255,255,.07);
+    }
+    .btn.primary{
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.34);
+    }
+    .note{
+      margin-top:18px;
+      color:var(--muted2);
+      font-size:13px;
+    }
+
+    /* Sections */
+    section{ padding:84px 0; }
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:24px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: clamp(22px, 3.2vw, 34px);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted2);
+      max-width:520px;
       font-size:14px;
     }
-    a:hover{border-color:#fff}
-    section{
-      max-width:900px;
-      margin:0 auto;
-      padding:80px 32px;
+
+    .grid{
+      display:grid;
+      gap:14px;
     }
-    .muted{
+
+    /* Services */
+    .cards{
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card{
+      grid-column: span 6;
+      border:1px solid rgba(255,255,255,.10);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding:18px 16px;
+    }
+    .card h3{
+      margin:0 0 8px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:14px;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .tagrow{
+      margin-top:12px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .tag{
+      font-size:12px;
+      color:rgba(255,255,255,.70);
+      border:1px solid rgba(255,255,255,.12);
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+      letter-spacing:.06em;
+    }
+
+    /* Work gallery */
+    .gallery{
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .shot{
+      grid-column: span 6;
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: var(--panel2);
+      min-height: 240px;
+      cursor:pointer;
+      isolation:isolate;
+    }
+    .shot.big{ grid-column: span 12; min-height: 360px; }
+    .shot img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: contrast(1.08) saturate(.9);
+      transform: scale(1.02);
+      transition: transform .22s ease, filter .22s ease;
+    }
+    .shot:hover img{ transform: scale(1.06); filter: contrast(1.12) saturate(.95); }
+    .shot:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,.86));
+      z-index:1;
+    }
+    .shot .cap{
+      position:absolute;
+      left:14px; right:14px; bottom:12px;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-end;
+    }
+    .shot .cap b{
       font-size:13px;
-      opacity:.5;
-      margin-top:32px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+    .shot .cap span{
+      font-size:12px;
+      color:var(--muted2);
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
+
+    /* Video embed (safe) */
+    .video{
+      border:1px solid rgba(255,255,255,.10);
+      background: var(--panel);
+      border-radius: var(--radius2);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+    }
+    .video .top{
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .video .top b{
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:13px;
+    }
+    .video .top span{
+      color:var(--muted2);
+      font-size:12px;
+      letter-spacing:.06em;
+    }
+    .video iframe{
+      width:100%;
+      aspect-ratio:16/9;
+      border:0;
+      display:block;
+      background:#000;
+    }
+
+    /* Private / Restricted */
+    .restricted{
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: var(--radius2);
+      padding:22px 18px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      box-shadow: var(--shadow);
+    }
+    .restricted h3{
+      margin:0 0 6px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:14px;
+    }
+    .restricted p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      max-width:720px;
+    }
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+    }
+    .box{
+      border:1px solid rgba(255,255,255,.10);
+      background: var(--panel);
+      border-radius: var(--radius2);
+      padding:18px 16px;
+    }
+    .box h3{
+      margin:0 0 10px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:14px;
+    }
+    .formrow{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    input, textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding:12px 12px;
+      color:#fff;
+      outline:none;
+      font: inherit;
+    }
+    textarea{ min-height:120px; resize:vertical; }
+    input:focus, textarea:focus{ border-color: rgba(255,255,255,.35); }
+    .small{
+      color:var(--muted2);
+      font-size:12px;
+      margin-top:10px;
+    }
+
+    footer{
+      padding:34px 0 46px;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:var(--muted2);
+      font-size:12px;
+      letter-spacing:.06em;
+    }
+
+    /* Lightbox */
+    .lb{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.86);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      z-index:100;
+    }
+    .lb.open{ display:flex; }
+    .lb-inner{
+      max-width: min(1100px, 96vw);
+      max-height: 88vh;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.18);
+      background:#000;
+      box-shadow: var(--shadow);
+      position:relative;
+    }
+    .lb-inner img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height: 88vh;
+      object-fit:contain;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px; right:10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.45);
+      color:#fff;
+      padding:10px 12px;
+      font-size:12px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .lb-close:hover{ border-color: rgba(255,255,255,.5); }
+
+    /* Responsive */
+    @media (max-width: 840px){
+      .card{ grid-column: span 12; }
+      .shot{ grid-column: span 12; }
+      .contact{ grid-template-columns: 1fr; }
+      .formrow{ grid-template-columns: 1fr; }
+      .links{ gap:8px; }
+      .hero{ min-height: 88vh; }
     }
   </style>
 </head>
+
 <body>
-
-  <div class="hero">
-    <div>
-      <h1>BLKRØM MEDIA</h1>
-      <p>visual media studio</p>
-      <p>film · photography · motion · post-production</p>
-
-      <div class="btns">
-        <a href="#work">VIEW WORK</a>
-        <a href="#private">PRIVATE VIEW</a>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand" aria-label="BLKRØM MEDIA">
+        <b>BLKRØM</b><span>media</span>
       </div>
-
-      <div class="muted">
-        Some projects are not publicly displayed.<br>
-        Viewer discretion advised.
+      <div class="links">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#motion">Motion</a>
+        <a href="#private">Private</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
   </div>
 
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="kicker"><span class="dot"></span><span>visual media studio</span></div>
+        <h1>BLKRØM MEDIA</h1>
+        <p class="sub"><strong>film</strong> · photography · motion · post-production</p>
+        <div class="cta">
+          <a class="btn primary" href="#work">View work</a>
+          <a class="btn" href="#contact">Request a quote</a>
+          <a class="btn" href="#private">Private view</a>
+        </div>
+        <div class="note">Cinematic visuals focused on atmosphere, tension and presence.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Capabilities</h2>
+        <p>End-to-end production with a cinematic finish. Clean surface, controlled undertone.</p>
+      </div>
+
+      <div class="grid cards">
+        <div class="card">
+          <h3>Film Production</h3>
+          <p>Concept, direction, shot planning, on-set execution. Built for mood and narrative.</p>
+          <div class="tagrow">
+            <span class="tag">story</span><span class="tag">mood</span><span class="tag">set</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Photography</h3>
+          <p>Urban, automotive, portrait & silhouette work. Light/shadow as a signature.</p>
+          <div class="tagrow">
+            <span class="tag">city</span><span class="tag">car</span><span class="tag">silhouette</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Motion & Reels</h3>
+          <p>Short-form edits, loops, teasers. Rhythm, restraint and impact.</p>
+          <div class="tagrow">
+            <span class="tag">reels</span><span class="tag">teasers</span><span class="tag">loops</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Post-Production</h3>
+          <p>Editing, color grading, grain, sound polish. “Developed in the dark.”</p>
+          <div class="tagrow">
+            <span class="tag">edit</span><span class="tag">grade</span><span class="tag">finish</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
   <section id="work">
-    <h2>SELECTED WORK</h2>
-    <p>
-      Cinematic visuals focused on atmosphere, tension and presence.<br>
-      Urban scenes, movement, bodies, light and shadow.
-    </p>
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Selected Work</h2>
+        <p>Replace the images in <b>assets/</b>. Click any frame to open fullscreen.</p>
+      </div>
+
+      <div class="grid gallery">
+        <div class="shot big" data-full="assets/work1.jpg">
+          <img src="assets/work1.jpg" alt="Work 01" loading="lazy">
+          <div class="cap"><b>Frame 01</b><span>night / city</span></div>
+        </div>
+        <div class="shot" data-full="assets/work2.jpg">
+          <img src="assets/work2.jpg" alt="Work 02" loading="lazy">
+          <div class="cap"><b>Frame 02</b><span>silhouette</span></div>
+        </div>
+        <div class="shot" data-full="assets/work3.jpg">
+          <img src="assets/work3.jpg" alt="Work 03" loading="lazy">
+          <div class="cap"><b>Frame 03</b><span>automotive</span></div>
+        </div>
+        <div class="shot" data-full="assets/work4.jpg">
+          <img src="assets/work4.jpg" alt="Work 04" loading="lazy">
+          <div class="cap"><b>Frame 04</b><span>details</span></div>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- MOTION -->
+  <section id="motion">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Motion</h2>
+        <p>Optional: embed a Vimeo/YouTube showreel. Replace the iframe URL below.</p>
+      </div>
+
+      <div class="video">
+        <div class="top">
+          <b>Showreel</b>
+          <span>motion · edit · grade</span>
+        </div>
+
+        <!-- Replace this with your own video link (YouTube or Vimeo embed URL) -->
+        <iframe
+          title="BLKRØM Showreel"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE -->
   <section id="private">
-    <h2>RESTRICTED</h2>
-    <p>
-      Certain projects are private and shared through direct access only.
-    </p>
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Private</h2>
+        <p>Subtle boundary. Nothing explicit. Just a controlled “shift”.</p>
+      </div>
+
+      <div class="restricted">
+        <div>
+          <h3>Restricted access</h3>
+          <p>Some projects are not publicly displayed. Access is shared through direct contact and verified requests.</p>
+          <p style="margin-top:10px;color:var(--muted2);font-size:12px;letter-spacing:.06em;">
+            Viewer discretion advised.
+          </p>
+        </div>
+        <div>
+          <!-- Put your private destination here later if you want (leave # for now). -->
+          <a class="btn primary" href="#contact" aria-label="Request access">Request access</a>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>Fastest: email. The form opens your mail app (no backend needed).</p>
+      </div>
+
+      <div class="contact">
+        <div class="box">
+          <h3>Request / Inquiry</h3>
+
+          <!-- No server needed: uses mailto -->
+          <form id="mailtoForm">
+            <div class="formrow">
+              <input id="name" type="text" placeholder="Name / Brand" required>
+              <input id="email" type="email" placeholder="Email" required>
+            </div>
+            <div style="height:10px"></div>
+            <input id="subject" type="text" placeholder="Subject (e.g. Film / Photo / Edit)">
+            <div style="height:10px"></div>
+            <textarea id="message" placeholder="Tell us what you want to create…" required></textarea>
+            <div style="height:12px"></div>
+
+            <!-- IMPORTANT: change this email -->
+            <button class="btn primary" type="submit">Send</button>
+            <div class="small">Tip: set a dedicated mail like <b>contact@yourdomain</b> later.</div>
+          </form>
+        </div>
+
+        <div class="box">
+          <h3>Direct</h3>
+          <p style="margin:0;color:var(--muted);">
+            Email: <a href="mailto:your@email.com" style="text-decoration:underline;">your@email.com</a><br>
+            Instagram: <span style="color:var(--muted2)">@yourhandle</span><br>
+            Location: <span style="color:var(--muted2)">Berlin / EU</span>
+          </p>
+          <div style="height:12px"></div>
+          <p style="margin:0;color:var(--muted2);font-size:12px;letter-spacing:.06em;">
+            BLKRØM MEDIA — visual media project · film · photography · motion · post-production
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> BLKRØM MEDIA · viewer discretion advised · all rights reserved
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lb-inner">
+      <button class="lb-close" id="lbClose" type="button">Close</button>
+      <img id="lbImg" alt="Fullscreen preview">
+    </div>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lightbox for gallery
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const closeBtn = document.getElementById('lbClose');
+
+    function openLB(src){
+      lbImg.src = src;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB(){
+      lb.classList.remove('open');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.shot').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        const src = el.getAttribute('data-full') || el.querySelector('img')?.src;
+        if(src) openLB(src);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLB);
+    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLB(); });
+
+    // Mailto form (no backend)
+    document.getElementById('mailtoForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+
+      const to = "your@email.com"; // CHANGE THIS
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim() || "Inquiry";
+      const message = document.getElementById('message').value.trim();
+
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\n${message}\n`
+      );
+
+      const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
+      window.location.href = mailto;
+    });
+  </script>
 </body>
 </html>
