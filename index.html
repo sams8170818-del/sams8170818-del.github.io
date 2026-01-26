@@ -969,54 +969,6 @@
     </div>
   </section>
 
-          <!-- No server needed: uses mailto -->
-          <form id="mailtoForm">
-            <div class="formrow">
-              <input id="name" type="text" placeholder="Name / Brand" required>
-              <input id="email" type="email" placeholder="Email" required>
-            </div>
-            <div style="height:10px"></div>
-            <input id="subject" type="text" placeholder="Subject (e.g. Film / Photo / Edit)">
-            <div style="height:10px"></div>
-            <textarea id="message" placeholder="Tell us what you want to create…" required></textarea>
-            <div style="height:12px"></div>
-
-            <!-- IMPORTANT: change this email -->
-            <button class="btn primary" type="submit">Send</button>
-            <div class="small">Tip: set a dedicated mail like <b>contact@yourdomain</b> later.</div>
-          </form>
-        </div>
-
-        <div class="box">
-          <h3>Direct</h3>
-          <p style="margin:0;color:var(--muted);">
-            Email: <a href="mailto:your@email.com" style="text-decoration:underline;">your@email.com</a><br>
-            Instagram: <span style="color:var(--muted2)">@yourhandle</span><br>
-            Location: <span style="color:var(--muted2)">Berlin / EU</span>
-          </p>
-          <div style="height:12px"></div>
-          <p style="margin:0;color:var(--muted2);font-size:12px;letter-spacing:.06em;">
-            BLKRØM MEDIA — visual media project · film · photography · motion · post-production
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap">
-      © <span id="year"></span> BLKRØM MEDIA · viewer discretion advised · all rights reserved
-    </div>
-  </footer>
-
-  <!-- Lightbox -->
-  <div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-    <div class="lb-inner">
-      <button class="lb-close" id="lbClose" type="button">Close</button>
-      <img id="lbImg" alt="Fullscreen preview">
-    </div>
-  </div>
-
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
