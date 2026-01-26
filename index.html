@@ -929,7 +929,7 @@
           </form>
         </div>
 
-        <!-- DIRECT CONTACT INFO -->
+               <!-- DIRECT CONTACT INFO -->
         <div class="card">
           <h3>Direct</h3>
           <p>
@@ -969,9 +969,24 @@
     </div>
   </section>
 
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> BLKRØM MEDIA · viewer discretion advised · all rights reserved
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lb-inner">
+      <button class="lb-close" id="lbClose" type="button">Close</button>
+      <img id="lbImg" alt="Fullscreen preview">
+    </div>
+  </div>
+
   <script>
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Lightbox for gallery
     const lb = document.getElementById('lightbox');
@@ -979,11 +994,14 @@
     const closeBtn = document.getElementById('lbClose');
 
     function openLB(src){
+      if(!lb || !lbImg) return;
       lbImg.src = src;
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
     function closeLB(){
+      if(!lb || !lbImg) return;
       lb.classList.remove('open');
       lbImg.src = '';
       document.body.style.overflow = '';
@@ -996,27 +1014,9 @@
       });
     });
 
-    closeBtn.addEventListener('click', closeLB);
-    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
+    if (closeBtn) closeBtn.addEventListener('click', closeLB);
+    if (lb) lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
     window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLB(); });
-
-    // Mailto form (no backend)
-    document.getElementById('mailtoForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-
-      const to = "your@email.com"; // CHANGE THIS
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const subject = document.getElementById('subject').value.trim() || "Inquiry";
-      const message = document.getElementById('message').value.trim();
-
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\n\n${message}\n`
-      );
-
-      const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${body}`;
-      window.location.href = mailto;
-    });
   </script>
 </body>
 </html>
