@@ -507,6 +507,60 @@
   grid-column: span 12;
 }
 
+    /* === GLASS MODE (cards/boxes) === */
+:root{
+  --glass-bg: rgba(255,255,255,.06);
+  --glass-bg-strong: rgba(255,255,255,.09);
+  --glass-border: rgba(255,255,255,.18);
+  --glass-border-strong: rgba(255,255,255,.26);
+  --glass-shadow: 0 18px 60px rgba(0,0,0,.55);
+}
+
+/* Base glass */
+.card,
+.box{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--glass-bg-strong), var(--glass-bg));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+}
+
+/* Subtle glass highlight */
+.card::before,
+.box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), transparent 40%);
+  opacity:.55;
+}
+
+/* Keep text crisp (no opacity on container!) */
+.card p,
+.box p,
+.card h3,
+.box h3{
+  color: var(--text);
+}
+
+/* Premium hover (very subtle) */
+.card:hover,
+.box:hover{
+  border-color: var(--glass-border-strong);
+}
+
+/* Fallback if blur not supported */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+  .card,
+  .box{
+    background: rgba(255,255,255,.07);
+  }
+}
+
     /* Responsive */
     @media (max-width: 840px){
       .card{ grid-column: span 12; }
