@@ -1,25 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="shortcut icon" href="favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BLKRØM MEDIA</title>
   <meta name="description" content="BLKRØM MEDIA — film · photography · motion · post-production. Cinematic visuals, dark aesthetics, curated work." />
 
-  <!-- Social preview (optional, can update later) -->
+  <!-- Social preview -->
   <meta property="og:title" content="BLKRØM MEDIA" />
   <meta property="og:description" content="film · photography · motion · post-production" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/hero.jpg" />
+
+  <!-- Fonts (editorial + clean UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -35,10 +36,16 @@
       --radius:18px;
       --radius2:26px;
       --max:1100px;
-    }
 
       --font-ui: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       --font-editorial: "Libre Baskerville", Georgia, serif;
+
+      --glass-bg: rgba(255,255,255,.06);
+      --glass-bg-strong: rgba(255,255,255,.09);
+      --glass-border: rgba(255,255,255,.18);
+      --glass-border-strong: rgba(255,255,255,.26);
+      --glass-shadow: 0 18px 60px rgba(0,0,0,.55);
+    }
 
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
@@ -46,7 +53,7 @@
       margin:0;
       background:var(--bg);
       color:var(--text);
-      font-family: var(--font-ui);-apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: var(--font-ui);
       line-height:1.6;
       overflow-x:hidden;
     }
@@ -71,6 +78,7 @@
       top:0;
       z-index:50;
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       background: linear-gradient(to bottom, rgba(0,0,0,.82), rgba(0,0,0,.35));
       border-bottom:1px solid rgba(255,255,255,.06);
     }
@@ -116,69 +124,51 @@
     }
 
     /* Hero */
-  /* Hero */
-.hero{
-  position:relative;
-  min-height:92vh;
-  display:flex;
-  align-items:center;
-  padding:40px 0 30px;
-  overflow:hidden;
-}
+    .hero{
+      position:relative;
+      min-height:92vh;
+      display:flex;
+      align-items:center;
+      padding:40px 0 30px;
+      overflow:hidden;
+    }
 
- .hero-bg{
-  position:absolute;
-  inset:0;
-  background-image: url("assets/hero.jpg");
-  background-size: cover;
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      background-image: url("assets/hero.jpg");
+      background-size: cover;
+      background-position: 85% 20%;
+      transform: scale(1.10);
+      filter: contrast(1.12) brightness(1.02);
+      z-index:0;
+      pointer-events:none;
+    }
 
-  /* <<< WICHTIG: Bild so verschieben, dass die Struktur/Wellen mehr ins Bild kommen */
-  background-position: 85% 20%;  /* mehr "oben rechts", aber sichtbar */
+    /* Fade: later fade-out downwards */
+    .hero-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.10) 0%,
+        rgba(0,0,0,.18) 55%,
+        rgba(0,0,0,.35) 75%,
+        rgba(0,0,0,.92) 100%
+      );
+    }
 
-  /* optional: minimal reinzoomen, damit’s nicht so leer wirkt */
-  transform: scale(1.10);
+    .hero .wrap{ position:relative; z-index:2; }
 
-  filter: contrast(1.12) brightness(1.02);
-  z-index:0;
-  pointer-events:none;
-}
-
-/* Fade: erst spät nach unten dunkel werden */
-.hero-bg::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,.10) 0%,
-    rgba(0,0,0,.18) 55%,
-    rgba(0,0,0,.35) 75%,
-    rgba(0,0,0,.92) 100%
-  );
-}
-
-.hero-bg::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.80));
-}
-
-.hero .wrap{
-  position: relative;
-  z-index: 2;
-}
-
-.hero-card{
-  background: none;
-  border: none;
-  box-shadow: none;
-
-  max-width: 820px;
-  padding: 38px 28px;
-
-  text-shadow: 0 10px 30px rgba(0,0,0,.65);
-}
+    .hero-card{
+      background:none;
+      border:none;
+      box-shadow:none;
+      max-width:820px;
+      padding:38px 28px;
+      text-shadow: 0 10px 30px rgba(0,0,0,.65);
+    }
 
     .kicker{
       display:flex;
@@ -189,10 +179,7 @@
       text-transform:uppercase;
       font-size:12px;
     }
-    .dot{
-      width:6px;height:6px;border-radius:999px;
-      background:rgba(255,255,255,.42);
-    }
+    .dot{ width:6px; height:6px; border-radius:999px; background:rgba(255,255,255,.42); }
 
     h1{
       margin:12px 0 6px;
@@ -230,6 +217,7 @@
       text-transform:uppercase;
       cursor:pointer;
       transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      color:#fff;
     }
     .btn:hover{
       transform: translateY(-1px);
@@ -240,17 +228,8 @@
       background: rgba(255,255,255,.12);
       border-color: rgba(255,255,255,.34);
     }
-  
-    .btn,
-    .btn.primary{
-      color:#fff;
-    }
 
-    .note{
-      margin-top:18px;
-      color:var(--muted2);
-      font-size:13px;
-    }
+    .note{ margin-top:18px; color:var(--muted2); font-size:13px; }
 
     /* Sections */
     section{ padding:84px 0; }
@@ -274,34 +253,50 @@
       font-size:14px;
     }
 
-    .grid{
-      display:grid;
-      gap:14px;
-    }
+    .grid{ display:grid; gap:14px; }
 
-    /* Services */
-    .cards{
-      grid-template-columns: repeat(12, 1fr);
-    }
+    /* Services / cards grid */
+    .cards{ grid-template-columns: repeat(12, 1fr); }
     .card{
       grid-column: span 6;
       border:1px solid rgba(255,255,255,.10);
-      background: var(--panel);
       border-radius: var(--radius);
       padding:18px 16px;
+
+      position:relative;
+      overflow:hidden;
+      background: linear-gradient(180deg, var(--glass-bg-strong), var(--glass-bg));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(14px) saturate(1.15);
+      -webkit-backdrop-filter: blur(14px) saturate(1.15);
     }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), transparent 40%);
+      opacity:.55;
+    }
+
     .card h3{
+      position:relative;
       margin:0 0 8px;
       letter-spacing:.10em;
       text-transform:uppercase;
       font-size:14px;
+      color: var(--text);
     }
     .card p{
+      position:relative;
       margin:0;
       color:var(--muted);
       font-size:14px;
     }
+
     .tagrow{
+      position:relative;
       margin-top:12px;
       display:flex;
       gap:8px;
@@ -317,66 +312,18 @@
       letter-spacing:.06em;
     }
 
-    /* Work gallery */
-    .gallery{
-      grid-template-columns: repeat(12, 1fr);
-    }
-    .shot{
-      grid-column: span 6;
-      position:relative;
-      border-radius: var(--radius);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      background: var(--panel2);
-      min-height: 240px;
-      cursor:pointer;
-      isolation:isolate;
-    }
-    .shot.big{ grid-column: span 12; min-height: 360px; }
-    .shot img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      filter: contrast(1.08) saturate(.9);
-      transform: scale(1.02);
-      transition: transform .22s ease, filter .22s ease;
-    }
-    .shot:hover img{ transform: scale(1.06); filter: contrast(1.12) saturate(.95); }
-    .shot:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,.86));
-      z-index:1;
-    }
-    .shot .cap{
-      position:absolute;
-      left:14px; right:14px; bottom:12px;
-      z-index:2;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-end;
-    }
-    .shot .cap b{
-      font-size:13px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-    }
-    .shot .cap span{
-      font-size:12px;
-      color:var(--muted2);
-      letter-spacing:.08em;
-      white-space:nowrap;
-    }
+    /* Premium hover (subtle) */
+    .card:hover{ border-color: var(--glass-border-strong); }
 
-    /* Video embed (safe) */
+    /* Video embed */
     .video{
       border:1px solid rgba(255,255,255,.10);
-      background: var(--panel);
+      background: linear-gradient(180deg, var(--glass-bg-strong), var(--glass-bg));
       border-radius: var(--radius2);
       overflow:hidden;
-      box-shadow: var(--shadow);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(14px) saturate(1.15);
+      -webkit-backdrop-filter: blur(14px) saturate(1.15);
     }
     .video .top{
       padding:14px 16px;
@@ -404,66 +351,62 @@
       background:#000;
     }
 
-    /* Private / Restricted */
-    .restricted{
-      border:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border-radius: var(--radius2);
-      padding:22px 18px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      box-shadow: var(--shadow);
-    }
-    .restricted h3{
-      margin:0 0 6px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:14px;
-    }
-    .restricted p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-      max-width:720px;
-    }
-
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
-    }
-    .box{
-      border:1px solid rgba(255,255,255,.10);
-      background: var(--panel);
-      border-radius: var(--radius2);
-      padding:18px 16px;
-    }
-    .box h3{
-      margin:0 0 10px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:14px;
-    }
-    .formrow{
+    /* Editorial Work (left image / right text) */
+    .editorial{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:10px;
+      gap:40px;
+      align-items:center;
+      margin:120px 0;
     }
-    input, textarea{
+    .editorial.reverse .editorial-img{ order:2; }
+    .editorial.reverse .editorial-text{ order:1; }
+
+    .editorial-img{
+      aspect-ratio: 4 / 5;
+      overflow:hidden;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+    }
+    .editorial-img img{
       width:100%;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      padding:12px 12px;
-      color:#fff;
-      outline:none;
-      font: inherit;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+      filter: contrast(1.05) saturate(.92);
     }
-    textarea{ min-height:120px; resize:vertical; }
-    input:focus, textarea:focus{ border-color: rgba(255,255,255,.35); }
+
+    .editorial-text{ max-width:520px; padding: 6px 0; }
+    .editorial-text h3{
+      font-family: var(--font-editorial);
+      font-weight:700;
+      font-size:34px;
+      line-height:1.1;
+      margin:0 0 18px;
+      letter-spacing:.01em;
+      text-transform:none;
+    }
+    .editorial-text p{
+      font-family: var(--font-editorial);
+      font-size:18px;
+      line-height:1.75;
+      color: rgba(255,255,255,.86);
+      margin:0;
+    }
+    .editorial-meta{
+      margin-top:14px;
+      font-family: var(--font-ui);
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.55);
+    }
+
+    /* Contact (single column card, no form) */
+    #contact .card{ grid-column: span 12; }
+
     .small{
       color:var(--muted2);
       font-size:12px;
@@ -478,173 +421,34 @@
       letter-spacing:.06em;
     }
 
-    /* Lightbox */
-    .lb{
-      position:fixed;
-      inset:0;
-      background: rgba(0,0,0,.86);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      z-index:100;
+    /* Fallback if blur not supported */
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+      .card, .video{
+        background: rgba(255,255,255,.07);
+      }
     }
-    .lb.open{ display:flex; }
-    .lb-inner{
-      max-width: min(1100px, 96vw);
-      max-height: 88vh;
-      border-radius: 18px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.18);
-      background:#000;
-      box-shadow: var(--shadow);
-      position:relative;
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .editorial{
+        grid-template-columns: 1fr;
+        gap:28px;
+        margin:80px 0;
+      }
+      .editorial.reverse .editorial-img,
+      .editorial.reverse .editorial-text{ order:unset; }
+      .editorial-text h3{ font-size:28px; }
     }
-    .lb-inner img{
-      display:block;
-      width:100%;
-      height:auto;
-      max-height: 88vh;
-      object-fit:contain;
-      background:#000;
+
+    @media (max-width: 840px){
+      .card{ grid-column: span 12; }
+      .links{ gap:8px; }
+      .hero{ min-height: 88vh; }
     }
-    .lb-close{
-      position:absolute;
-      top:10px; right:10px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.22);
-      background: rgba(0,0,0,.45);
-      color:#fff;
-      padding:10px 12px;
-      font-size:12px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      cursor:pointer;
-    }
-    .lb-close:hover{ border-color: rgba(255,255,255,.5); }
-
-    /* CONTACT: full width card */
-#contact .card{
-  grid-column: span 12;
-}
-
-    /* === GLASS MODE (cards/boxes) === */
-:root{
-  --glass-bg: rgba(255,255,255,.06);
-  --glass-bg-strong: rgba(255,255,255,.09);
-  --glass-border: rgba(255,255,255,.18);
-  --glass-border-strong: rgba(255,255,255,.26);
-  --glass-shadow: 0 18px 60px rgba(0,0,0,.55);
-}
-
-/* Base glass */
-.card,
-.box{
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(180deg, var(--glass-bg-strong), var(--glass-bg));
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(14px) saturate(1.15);
-  -webkit-backdrop-filter: blur(14px) saturate(1.15);
-}
-
-/* Subtle glass highlight */
-.card::before,
-.box::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background: linear-gradient(180deg, rgba(255,255,255,.10), transparent 40%);
-  opacity:.55;
-}
-
-/* Keep text crisp (no opacity on container!) */
-.card p,
-.box p,
-.card h3,
-.box h3{
-  color: var(--text);
-}
-
-/* Premium hover (very subtle) */
-.card:hover,
-.box:hover{
-  border-color: var(--glass-border-strong);
-}
-
-/* Fallback if blur not supported */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
-  .card,
-  .box{
-    background: rgba(255,255,255,.07);
-  }
-}
-/* === EDITORIAL SPLIT === */
-.editorial{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:40px;
-  align-items:center;
-  margin:120px 0;
-}
-
-.editorial.reverse .editorial-img{ order:2; }
-.editorial.reverse .editorial-text{ order:1; }
-
-.editorial-img{
-  aspect-ratio: 4 / 5;
-  overflow:hidden;
-}
-
-.editorial-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.editorial-text{
-  max-width:520px;
-}
-
-.editorial-text h3{
-  font-family: "Libre Baskerville", serif;
-  font-size:34px;
-  margin:0 0 18px;
-}
-
-.editorial-text p{
-  font-family: "Libre Baskerville", serif;
-  font-size:18px;
-  line-height:1.7;
-  margin:0;
-}
-
-/* === RESPONSIVE (keep exactly once) === */
-@media (max-width: 900px){
-  .editorial{
-    grid-template-columns: 1fr;
-    gap:28px;
-    margin:80px 0;
-  }
-}
-
-/* Responsive */
-@media (max-width: 840px){
-  .card{ grid-column: span 12; }
-  .shot{ grid-column: span 12; }
-  .contact{ grid-template-columns: 1fr; }
-  .formrow{ grid-template-columns: 1fr; }
-  .links{ gap:8px; }
-  .hero{ min-height: 88vh; }
-}
   </style>
 </head>
 
 <body>
-  
   <!-- NAV -->
   <div class="nav">
     <div class="wrap nav-inner">
@@ -662,7 +466,7 @@
     </div>
   </div>
 
-   <!-- HERO -->
+  <!-- HERO -->
   <header class="hero" id="top">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap">
@@ -673,9 +477,7 @@
         </div>
 
         <h1>BLKRØM MEDIA</h1>
-        <p class="sub">
-          <strong>film</strong> · photography · motion · post-production
-        </p>
+        <p class="sub"><strong>film</strong> · photography · motion · post-production</p>
 
         <div class="cta">
           <a class="btn primary" href="#work">View work</a>
@@ -689,7 +491,6 @@
       </div>
     </div>
   </header>
-
 
   <!-- SERVICES -->
   <section id="services">
@@ -726,7 +527,7 @@
 
         <div class="card">
           <h3>Post-Production</h3>
-          <p>Editing, color grading, grain, sound polish. “Developed in the dark.”</p>
+          <p>Editing, color grading, grain, sound polish. Developed in the dark.</p>
           <div class="tagrow">
             <span class="tag">edit</span><span class="tag">grade</span><span class="tag">finish</span>
           </div>
@@ -735,30 +536,35 @@
     </div>
   </section>
 
-  <!-- WORK -->
+  <!-- WORK (EDITORIAL SPLIT) -->
   <section id="work">
     <div class="wrap">
       <div class="section-title">
         <h2>Selected Work</h2>
-        <p>Replace the images in <b>assets/</b>. Click any frame to open fullscreen.</p>
+        <p>Two signature frames. Editorial layout. Replace images in <b>assets/</b>.</p>
       </div>
 
-      <div class="grid gallery">
-        <div class="shot big" data-full="assets/work1.jpg">
-          <img src="assets/work1.jpg" alt="Work 01" loading="lazy">
-          <div class="cap"><b>Frame 01</b><span>night / city</span></div>
+      <!-- Block 1: image left / text right -->
+      <div class="editorial">
+        <div class="editorial-img">
+          <img src="assets/editorial1.jpg" alt="City at night" loading="lazy">
         </div>
-        <div class="shot" data-full="assets/work2.jpg">
-          <img src="assets/work2.jpg" alt="Work 02" loading="lazy">
-          <div class="cap"><b>Frame 02</b><span>silhouette</span></div>
+        <div class="editorial-text">
+          <h3>City at Night</h3>
+          <p>Controlled light. Quiet movement.<br>Frames built around presence — not noise.</p>
+          <div class="editorial-meta">night / city</div>
         </div>
-        <div class="shot" data-full="assets/work3.jpg">
-          <img src="assets/work3.jpg" alt="Work 03" loading="lazy">
-          <div class="cap"><b>Frame 03</b><span>automotive</span></div>
+      </div>
+
+      <!-- Block 2: mirrored -->
+      <div class="editorial reverse">
+        <div class="editorial-img">
+          <img src="assets/editorial2.jpg" alt="Automotive" loading="lazy">
         </div>
-        <div class="shot" data-full="assets/work4.jpg">
-          <img src="assets/work4.jpg" alt="Work 04" loading="lazy">
-          <div class="cap"><b>Frame 04</b><span>details</span></div>
+        <div class="editorial-text">
+          <h3>Automotive Silence</h3>
+          <p>Editorial pacing. Mechanical beauty.<br>Nothing accidental.</p>
+          <div class="editorial-meta">automotive / detail</div>
         </div>
       </div>
     </div>
@@ -778,7 +584,6 @@
           <span>motion · edit · grade</span>
         </div>
 
-        <!-- Replace this with your own video link (YouTube or Vimeo embed URL) -->
         <iframe
           title="BLKRØM Showreel"
           src="https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -789,265 +594,198 @@
     </div>
   </section>
 
-    <!-- CREATOR PROGRAM -->
+  <!-- CREATOR PROGRAM -->
   <section id="creators">
     <div class="wrap">
       <div class="section-title">
         <h2>Creator Program</h2>
-        <p>
-          Selected creators. Subscription-based platforms. We focus on brand, structure and long-term growth – not chaos.
-        </p>
+        <p>Selected creators. Subscription-based platforms. Brand, structure and long-term growth — not chaos.</p>
       </div>
 
       <div class="grid cards">
         <div class="card">
           <h3>Brand & Identity</h3>
-          <p>
-            Positioning, visual language and boundaries. We build a recognisable persona instead of random posts.
-          </p>
+          <p>Positioning, visual language and boundaries. A recognisable persona instead of random posts.</p>
           <div class="tagrow">
-            <span class="tag">positioning</span>
-            <span class="tag">visuals</span>
-            <span class="tag">values</span>
+            <span class="tag">positioning</span><span class="tag">visuals</span><span class="tag">values</span>
           </div>
         </div>
 
         <div class="card">
           <h3>Content & Production</h3>
-          <p>
-            Cinematic photo and video sessions, mood concepts, seasonal themes. Content that feels intentional, not rushed.
-          </p>
+          <p>Cinematic photo and video sessions, mood concepts, seasonal themes. Intentional content.</p>
           <div class="tagrow">
-            <span class="tag">film</span>
-            <span class="tag">photo</span>
-            <span class="tag">stories</span>
+            <span class="tag">film</span><span class="tag">photo</span><span class="tag">stories</span>
           </div>
         </div>
 
         <div class="card">
           <h3>Growth & Monetization</h3>
-          <p>
-            Private membership funnels, offer structure, upsells and drops. Clean systems for sustainable revenue.
-          </p>
+          <p>Private membership funnels, offer structure, upsells and drops. Clean systems for sustainable revenue.</p>
           <div class="tagrow">
-            <span class="tag">funnel</span>
-            <span class="tag">memberships</span>
-            <span class="tag">upsell</span>
+            <span class="tag">funnel</span><span class="tag">memberships</span><span class="tag">upsell</span>
           </div>
         </div>
 
         <div class="card">
           <h3>Safety & Partnership</h3>
-          <p>
-            No one is pushed into anything. We define limits together, keep things transparent and treat this as a shared project.
-          </p>
+          <p>Boundaries defined together. Transparent collaboration. A shared project.</p>
           <div class="tagrow">
-            <span class="tag">consent</span>
-            <span class="tag">privacy</span>
-            <span class="tag">creator first</span>
+            <span class="tag">consent</span><span class="tag">privacy</span><span class="tag">creator first</span>
           </div>
         </div>
       </div>
 
       <div style="margin-top:24px;">
         <a class="btn primary" href="#contact">Apply to work with BLKRØM</a>
-        <div class="small">
-          Limited spots. We discuss boundaries, content and revenue split individually in a private call.
-        </div>
+        <div class="small">Limited spots. Boundaries, content and revenue split are discussed individually in a private call.</div>
       </div>
     </div>
   </section>
 
   <!-- PHILOSOPHY -->
-<section id="philosophy">
-  <div class="wrap">
-    <div class="section-title">
-      <h2>Philosophy</h2>
-      <p>
-        We work with self-driven creators who aim higher than noise.
-        Brand over chaos. Direction over randomness. Boundaries respected.
-      </p>
+  <section id="philosophy">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Philosophy</h2>
+        <p>Brand over chaos. Direction over randomness. Boundaries respected.</p>
+      </div>
+
+      <div class="card">
+        <p style="font-size: 1.1rem;">
+          This is not fast content. This is long-term identity.
+          You bring the ambition — we build the system, visuals and structure.
+        </p>
+        <p style="margin-top: 8px;">
+          No pressure. No exploitation. No assumptions.<br>
+          Only collaboration, vision and growth.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <p style="font-size: 1.1rem;">
-        This is not fast content. This is long-term identity.
-        You bring the ambition — we build the system, visuals and structure.
-      </p>
-      <p style="margin-top: 8px;">
-        No pressure. No exploitation. No assumptions.
-        <br>
-        Only collaboration, vision and growth.
-      </p>
+  <!-- PRIVATE -->
+  <section id="private">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Private</h2>
+        <p>
+          A reserved space for selected creators who operate beyond public platforms.
+          Invite-only. Discreet. Structured.
+        </p>
+      </div>
+
+      <div class="card">
+        <p style="font-size: 1.1rem;">We provide:</p>
+        <ul style="margin-top: 8px; color: var(--muted);">
+          <li>Cinematic photo & film production</li>
+          <li>Content planning & seasonal storylines</li>
+          <li>Private membership funnels & releases</li>
+          <li>Offer structure, pricing & upsells</li>
+          <li>Audience interaction systems (optional)</li>
+        </ul>
+
+        <p style="margin-top: 16px;">
+          <strong>Creator First.</strong><br>
+          No pressure. No boundary pushing. Every move is aligned with your comfort, style and identity.
+        </p>
+
+        <p style="margin-top: 12px;">
+          Private is <strong>invite-only</strong>. Apply below to request access.
+        </p>
+
+        <a class="btn primary" href="#contact" style="margin-top: 16px;">Request Access</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
- <!-- PRIVATE -->
-<section id="private">
-  <div class="wrap">
-    <div class="section-title">
-      <h2>Private</h2>
-      <p>
-        A reserved space for selected creators who work beyond public platforms.
-        Whether you build on subscription-based models or premium memberships —
-        BLKRØM supports you with structure, content and long-term direction.
-      </p>
-    </div>
-
-    <div class="card">
-      <p style="font-size: 1.1rem;">
-        We provide:
-      </p>
-      <ul style="margin-top: 8px;">
-        <li>Cinematic photo & film production</li>
-        <li>Content planning & seasonal storylines</li>
-        <li>Private membership funnels & releases</li>
-        <li>Offer structure, pricing & upsells</li>
-        <li>Audience interaction systems (optional)</li>
-      </ul>
-
-      <p style="margin-top: 16px;">
-        <strong>Creator First.</strong><br>
-        We do not pressure, push boundaries or promise shortcuts.
-        Every move is aligned with your comfort, style and identity.
-      </p>
-
-      <p style="margin-top: 12px;">
-        Private is <strong>invite-only</strong>. Apply below to request access.
-      </p>
-
-      <a class="btn primary" href="#contact" style="margin-top: 16px;">
-        Request Access
-      </a>
-    </div>
-  </div>
-</section>
-
-    <!-- CREATOR FAQ -->
+  <!-- CREATOR FAQ -->
   <section id="creator-faq">
     <div class="wrap">
       <div class="section-title">
         <h2>Creator FAQ</h2>
-        <p>
-          Short answers for creators considering working with BLKRØM —
-          what this is, how it works, and what we expect.
-        </p>
+        <p>Short answers for creators considering working with BLKRØM — what this is, how it works, and what we expect.</p>
       </div>
 
       <div class="grid cards faq">
-
         <div class="card">
           <h3>Do I need experience as a creator or model?</h3>
-          <p>
-            Not necessarily. BLKRØM works with both established creators and women at the very beginning.
-            What matters is intention, reliability and a clear sense of your boundaries.
-          </p>
+          <p>Not necessarily. What matters is intention, reliability and a clear sense of your boundaries.</p>
         </div>
 
         <div class="card">
           <h3>Do I have to create explicit content?</h3>
-          <p>
-            No. The content level is defined together and always stays within your comfort zone.
-            We can work from suggestive to editorial, from anonymous to fully visible — nothing is forced.
-          </p>
+          <p>No. The content level is defined together and always stays within your comfort zone.</p>
         </div>
 
         <div class="card">
           <h3>How does the collaboration work?</h3>
-          <p>
-            We start with a portfolio and strategy call, define goals, boundaries and capacity.
-            From there we decide on shoots, content structure and rhythm.
-            Everything stays transparent, planned and documented.
-          </p>
+          <p>We start with a portfolio and strategy call, define goals and capacity, then decide on structure and rhythm.</p>
         </div>
 
         <div class="card">
           <h3>Does BLKRØM earn money from my revenue?</h3>
-          <p>
-            BLKRØM works with custom agreements per creator.
-            A revenue share can be part of the collaboration, but is always discussed individually
-            after the portfolio call. Terms are decided privately and only if both sides agree.
-          </p>
+          <p>BLKRØM works with custom agreements per creator. Terms are discussed privately after the portfolio call.</p>
         </div>
 
         <div class="card">
           <h3>What do I need to invest?</h3>
-          <p>
-            Time, consistency and a real willingness to treat your work as a brand, not a side-effect.
-            You show up prepared, honest about your limits and ready to execute.
-            BLKRØM brings structure, visuals and long-term direction.
-          </p>
+          <p>Time, consistency and willingness to treat your work as a brand — not a side-effect.</p>
         </div>
 
         <div class="card">
           <h3>Is this open to anyone?</h3>
-          <p>
-            No. BLKRØM is selective and works invite-only or by application.
-            This keeps communication focused and ensures we only take on creators we can genuinely support.
-          </p>
+          <p>No. BLKRØM is selective and works invite-only or by application.</p>
         </div>
-
       </div>
     </div>
   </section>
- 
-  <!-- CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="section-title">
-      <h2>Contact</h2>
-      <p>
-        For selected creators and partners.
-        All inquiries are reviewed manually and kept confidential.
-      </p>
-    </div>
 
-    <div class="grid cards">
-    <div class="card">
+  <!-- CONTACT (single column, no form, no buttons) -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>For selected creators and partners. All inquiries are reviewed manually and kept confidential.</p>
+      </div>
 
-        <h3>Inquiries</h3>
+      <div class="grid cards">
+        <div class="card">
+          <h3>Inquiries</h3>
 
-        <p>
-          BLKRØM works invite-only.
-          We collaborate with creators who value discretion, structure and long-term direction.
-        </p>
+          <p>
+            BLKRØM works invite-only.
+            We collaborate with creators who value discretion, structure and long-term direction.
+          </p>
 
-        <p style="margin-top:12px;">
-          If you believe there is a potential fit, feel free to reach out directly.
-          Please include a short introduction and your intent.
-        </p>
+          <p style="margin-top:12px;">
+            If you believe there is a potential fit, reach out directly with a short introduction and your intent.
+          </p>
 
-        <div style="height:16px"></div>
+          <div style="height:16px"></div>
 
-        <p>
-          <strong>Email</strong><br>
-          <a href="mailto:contact@blkrom-media.com">
-            contact@blkrom-media.com
-          </a>
-        </p>
+          <p>
+            <strong>Email</strong><br>
+            <a href="mailto:contact@blkrom-media.com">contact@blkrom-media.com</a>
+          </p>
 
-        <p style="margin-top:10px;">
-          <strong>Instagram</strong><br>
-          <a href="https://www.instagram.com/fabian_dos.santos"
-             target="_blank" rel="noreferrer">
-            @fabian_dos.santos
-          </a>
-        </p>
+          <p style="margin-top:10px;">
+            <strong>Instagram</strong><br>
+            <a href="https://www.instagram.com/fabian_dos.santos" target="_blank" rel="noreferrer">@fabian_dos.santos</a>
+          </p>
 
-        <p style="margin-top:12px;">
-          <strong>Base</strong><br>
-          Munich (DE) · Perth (AU)
-        </p>
+          <p style="margin-top:12px;">
+            <strong>Base</strong><br>
+            Munich (DE) · Perth (AU)
+          </p>
 
-        <p class="small" style="margin-top:14px;">
-          No forms. No automation. If we reply, it’s intentional.
-        </p>
-
+          <p class="small" style="margin-top:14px;">
+            No forms. No automation. If we reply, it’s intentional.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <footer>
     <div class="wrap">
@@ -1055,48 +793,9 @@
     </div>
   </footer>
 
-  <!-- Lightbox -->
-  <div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-    <div class="lb-inner">
-      <button class="lb-close" id="lbClose" type="button">Close</button>
-      <img id="lbImg" alt="Fullscreen preview">
-    </div>
-  </div>
-
   <script>
-    // Year
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    // Lightbox for gallery
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const closeBtn = document.getElementById('lbClose');
-
-    function openLB(src){
-      if(!lb || !lbImg) return;
-      lbImg.src = src;
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLB(){
-      if(!lb || !lbImg) return;
-      lb.classList.remove('open');
-      lbImg.src = '';
-      document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('.shot').forEach(el=>{
-      el.addEventListener('click', ()=>{
-        const src = el.getAttribute('data-full') || el.querySelector('img')?.src;
-        if(src) openLB(src);
-      });
-    });
-
-    if (closeBtn) closeBtn.addEventListener('click', closeLB);
-    if (lb) lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLB(); });
   </script>
 </body>
 </html>
