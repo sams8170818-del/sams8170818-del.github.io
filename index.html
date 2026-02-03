@@ -17,7 +17,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/hero.jpg" />
 
-  <!-- Fonts (editorial + clean UI) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
@@ -25,13 +25,10 @@
   <style>
     :root{
       --bg:#000;
-      --panel:rgba(255,255,255,.04);
-      --panel2:rgba(255,255,255,.06);
       --text:#fff;
       --muted:rgba(255,255,255,.72);
       --muted2:rgba(255,255,255,.55);
       --line:rgba(255,255,255,.14);
-      --line2:rgba(255,255,255,.22);
       --shadow: 0 18px 60px rgba(0,0,0,.55);
       --radius:18px;
       --radius2:26px;
@@ -39,12 +36,6 @@
 
       --font-ui: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       --font-editorial: "Libre Baskerville", Georgia, serif;
-
-      --glass-bg: rgba(255,255,255,.06);
-      --glass-bg-strong: rgba(255,255,255,.09);
-      --glass-border: rgba(255,255,255,.18);
-      --glass-border-strong: rgba(255,255,255,.26);
-      --glass-shadow: 0 18px 60px rgba(0,0,0,.55);
     }
 
     *{ box-sizing:border-box; }
@@ -72,201 +63,89 @@
     a{ color:inherit; text-decoration:none; }
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
-    /* ===== TOP NAV (minimal) ===== */
+    /* ===== NAV (logo removed, only menu trigger) ===== */
     .nav{
       position:fixed;
-      top:0;
-      left:0;
-      right:0;
+      top:0; left:0; right:0;
       z-index:80;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      background: linear-gradient(to bottom, rgba(0,0,0,.72), rgba(0,0,0,.18));
+      background: linear-gradient(to bottom, rgba(0,0,0,.82), rgba(0,0,0,.25));
       border-bottom:1px solid rgba(255,255,255,.06);
     }
     .nav-inner{
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-end;
       padding:14px 0;
-      gap:16px;
-    }
-    .brand{
-      display:flex;
-      align-items:baseline;
-      gap:10px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      white-space:nowrap;
-      user-select:none;
-    }
-    .brand b{ font-weight:800; }
-    .brand span{
-      font-size:12px;
-      letter-spacing:.22em;
-      color:var(--muted2);
-      text-transform:uppercase;
     }
 
     .menu-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.03);
-      color:var(--muted);
+      appearance:none;
+      border:0;
+      background:transparent;
+      color:rgba(255,255,255,.78);
       font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
-    }
-    .menu-btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.40);
-      background: rgba(255,255,255,.06);
-      color:#fff;
-    }
-    .menu-icon{
-      width:18px; height:10px; position:relative; display:inline-block;
-    }
-    .menu-icon:before,
-    .menu-icon:after{
-      content:"";
-      position:absolute;
-      left:0; right:0;
-      height:1px;
-      background:rgba(255,255,255,.72);
-      border-radius:999px;
-    }
-    .menu-icon:before{ top:0; }
-    .menu-icon:after{ bottom:0; }
-    .menu-icon i{
-      position:absolute;
-      left:0; right:0;
-      top:50%;
-      height:1px;
-      transform: translateY(-50%);
-      background:rgba(255,255,255,.42);
-      border-radius:999px;
-    }
-
-    /* ===== DROPDOWN PANEL ===== */
-    .menu-overlay{
-      position:fixed;
-      inset:0;
-      z-index:90;
-      background: rgba(0,0,0,.82);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .18s ease;
-    }
-    .menu-panel{
-      position:fixed;
-      top:0; left:0; right:0;
-      z-index:95;
-      transform: translateY(-12px);
-      opacity:0;
-      pointer-events:none;
-      transition: transform .18s ease, opacity .18s ease;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(to bottom, rgba(0,0,0,.92), rgba(0,0,0,.70));
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-    .menu-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:18px 22px 22px;
-      display:grid;
-      grid-template-columns: 1fr auto;
-      gap:18px;
-      align-items:start;
-    }
-    .menu-title{
-      display:flex;
-      align-items:baseline;
-      gap:10px;
       letter-spacing:.18em;
       text-transform:uppercase;
-      white-space:nowrap;
-      color:rgba(255,255,255,.88);
-      user-select:none;
-    }
-    .menu-title b{ font-weight:800; }
-    .menu-title span{ font-size:12px; letter-spacing:.22em; color:var(--muted2); }
-
-    .menu-close{
-      justify-self:end;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.03);
-      color:var(--muted);
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
       cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
+      padding:10px 6px;
     }
-    .menu-close:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.40);
-      background: rgba(255,255,255,.06);
-      color:#fff;
+    .menu-btn:hover{ color:#fff; }
+
+    /* ===== EWG-STYLE NARROW DROPDOWN BAR ===== */
+    .menu-bar{
+      position:fixed;
+      top:53px; /* sits under nav (nav height ~53px) */
+      left:0; right:0;
+      z-index:75;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.92), rgba(0,0,0,.72));
+      border-bottom:1px solid rgba(255,255,255,.08);
+
+      overflow:hidden;
+      max-height:0;
+      opacity:0;
+      transform: translateY(-6px);
+      pointer-events:none;
+      transition: max-height .18s ease, opacity .18s ease, transform .18s ease;
+    }
+
+    body.menu-open .menu-bar{
+      max-height:160px; /* narrow bar height */
+      opacity:1;
+      transform: translateY(0);
+      pointer-events:auto;
+    }
+
+    .menu-bar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 22px 18px;
     }
 
     .menu-links{
-      grid-column:1 / -1;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:8px;
-      padding-top:6px;
-    }
-    .menu-links a{
       display:flex;
+      flex-wrap:wrap;
       align-items:center;
-      justify-content:space-between;
-      padding:12px 12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
-      color:rgba(255,255,255,.86);
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:12px;
-      transition: border-color .12s ease, background .12s ease, transform .12s ease;
-    }
-    .menu-links a:hover{
-      border-color: rgba(255,255,255,.28);
-      background: rgba(255,255,255,.05);
-      transform: translateY(-1px);
-    }
-    .menu-links a small{
-      color: rgba(255,255,255,.40);
-      letter-spacing:.18em;
-      font-size:11px;
-      text-transform:none;
+      gap:18px 22px;
+      justify-content:flex-start;
     }
 
-    /* Open state */
-    .menu-open .menu-overlay{
-      opacity:1;
-      pointer-events:auto;
+    .menu-links a{
+      font-family: var(--font-editorial);
+      font-weight:700;
+      font-size: clamp(14px, 1.3vw, 18px);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.86);
+      padding:6px 2px;
+      transition: opacity .12s ease;
+      white-space:nowrap;
     }
-    .menu-open .menu-panel{
-      opacity:1;
-      pointer-events:auto;
-      transform: translateY(0);
-    }
+
+    .menu-links a:hover{ opacity:.62; }
 
     /* ===== HERO (video + bottom 10mm fade) ===== */
     .hero{
@@ -274,8 +153,10 @@
       min-height:100vh;
       display:flex;
       align-items:center;
+      justify-content:center;
       overflow:hidden;
       padding:110px 0 60px; /* space under fixed nav */
+      text-align:center;
     }
 
     .hero-media{
@@ -294,7 +175,7 @@
       filter: contrast(1.12) brightness(1.02);
     }
 
-    /* global soft overlay (very light) */
+    /* very light global overlay */
     .hero-media::before{
       content:"";
       position:absolute;
@@ -312,88 +193,38 @@
     .hero-media::after{
       content:"";
       position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
+      left:0; right:0; bottom:0;
       height: clamp(32px, 3.2vh, 56px);
       background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
     }
 
-    .hero .wrap{ position:relative; z-index:2; }
-
-    .hero-card{
-      background:none;
-      border:none;
-      box-shadow:none;
-      max-width:820px;
-      padding:38px 28px;
-      text-shadow: 0 12px 40px rgba(0,0,0,.75);
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      padding:0 22px;
     }
 
-    .kicker{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:var(--muted2);
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      font-size:12px;
-    }
-    .dot{ width:6px; height:6px; border-radius:999px; background:rgba(255,255,255,.42); }
-
-    h1{
-      margin:12px 0 6px;
+    .hero-title{
+      margin:0;
       font-size: clamp(34px, 6.2vw, 74px);
       line-height:1.05;
       letter-spacing:.14em;
       text-transform:uppercase;
+      text-shadow: 0 12px 40px rgba(0,0,0,.75);
     }
-    .sub{
-      margin:10px 0 0;
-      color:var(--muted);
-      font-size:16px;
-      letter-spacing:.08em;
+
+    .hero-sub{
+      margin:12px 0 0;
+      font-family: var(--font-editorial);
+      font-size: clamp(14px, 1.4vw, 18px);
+      color: rgba(255,255,255,.78);
+      letter-spacing:.06em;
       text-transform:lowercase;
+      text-shadow: 0 10px 30px rgba(0,0,0,.65);
     }
-    .sub strong{ color:#fff; font-weight:700; }
-
-    .cta{
-      margin-top:22px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 16px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.20);
-      background: rgba(255,255,255,.04);
-      font-size:13px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      cursor:pointer;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-      color:#fff;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.45);
-      background: rgba(255,255,255,.07);
-    }
-    .btn.primary{
-      background: rgba(255,255,255,.12);
-      border-color: rgba(255,255,255,.34);
-    }
-
-    .note{ margin-top:18px; color:var(--muted2); font-size:13px; }
 
     /* ===== SECTIONS ===== */
     section{ padding:84px 0; }
-
     .section-title{
       display:flex;
       align-items:flex-end;
@@ -414,104 +245,14 @@
       font-size:14px;
     }
 
-    .grid{ display:grid; gap:14px; }
-
-    /* Services / cards grid */
-    .cards{ grid-template-columns: repeat(12, 1fr); }
-    .card{
-      grid-column: span 6;
-      border-radius: var(--radius);
-      padding:18px 16px;
-
-      position:relative;
-      overflow:hidden;
-      background: linear-gradient(180deg, var(--glass-bg-strong), var(--glass-bg));
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(14px) saturate(1.15);
-      -webkit-backdrop-filter: blur(14px) saturate(1.15);
-    }
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background: linear-gradient(180deg, rgba(255,255,255,.10), transparent 40%);
-      opacity:.55;
+    /* keep your existing content styling (simple, no “cheap tiles” yet) */
+    .divider{
+      height:1px;
+      background: rgba(255,255,255,.08);
+      margin:26px 0;
     }
 
-    .card h3{
-      position:relative;
-      margin:0 0 8px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:14px;
-      color: var(--text);
-    }
-    .card p{
-      position:relative;
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .tagrow{
-      position:relative;
-      margin-top:12px;
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-    .tag{
-      font-size:12px;
-      color:rgba(255,255,255,.70);
-      border:1px solid rgba(255,255,255,.12);
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.03);
-      letter-spacing:.06em;
-    }
-
-    /* Premium hover (subtle) */
-    .card:hover{ border-color: var(--glass-border-strong); }
-
-    /* Video embed */
-    .video{
-      border:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, var(--glass-bg-strong), var(--glass-bg));
-      border-radius: var(--radius2);
-      overflow:hidden;
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(14px) saturate(1.15);
-      -webkit-backdrop-filter: blur(14px) saturate(1.15);
-    }
-    .video .top{
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .video .top b{
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:13px;
-    }
-    .video .top span{
-      color:var(--muted2);
-      font-size:12px;
-      letter-spacing:.06em;
-    }
-    .video iframe{
-      width:100%;
-      aspect-ratio:16/9;
-      border:0;
-      display:block;
-      background:#000;
-    }
-
-    /* Editorial Work (left image / right text) */
+    /* Editorial splits (your modern backbone) */
     .editorial{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -564,13 +305,28 @@
       color: rgba(255,255,255,.55);
     }
 
-    /* Contact (single column card, no form) */
-    #contact .card{ grid-column: span 12; }
-
-    .small{
-      color:var(--muted2);
-      font-size:12px;
-      margin-top:10px;
+    /* Simple list blocks (interim until we rebuild sections) */
+    .list{
+      display:grid;
+      gap:12px;
+      margin-top:22px;
+    }
+    .list-item{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:6px;
+      padding:14px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .list-item b{
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:13px;
+      color: rgba(255,255,255,.92);
+    }
+    .list-item span{
+      color: var(--muted);
+      font-size:14px;
     }
 
     footer{
@@ -581,15 +337,11 @@
       letter-spacing:.06em;
     }
 
-    /* Fallback if blur not supported */
-    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
-      .card, .video, .menu-panel, .menu-overlay{
-        background: rgba(255,255,255,.07);
-      }
-    }
-
     /* Responsive */
     @media (max-width: 900px){
+      .menu-bar{ top:52px; }
+      body.menu-open .menu-bar{ max-height:220px; }
+      .menu-links{ justify-content:flex-start; }
       .editorial{
         grid-template-columns: 1fr;
         gap:28px;
@@ -599,52 +351,32 @@
       .editorial.reverse .editorial-text{ order:unset; }
       .editorial-text h3{ font-size:28px; }
     }
-
-    @media (max-width: 840px){
-      .card{ grid-column: span 12; }
-      .hero{ min-height: 100vh; }
-      .menu-inner{ padding:16px 18px 20px; }
-    }
   </style>
 </head>
 
 <body>
 
-  <!-- NAV (minimal) -->
+  <!-- NAV -->
   <div class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="#top" aria-label="BLKRØM MEDIA">
-        <b>BLKRØM</b><span>media</span>
-      </a>
-
-      <button class="menu-btn" id="menuBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menuPanel">
-        <span class="menu-icon" aria-hidden="true"><i></i></span>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuBar">
         Menu
       </button>
     </div>
   </div>
 
-  <!-- MENU OVERLAY + PANEL -->
-  <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
-
-  <div class="menu-panel" id="menuPanel" role="dialog" aria-modal="true" aria-label="Menu">
-    <div class="menu-inner">
-      <div class="menu-title">
-        <b>BLKRØM</b><span>media</span>
-      </div>
-
-      <button class="menu-close" id="menuClose" type="button">
-        Close
-      </button>
-
+  <!-- NARROW DROPDOWN BAR -->
+  <div class="menu-bar" id="menuBar" aria-hidden="true">
+    <div class="menu-bar-inner">
       <nav class="menu-links" aria-label="Site sections">
-        <a href="#services"><span>Services</span><small>Capabilities</small></a>
-        <a href="#work"><span>Work</span><small>Selected</small></a>
-        <a href="#motion"><span>Motion</span><small>Showreel</small></a>
-        <a href="#creators"><span>Creators</span><small>Program</small></a>
-        <a href="#private"><span>Private</span><small>Invite-only</small></a>
-        <a href="#creator-faq"><span>FAQ</span><small>Creator</small></a>
-        <a href="#contact"><span>Contact</span><small>Direct</small></a>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#motion">Motion</a>
+        <a href="#creators">Creator Program</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#private">Private</a>
+        <a href="#creator-faq">FAQ</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </div>
@@ -658,79 +390,47 @@
       </video>
     </div>
 
-    <div class="wrap">
-      <div class="hero-card">
-        <div class="kicker">
-          <span class="dot"></span>
-          <span>visual media studio</span>
-        </div>
-
-        <h1>BLKRØM MEDIA</h1>
-        <p class="sub"><strong>film</strong> · photography · motion · post-production</p>
-
-        <div class="cta">
-          <a class="btn primary" href="#work">View work</a>
-          <a class="btn" href="#contact">Apply to work</a>
-          <a class="btn" href="#private">Private view</a>
-        </div>
-
-        <div class="note">
-          Cinematic visuals focused on atmosphere, tension and presence.
-        </div>
-      </div>
+    <div class="hero-inner">
+      <h1 class="hero-title">BLKRØM MEDIA</h1>
+      <div class="hero-sub">film · photography · motion · post-production</div>
     </div>
   </header>
 
-  <!-- SERVICES -->
+  <!-- SERVICES (temporary clean list; we’ll modernize later) -->
   <section id="services">
     <div class="wrap">
       <div class="section-title">
-        <h2>Capabilities</h2>
-        <p>End-to-end production with a cinematic finish. Clean surface, controlled undertone.</p>
+        <h2>Services</h2>
+        <p>Clean surface. Controlled undertone. Built for presence.</p>
       </div>
 
-      <div class="grid cards">
-        <div class="card">
-          <h3>Film Production</h3>
-          <p>Concept, direction, shot planning, on-set execution. Built for mood and narrative.</p>
-          <div class="tagrow">
-            <span class="tag">story</span><span class="tag">mood</span><span class="tag">set</span>
-          </div>
+      <div class="list">
+        <div class="list-item">
+          <b>Film Production</b>
+          <span>Concept, direction, shot planning, on-set execution.</span>
         </div>
-
-        <div class="card">
-          <h3>Photography</h3>
-          <p>Urban, automotive, portrait & silhouette work. Light/shadow as a signature.</p>
-          <div class="tagrow">
-            <span class="tag">city</span><span class="tag">car</span><span class="tag">silhouette</span>
-          </div>
+        <div class="list-item">
+          <b>Photography</b>
+          <span>Urban, automotive, portrait & silhouette work.</span>
         </div>
-
-        <div class="card">
-          <h3>Motion & Reels</h3>
-          <p>Short-form edits, loops, teasers. Rhythm, restraint and impact.</p>
-          <div class="tagrow">
-            <span class="tag">reels</span><span class="tag">teasers</span><span class="tag">loops</span>
-          </div>
+        <div class="list-item">
+          <b>Motion & Reels</b>
+          <span>Short-form edits, loops, teasers — restraint and impact.</span>
         </div>
-
-        <div class="card">
-          <h3>Post-Production</h3>
-          <p>Editing, color grading, grain, sound polish. Developed in the dark.</p>
-          <div class="tagrow">
-            <span class="tag">edit</span><span class="tag">grade</span><span class="tag">finish</span>
-          </div>
+        <div class="list-item">
+          <b>Post-Production</b>
+          <span>Editing, color grading, grain, sound polish.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WORK (EDITORIAL SPLIT) -->
+  <!-- WORK -->
   <section id="work">
     <div class="wrap">
       <div class="section-title">
-        <h2>Selected Work</h2>
-        <p>Editorial layout. Replace images in <b>assets/</b>.</p>
+        <h2>Work</h2>
+        <p>Replace images in <b>assets/</b>.</p>
       </div>
 
       <div class="editorial">
@@ -739,7 +439,7 @@
         </div>
         <div class="editorial-text">
           <h3>City at Night</h3>
-          <p>Controlled light. Quiet movement.<br>Frames built around presence — not noise.</p>
+          <p>Controlled light. Quiet movement. Frames built around presence — not noise.</p>
           <div class="editorial-meta">night / city</div>
         </div>
       </div>
@@ -750,33 +450,10 @@
         </div>
         <div class="editorial-text">
           <h3>Silhouette</h3>
-          <p>Less skin. More shape.<br>Identity through shadow and restraint.</p>
+          <p>Less skin. More shape. Identity through shadow and restraint.</p>
           <div class="editorial-meta">silhouette / noir</div>
         </div>
       </div>
-
-      <div class="editorial">
-        <div class="editorial-img">
-          <img src="assets/editorial3.jpg" alt="Automotive" loading="lazy">
-        </div>
-        <div class="editorial-text">
-          <h3>Automotive</h3>
-          <p>Editorial pacing. Mechanical beauty.<br>Metal, motion, control.</p>
-          <div class="editorial-meta">automotive / metal</div>
-        </div>
-      </div>
-
-      <div class="editorial reverse">
-        <div class="editorial-img">
-          <img src="assets/editorial4.jpg" alt="Details" loading="lazy">
-        </div>
-        <div class="editorial-text">
-          <h3>Details</h3>
-          <p>Texture, light, micro-movement.<br>Small frames that carry the whole mood.</p>
-          <div class="editorial-meta">detail / texture</div>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -785,18 +462,15 @@
     <div class="wrap">
       <div class="section-title">
         <h2>Motion</h2>
-        <p>Optional: embed a Vimeo/YouTube showreel. Replace the iframe URL below.</p>
+        <p>Embed your showreel (replace iframe URL).</p>
       </div>
 
-      <div class="video">
-        <div class="top">
-          <b>Showreel</b>
-          <span>motion · edit · grade</span>
-        </div>
-
+      <div class="divider"></div>
+      <div style="border:1px solid rgba(255,255,255,.10); border-radius:26px; overflow:hidden;">
         <iframe
           title="BLKRØM Showreel"
           src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          style="width:100%; aspect-ratio:16/9; border:0; display:block; background:#000;"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen>
         </iframe>
@@ -809,46 +483,26 @@
     <div class="wrap">
       <div class="section-title">
         <h2>Creator Program</h2>
-        <p>Selected creators. Subscription-based platforms. Brand, structure and long-term growth — not chaos.</p>
+        <p>Selected creators. Brand, structure and long-term direction.</p>
       </div>
 
-      <div class="grid cards">
-        <div class="card">
-          <h3>Brand & Identity</h3>
-          <p>Positioning, visual language and boundaries. A recognisable persona instead of random posts.</p>
-          <div class="tagrow">
-            <span class="tag">positioning</span><span class="tag">visuals</span><span class="tag">values</span>
-          </div>
+      <div class="list">
+        <div class="list-item">
+          <b>Brand & Identity</b>
+          <span>Positioning, visual language, boundaries.</span>
         </div>
-
-        <div class="card">
-          <h3>Content & Production</h3>
-          <p>Cinematic photo and video sessions, mood concepts, seasonal themes. Intentional content.</p>
-          <div class="tagrow">
-            <span class="tag">film</span><span class="tag">photo</span><span class="tag">stories</span>
-          </div>
+        <div class="list-item">
+          <b>Content & Production</b>
+          <span>Cinematic photo and video sessions. Intentional themes.</span>
         </div>
-
-        <div class="card">
-          <h3>Growth & Monetization</h3>
-          <p>Private membership funnels, offer structure, upsells and drops. Clean systems for sustainable revenue.</p>
-          <div class="tagrow">
-            <span class="tag">funnel</span><span class="tag">memberships</span><span class="tag">upsell</span>
-          </div>
+        <div class="list-item">
+          <b>Growth & Systems</b>
+          <span>Funnels, releases, offer structure — built as clean systems.</span>
         </div>
-
-        <div class="card">
-          <h3>Safety & Partnership</h3>
-          <p>Boundaries defined together. Transparent collaboration. A shared project.</p>
-          <div class="tagrow">
-            <span class="tag">consent</span><span class="tag">privacy</span><span class="tag">creator first</span>
-          </div>
+        <div class="list-item">
+          <b>Safety & Partnership</b>
+          <span>Boundaries defined together. Transparent collaboration.</span>
         </div>
-      </div>
-
-      <div style="margin-top:24px;">
-        <a class="btn primary" href="#contact">Apply to work with BLKRØM</a>
-        <div class="small">Limited spots. Boundaries, content and revenue split are discussed individually in a private call.</div>
       </div>
     </div>
   </section>
@@ -858,18 +512,22 @@
     <div class="wrap">
       <div class="section-title">
         <h2>Philosophy</h2>
-        <p>Brand over chaos. Direction over randomness. Boundaries respected.</p>
+        <p>Brand over chaos. Direction over randomness.</p>
       </div>
 
-      <div class="card">
-        <p style="font-size: 1.1rem;">
-          This is not fast content. This is long-term identity.
-          You bring the ambition — we build the system, visuals and structure.
-        </p>
-        <p style="margin-top: 8px;">
-          No pressure. No exploitation. No assumptions.<br>
-          Only collaboration, vision and growth.
-        </p>
+      <div class="list">
+        <div class="list-item">
+          <b>Identity</b>
+          <span>Not fast content. Long-term presence.</span>
+        </div>
+        <div class="list-item">
+          <b>Restraint</b>
+          <span>Less noise. More control.</span>
+        </div>
+        <div class="list-item">
+          <b>Boundaries</b>
+          <span>Always aligned. Always respected.</span>
+        </div>
       </div>
     </div>
   </section>
@@ -879,119 +537,53 @@
     <div class="wrap">
       <div class="section-title">
         <h2>Private</h2>
-        <p>
-          A reserved space for selected creators who operate beyond public platforms.
-          Invite-only. Discreet. Structured.
-        </p>
+        <p>Invite-only. Discreet. Structured.</p>
       </div>
 
-      <div class="card">
-        <p style="font-size: 1.1rem;">We provide:</p>
-        <ul style="margin-top: 8px; color: var(--muted);">
-          <li>Cinematic photo & film production</li>
-          <li>Content planning & seasonal storylines</li>
-          <li>Private membership funnels & releases</li>
-          <li>Offer structure, pricing & upsells</li>
-          <li>Audience interaction systems (optional)</li>
-        </ul>
-
-        <p style="margin-top: 16px;">
-          <strong>Creator First.</strong><br>
-          No pressure. No boundary pushing. Every move is aligned with your comfort, style and identity.
-        </p>
-
-        <p style="margin-top: 12px;">
-          Private is <strong>invite-only</strong>. Apply below to request access.
-        </p>
-
-        <a class="btn primary" href="#contact" style="margin-top: 16px;">Request Access</a>
+      <div class="list">
+        <div class="list-item"><b>Cinematic production</b><span>Photo & film. Editorial pacing.</span></div>
+        <div class="list-item"><b>Planning</b><span>Seasonal themes, content rhythm.</span></div>
+        <div class="list-item"><b>Systems</b><span>Membership structure & releases.</span></div>
       </div>
     </div>
   </section>
 
-  <!-- CREATOR FAQ -->
+  <!-- FAQ -->
   <section id="creator-faq">
     <div class="wrap">
       <div class="section-title">
-        <h2>Creator FAQ</h2>
-        <p>Short answers for creators considering working with BLKRØM — what this is, how it works, and what we expect.</p>
+        <h2>FAQ</h2>
+        <p>Short answers. No noise.</p>
       </div>
 
-      <div class="grid cards faq">
-        <div class="card">
-          <h3>Do I need experience as a creator or model?</h3>
-          <p>Not necessarily. What matters is intention, reliability and a clear sense of your boundaries.</p>
-        </div>
-
-        <div class="card">
-          <h3>Do I have to create explicit content?</h3>
-          <p>No. The content level is defined together and always stays within your comfort zone.</p>
-        </div>
-
-        <div class="card">
-          <h3>How does the collaboration work?</h3>
-          <p>We start with a portfolio and strategy call, define goals and capacity, then decide on structure and rhythm.</p>
-        </div>
-
-        <div class="card">
-          <h3>Does BLKRØM earn money from my revenue?</h3>
-          <p>BLKRØM works with custom agreements per creator. Terms are discussed privately after the portfolio call.</p>
-        </div>
-
-        <div class="card">
-          <h3>What do I need to invest?</h3>
-          <p>Time, consistency and willingness to treat your work as a brand — not a side-effect.</p>
-        </div>
-
-        <div class="card">
-          <h3>Is this open to anyone?</h3>
-          <p>No. BLKRØM is selective and works invite-only or by application.</p>
-        </div>
+      <div class="list">
+        <div class="list-item"><b>Do I need experience?</b><span>Reliability and boundaries matter more than experience.</span></div>
+        <div class="list-item"><b>Explicit content required?</b><span>No. Level is defined together.</span></div>
+        <div class="list-item"><b>How does it start?</b><span>We review fit, then define structure and pace.</span></div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT (single column, no form, no buttons) -->
+  <!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
       <div class="section-title">
         <h2>Contact</h2>
-        <p>For selected creators and partners. All inquiries are reviewed manually and kept confidential.</p>
+        <p>Invite-only. Manual review. Confidential.</p>
       </div>
 
-      <div class="grid cards">
-        <div class="card">
-          <h3>Inquiries</h3>
-
-          <p>
-            BLKRØM works invite-only.
-            We collaborate with creators who value discretion, structure and long-term direction.
-          </p>
-
-          <p style="margin-top:12px;">
-            If you believe there is a potential fit, reach out directly with a short introduction and your intent.
-          </p>
-
-          <div style="height:16px"></div>
-
-          <p>
-            <strong>Email</strong><br>
-            <a href="mailto:contact@blkrom-media.com">contact@blkrom-media.com</a>
-          </p>
-
-          <p style="margin-top:10px;">
-            <strong>Instagram</strong><br>
-            <a href="https://www.instagram.com/fabian_dos.santos" target="_blank" rel="noreferrer">@fabian_dos.santos</a>
-          </p>
-
-          <p style="margin-top:12px;">
-            <strong>Base</strong><br>
-            Munich (DE) · Perth (AU)
-          </p>
-
-          <p class="small" style="margin-top:14px;">
-            No forms. No automation. If we reply, it’s intentional.
-          </p>
+      <div class="list">
+        <div class="list-item">
+          <b>Email</b>
+          <span><a href="mailto:contact@blkrom-media.com">contact@blkrom-media.com</a></span>
+        </div>
+        <div class="list-item">
+          <b>Instagram</b>
+          <span><a href="https://www.instagram.com/fabian_dos.santos" target="_blank" rel="noreferrer">@fabian_dos.santos</a></span>
+        </div>
+        <div class="list-item">
+          <b>Base</b>
+          <span>Munich (DE) · Perth (AU)</span>
         </div>
       </div>
     </div>
@@ -999,7 +591,7 @@
 
   <footer>
     <div class="wrap">
-      © <span id="year"></span> BLKRØM MEDIA · viewer discretion advised · all rights reserved
+      © <span id="year"></span> BLKRØM MEDIA · all rights reserved
     </div>
   </footer>
 
@@ -1008,35 +600,26 @@
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // menu open/close
+    // menu toggle (narrow bar)
     const body = document.body;
     const btn = document.getElementById('menuBtn');
-    const closeBtn = document.getElementById('menuClose');
-    const overlay = document.getElementById('menuOverlay');
-    const panel = document.getElementById('menuPanel');
-    const links = panel ? panel.querySelectorAll('a[href^="#"]') : [];
+    const bar = document.getElementById('menuBar');
+    const links = bar ? bar.querySelectorAll('a[href^="#"]') : [];
 
     function openMenu(){
       body.classList.add('menu-open');
       btn.setAttribute('aria-expanded', 'true');
-      overlay.setAttribute('aria-hidden', 'false');
-      // focus first link
-      setTimeout(() => { if (links[0]) links[0].focus(); }, 50);
+      if (bar) bar.setAttribute('aria-hidden', 'false');
     }
     function closeMenu(){
       body.classList.remove('menu-open');
       btn.setAttribute('aria-expanded', 'false');
-      overlay.setAttribute('aria-hidden', 'true');
-      btn.focus();
+      if (bar) bar.setAttribute('aria-hidden', 'true');
     }
 
     if (btn) btn.addEventListener('click', () => {
-      if (body.classList.contains('menu-open')) closeMenu();
-      else openMenu();
+      body.classList.contains('menu-open') ? closeMenu() : openMenu();
     });
-
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-    if (overlay) overlay.addEventListener('click', closeMenu);
 
     // close on ESC
     document.addEventListener('keydown', (e) => {
@@ -1044,7 +627,15 @@
     });
 
     // close when clicking a menu link
-    links.forEach(a => a.addEventListener('click', () => closeMenu()));
+    links.forEach(a => a.addEventListener('click', closeMenu));
+
+    // click outside closes (but keeps it “quiet”)
+    document.addEventListener('click', (e) => {
+      if (!body.classList.contains('menu-open')) return;
+      const isBtn = btn && (e.target === btn || btn.contains(e.target));
+      const isBar = bar && (e.target === bar || bar.contains(e.target));
+      if (!isBtn && !isBar) closeMenu();
+    });
   </script>
 </body>
 </html>
