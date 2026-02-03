@@ -72,14 +72,16 @@
     a{ color:inherit; text-decoration:none; }
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
-    /* Top nav */
+    /* ===== TOP NAV (minimal) ===== */
     .nav{
-      position:sticky;
+      position:fixed;
       top:0;
-      z-index:50;
+      left:0;
+      right:0;
+      z-index:80;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      background: linear-gradient(to bottom, rgba(0,0,0,.82), rgba(0,0,0,.35));
+      background: linear-gradient(to bottom, rgba(0,0,0,.72), rgba(0,0,0,.18));
       border-bottom:1px solid rgba(255,255,255,.06);
     }
     .nav-inner{
@@ -96,6 +98,7 @@
       letter-spacing:.18em;
       text-transform:uppercase;
       white-space:nowrap;
+      user-select:none;
     }
     .brand b{ font-weight:800; }
     .brand span{
@@ -104,49 +107,195 @@
       color:var(--muted2);
       text-transform:uppercase;
     }
-    .links{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .links a{
-      font-size:13px;
-      letter-spacing:.08em;
+
+    .menu-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.03);
       color:var(--muted);
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid transparent;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
     }
-    .links a:hover{
-      border-color:rgba(255,255,255,.16);
+    .menu-btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.40);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+    }
+    .menu-icon{
+      width:18px; height:10px; position:relative; display:inline-block;
+    }
+    .menu-icon:before,
+    .menu-icon:after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      height:1px;
+      background:rgba(255,255,255,.72);
+      border-radius:999px;
+    }
+    .menu-icon:before{ top:0; }
+    .menu-icon:after{ bottom:0; }
+    .menu-icon i{
+      position:absolute;
+      left:0; right:0;
+      top:50%;
+      height:1px;
+      transform: translateY(-50%);
+      background:rgba(255,255,255,.42);
+      border-radius:999px;
+    }
+
+    /* ===== DROPDOWN PANEL ===== */
+    .menu-overlay{
+      position:fixed;
+      inset:0;
+      z-index:90;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+    }
+    .menu-panel{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:95;
+      transform: translateY(-12px);
+      opacity:0;
+      pointer-events:none;
+      transition: transform .18s ease, opacity .18s ease;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(to bottom, rgba(0,0,0,.92), rgba(0,0,0,.70));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .menu-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:18px 22px 22px;
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:18px;
+      align-items:start;
+    }
+    .menu-title{
+      display:flex;
+      align-items:baseline;
+      gap:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      color:rgba(255,255,255,.88);
+      user-select:none;
+    }
+    .menu-title b{ font-weight:800; }
+    .menu-title span{ font-size:12px; letter-spacing:.22em; color:var(--muted2); }
+
+    .menu-close{
+      justify-self:end;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
+    }
+    .menu-close:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.40);
+      background: rgba(255,255,255,.06);
       color:#fff;
     }
 
-    /* Hero */
-    .hero{
-      position:relative;
-      min-height:92vh;
+    .menu-links{
+      grid-column:1 / -1;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:8px;
+      padding-top:6px;
+    }
+    .menu-links a{
       display:flex;
       align-items:center;
-      padding:40px 0 30px;
-      overflow:hidden;
+      justify-content:space-between;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      color:rgba(255,255,255,.86);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:12px;
+      transition: border-color .12s ease, background .12s ease, transform .12s ease;
+    }
+    .menu-links a:hover{
+      border-color: rgba(255,255,255,.28);
+      background: rgba(255,255,255,.05);
+      transform: translateY(-1px);
+    }
+    .menu-links a small{
+      color: rgba(255,255,255,.40);
+      letter-spacing:.18em;
+      font-size:11px;
+      text-transform:none;
     }
 
-    .hero-bg{
+    /* Open state */
+    .menu-open .menu-overlay{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .menu-open .menu-panel{
+      opacity:1;
+      pointer-events:auto;
+      transform: translateY(0);
+    }
+
+    /* ===== HERO (video + bottom 10mm fade) ===== */
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      padding:110px 0 60px; /* space under fixed nav */
+    }
+
+    .hero-media{
       position:absolute;
       inset:0;
-      background-image: url("assets/hero.jpg");
-      background-size: cover;
-      background-position: 85% 20%;
-      transform: scale(1.10);
-      filter: contrast(1.12) brightness(1.02);
       z-index:0;
       pointer-events:none;
+      background:#000;
+    }
+    .hero-video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+      filter: contrast(1.12) brightness(1.02);
     }
 
-    /* Fade: later fade-out downwards */
-    .hero-bg::after{
+    /* global soft overlay (very light) */
+    .hero-media::before{
       content:"";
       position:absolute;
       inset:0;
@@ -154,9 +303,20 @@
         to bottom,
         rgba(0,0,0,.10) 0%,
         rgba(0,0,0,.18) 55%,
-        rgba(0,0,0,.35) 75%,
-        rgba(0,0,0,.92) 100%
+        rgba(0,0,0,.32) 78%,
+        rgba(0,0,0,.60) 100%
       );
+    }
+
+    /* bottom fade (~10mm) */
+    .hero-media::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height: clamp(32px, 3.2vh, 56px);
+      background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
     }
 
     .hero .wrap{ position:relative; z-index:2; }
@@ -167,7 +327,7 @@
       box-shadow:none;
       max-width:820px;
       padding:38px 28px;
-      text-shadow: 0 10px 30px rgba(0,0,0,.65);
+      text-shadow: 0 12px 40px rgba(0,0,0,.75);
     }
 
     .kicker{
@@ -231,8 +391,9 @@
 
     .note{ margin-top:18px; color:var(--muted2); font-size:13px; }
 
-    /* Sections */
+    /* ===== SECTIONS ===== */
     section{ padding:84px 0; }
+
     .section-title{
       display:flex;
       align-items:flex-end;
@@ -259,7 +420,6 @@
     .cards{ grid-template-columns: repeat(12, 1fr); }
     .card{
       grid-column: span 6;
-      border:1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
       padding:18px 16px;
 
@@ -423,7 +583,7 @@
 
     /* Fallback if blur not supported */
     @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
-      .card, .video{
+      .card, .video, .menu-panel, .menu-overlay{
         background: rgba(255,255,255,.07);
       }
     }
@@ -442,33 +602,62 @@
 
     @media (max-width: 840px){
       .card{ grid-column: span 12; }
-      .links{ gap:8px; }
-      .hero{ min-height: 88vh; }
+      .hero{ min-height: 100vh; }
+      .menu-inner{ padding:16px 18px 20px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- NAV -->
+
+  <!-- NAV (minimal) -->
   <div class="nav">
     <div class="wrap nav-inner">
-      <div class="brand" aria-label="BLKRØM MEDIA">
+      <a class="brand" href="#top" aria-label="BLKRØM MEDIA">
+        <b>BLKRØM</b><span>media</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menuPanel">
+        <span class="menu-icon" aria-hidden="true"><i></i></span>
+        Menu
+      </button>
+    </div>
+  </div>
+
+  <!-- MENU OVERLAY + PANEL -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+
+  <div class="menu-panel" id="menuPanel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="menu-inner">
+      <div class="menu-title">
         <b>BLKRØM</b><span>media</span>
       </div>
-      <div class="links">
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#motion">Motion</a>
-        <a href="#creators">Creators</a>
-        <a href="#private">Private</a>
-        <a href="#contact">Contact</a>
-      </div>
+
+      <button class="menu-close" id="menuClose" type="button">
+        Close
+      </button>
+
+      <nav class="menu-links" aria-label="Site sections">
+        <a href="#services"><span>Services</span><small>Capabilities</small></a>
+        <a href="#work"><span>Work</span><small>Selected</small></a>
+        <a href="#motion"><span>Motion</span><small>Showreel</small></a>
+        <a href="#creators"><span>Creators</span><small>Program</small></a>
+        <a href="#private"><span>Private</span><small>Invite-only</small></a>
+        <a href="#creator-faq"><span>FAQ</span><small>Creator</small></a>
+        <a href="#contact"><span>Contact</span><small>Direct</small></a>
+      </nav>
     </div>
   </div>
 
   <!-- HERO -->
   <header class="hero" id="top">
-    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-media" aria-hidden="true">
+      <!-- CHANGE THIS PATH -->
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+        <source src="assets/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+
     <div class="wrap">
       <div class="hero-card">
         <div class="kicker">
@@ -536,65 +725,60 @@
     </div>
   </section>
 
-<!-- WORK (EDITORIAL SPLIT) -->
-<section id="work">
-  <div class="wrap">
-    <div class="section-title">
-      <h2>Selected Work</h2>
-      <p>Editorial layout. Replace images in <b>assets/</b>.</p>
+  <!-- WORK (EDITORIAL SPLIT) -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Selected Work</h2>
+        <p>Editorial layout. Replace images in <b>assets/</b>.</p>
+      </div>
+
+      <div class="editorial">
+        <div class="editorial-img">
+          <img src="assets/editorial1.jpg" alt="City at night" loading="lazy">
+        </div>
+        <div class="editorial-text">
+          <h3>City at Night</h3>
+          <p>Controlled light. Quiet movement.<br>Frames built around presence — not noise.</p>
+          <div class="editorial-meta">night / city</div>
+        </div>
+      </div>
+
+      <div class="editorial reverse">
+        <div class="editorial-img">
+          <img src="assets/editorial2.jpg" alt="Silhouette" loading="lazy">
+        </div>
+        <div class="editorial-text">
+          <h3>Silhouette</h3>
+          <p>Less skin. More shape.<br>Identity through shadow and restraint.</p>
+          <div class="editorial-meta">silhouette / noir</div>
+        </div>
+      </div>
+
+      <div class="editorial">
+        <div class="editorial-img">
+          <img src="assets/editorial3.jpg" alt="Automotive" loading="lazy">
+        </div>
+        <div class="editorial-text">
+          <h3>Automotive</h3>
+          <p>Editorial pacing. Mechanical beauty.<br>Metal, motion, control.</p>
+          <div class="editorial-meta">automotive / metal</div>
+        </div>
+      </div>
+
+      <div class="editorial reverse">
+        <div class="editorial-img">
+          <img src="assets/editorial4.jpg" alt="Details" loading="lazy">
+        </div>
+        <div class="editorial-text">
+          <h3>Details</h3>
+          <p>Texture, light, micro-movement.<br>Small frames that carry the whole mood.</p>
+          <div class="editorial-meta">detail / texture</div>
+        </div>
+      </div>
+
     </div>
-
-    <!-- 1: City / Night (Bild links, Text rechts) -->
-    <div class="editorial">
-      <div class="editorial-img">
-        <img src="assets/editorial1.jpg" alt="City at night" loading="lazy">
-      </div>
-      <div class="editorial-text">
-        <h3>City at Night</h3>
-        <p>Controlled light. Quiet movement.<br>Frames built around presence — not noise.</p>
-        <div class="editorial-meta">night / city</div>
-      </div>
-    </div>
-
-    <!-- 2: Silhouette (gespiegelt) -->
-    <div class="editorial reverse">
-      <div class="editorial-img">
-        <img src="assets/editorial2.jpg" alt="Silhouette" loading="lazy">
-      </div>
-      <div class="editorial-text">
-        <h3>Silhouette</h3>
-        <p>Less skin. More shape.<br>Identity through shadow and restraint.</p>
-        <div class="editorial-meta">silhouette / noir</div>
-      </div>
-    </div>
-
-    <!-- 3: Automotive (Bild links) -->
-    <div class="editorial">
-      <div class="editorial-img">
-        <img src="assets/editorial3.jpg" alt="Automotive" loading="lazy">
-      </div>
-      <div class="editorial-text">
-        <h3>Automotive</h3>
-        <p>Editorial pacing. Mechanical beauty.<br>Metal, motion, control.</p>
-        <div class="editorial-meta">automotive / metal</div>
-      </div>
-    </div>
-
-    <!-- 4: Details (gespiegelt) -->
-    <div class="editorial reverse">
-      <div class="editorial-img">
-        <img src="assets/editorial4.jpg" alt="Details" loading="lazy">
-      </div>
-      <div class="editorial-text">
-        <h3>Details</h3>
-        <p>Texture, light, micro-movement.<br>Small frames that carry the whole mood.</p>
-        <div class="editorial-meta">detail / texture</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
+  </section>
 
   <!-- MOTION -->
   <section id="motion">
@@ -820,8 +1004,47 @@
   </footer>
 
   <script>
+    // year
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // menu open/close
+    const body = document.body;
+    const btn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('menuClose');
+    const overlay = document.getElementById('menuOverlay');
+    const panel = document.getElementById('menuPanel');
+    const links = panel ? panel.querySelectorAll('a[href^="#"]') : [];
+
+    function openMenu(){
+      body.classList.add('menu-open');
+      btn.setAttribute('aria-expanded', 'true');
+      overlay.setAttribute('aria-hidden', 'false');
+      // focus first link
+      setTimeout(() => { if (links[0]) links[0].focus(); }, 50);
+    }
+    function closeMenu(){
+      body.classList.remove('menu-open');
+      btn.setAttribute('aria-expanded', 'false');
+      overlay.setAttribute('aria-hidden', 'true');
+      btn.focus();
+    }
+
+    if (btn) btn.addEventListener('click', () => {
+      if (body.classList.contains('menu-open')) closeMenu();
+      else openMenu();
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    if (overlay) overlay.addEventListener('click', closeMenu);
+
+    // close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+    });
+
+    // close when clicking a menu link
+    links.forEach(a => a.addEventListener('click', () => closeMenu()));
   </script>
 </body>
 </html>
