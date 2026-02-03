@@ -145,13 +145,14 @@
        HERO (Video + bottom 10mm fade)
        =========================== */
     .hero{
-      position:relative;
-      min-height:92vh;
-      display:flex;
-      align-items:flex-end;
-      padding:64px 0 64px;
-      overflow:hidden;
-    }
+  position:relative;
+  min-height:92vh;
+  display:flex;
+  align-items:center;
+  padding:0;
+  overflow:hidden;
+}
+
 
     .hero video{
       position:absolute;
@@ -164,24 +165,28 @@
       opacity:.85;
     }
 
-    /* bottom fade */
-    .hero:after{
-      content:"";
-      position:absolute;
-      left:0; right:0; bottom:0;
-      height:46px;
-      background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
-      pointer-events:none;
-      z-index:1;
-    }
-
-    .hero .inner{
-      position:relative;
-      z-index:2;
-      width:min(var(--max), calc(100% - 48px));
-      margin:0 auto;
-      padding-top:80px;
-    }
+ /* bottom fade */
+.hero:after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-1px;
+  height:40px;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.04),
+    rgba(0,0,0,1)
+  );
+  pointer-events:none;
+  z-index:1;
+}
+    
+   .hero .inner{
+  position:relative;
+  z-index:2;
+  width:min(var(--max), calc(100% - 48px));
+  margin:0 auto;
+  text-align:center;
+}
 
     .hero h1{
       margin:0;
@@ -446,12 +451,11 @@
       <source src="assets/hero.mp4" type="video/mp4" />
     </video>
 
-    <div class="inner">
-      <h1>BLKRØM MEDIA</h1>
-      <p class="hero-subline">film · photography · motion · post-production</p>
-      <p class="hero-sub">Cinematic visuals. Dark aesthetics. Curated work.</p>
-    </div>
-  </header>
+    <div class="inner hero-center">
+  <h1 class="hero-title">BLKRØM MEDIA</h1>
+  <p class="hero-subline">film · photography · motion · post-production</p>
+</div>
+
 
   <!-- SERVICES -->
   <section id="services">
