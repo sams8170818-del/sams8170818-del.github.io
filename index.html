@@ -164,7 +164,7 @@
       opacity:.85;
     }
 
-    /* bottom fade (about 10mm / ~38px) */
+    /* bottom fade */
     .hero:after{
       content:"";
       position:absolute;
@@ -210,7 +210,7 @@
     }
 
     /* ===========================
-       SECTIONS (simple, not "cheap tiles")
+       SECTIONS
        =========================== */
     section{ padding:96px 0; border-top:1px solid var(--line); }
     .kicker{
@@ -341,14 +341,6 @@
       color:rgba(255,255,255,.86);
       margin:0;
     }
-    .editorial-meta{
-      margin-top:14px;
-      font-family:var(--font-ui);
-      font-size:12px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.55);
-    }
 
     /* ===========================
        CONTACT (single column)
@@ -437,8 +429,13 @@
     </button>
 
     <nav class="drop" id="menuDrop" aria-hidden="true">
-      <a href="#about">About us</a>
-      <a href="#network">Our network</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#motion">Motion</a>
+      <a href="#creators">Creator Program</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#private">Private</a>
+      <a href="#creator-faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -456,56 +453,57 @@
     </div>
   </header>
 
-  <!-- ABOUT -->
-  <section id="about">
+  <!-- SERVICES -->
+  <section id="services">
     <div class="wrap">
-      <p class="kicker">About</p>
-      <h2 class="h2">Brand-first creative direction.</h2>
+      <p class="kicker">Services</p>
+      <h2 class="h2">Cinematic production. Controlled presence.</h2>
       <p class="lead">
-        We build visual identities with restraint, precision and intention — designed to hold attention, shape perception,
-        and elevate presence across platforms.
+        Film, photography and motion built for modern attention spans. Minimal, precise, and designed to shape perception.
       </p>
 
       <div class="grid">
         <div class="card">
-          <h3>Direction</h3>
-          <p>Clear creative systems: tone, pacing, framing and consistency — so your content feels intentional, not random.</p>
+          <h3>Film</h3>
+          <p>Concept, direction and execution built for premium short form.</p>
         </div>
-
         <div class="card">
-          <h3>Production</h3>
-          <p>Film, photography and motion built for modern attention spans — cinematic, minimal, and controlled.</p>
+          <h3>Photography</h3>
+          <p>Editorial imagery with restraint, silhouette and identity.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Editorial splits -->
-      <div class="editorial">
+  <!-- EDITORIAL (5 splits) -->
+  <section id="editorial">
+    <div class="wrap">
+
+<div class="editorial">
         <div class="editorial-img"><img src="assets/editorial1.jpg" alt=""></div>
         <div class="editorial-text">
           <h3>Silhouette / Presence</h3>
           <p>
             Presence is not built through exposure, but through restraint.<br>
             We shape identities that feel controlled, intentional,<br>
-            and instantly recognizable — without revealing more than necessary.
+            and instantly recognizable, without revealing more than necessary.
           </p>
-          <div class="editorial-meta">Identity · Restraint · Recognition</div>
-        </div>
+</div>
       </div>
 
-      <div class="editorial reverse">
+<div class="editorial reverse">
         <div class="editorial-img"><img src="assets/editorial2.jpg" alt=""></div>
         <div class="editorial-text">
           <h3>Motion / Body Language</h3>
           <p>
             Character lives in movement.<br>
-            We direct motion to communicate confidence, rhythm and availability —<br>
+            We direct motion to communicate confidence, rhythm and availability,<br>
             without staged seduction.
           </p>
-          <div class="editorial-meta">Movement · Rhythm · Control</div>
-        </div>
+</div>
       </div>
 
-      <div class="editorial">
+<div class="editorial">
         <div class="editorial-img"><img src="assets/editorial3.jpg" alt=""></div>
         <div class="editorial-text">
           <h3>Detail / Control</h3>
@@ -514,52 +512,159 @@
             We design content that invites imagination,<br>
             holds attention longer, and converts through precision.
           </p>
-          <div class="editorial-meta">Fragments · Precision · Conversion</div>
-        </div>
+</div>
       </div>
 
-      <div class="editorial reverse">
+<div class="editorial reverse">
         <div class="editorial-img"><img src="assets/editorial4.jpg" alt=""></div>
         <div class="editorial-text">
           <h3>Environment / World</h3>
           <p>
-            A creator exists in a world — not a feed.<br>
+            A creator exists in a world, not a feed.<br>
             We build visual environments that feel real and aspirational,<br>
-            so followers don’t just watch — they enter.
+            so followers don’t just watch, they enter.
           </p>
-          <div class="editorial-meta">World · Context · Immersion</div>
-        </div>
+</div>
       </div>
 
-      <div class="editorial">
+<div class="editorial">
         <div class="editorial-img"><img src="assets/editorial5.jpg" alt=""></div>
         <div class="editorial-text">
           <h3>Stillness / Power</h3>
           <p>
-            True authority doesn’t ask for attention — it holds it.<br>
+            True authority doesn’t ask for attention, it holds it.<br>
             We position creators in calm, confident stillness,<br>
             where presence feels expensive and access feels earned.
           </p>
-          <div class="editorial-meta">Authority · Calm · Access</div>
-        </div>
+</div>
       </div>
 
     </div>
   </section>
 
-  <!-- NETWORK / WORK -->
-  <section id="network">
+  <!-- WORK -->
+  <section id="work">
     <div class="wrap">
-      <p class="kicker">Network</p>
-      <h2 class="h2">Curated collaborations.</h2>
-      <p class="lead">
-        A private network of creators, editors, shooters and operators — built for discretion, consistency and quality.
-      </p>
+      <p class="kicker">Work</p>
+      <h2 class="h2">Curated output.</h2>
+      <p class="lead">Replace images in <b>assets/</b> or remove this section.</p>
 
       <div class="grid">
         <div class="shot"><img src="assets/work1.jpg" alt=""></div>
         <div class="shot"><img src="assets/work2.jpg" alt=""></div>
         <div class="shot"><img src="assets/work3.jpg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <section id="motion">
+    <div class="wrap">
+      <p class="kicker">Motion</p>
+      <h2 class="h2">Showreel</h2>
+      <p class="lead">Embed your reel. Replace the iframe URL.</p>
+
+      <div class="shot" style="grid-column: span 12; min-height:auto; border-radius:18px; overflow:hidden;">
+        <iframe
+          title="BLKRØM Showreel"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          style="width:100%; aspect-ratio:16/9; border:0; display:block; background:#000;"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATOR PROGRAM -->
+  <section id="creators">
+    <div class="wrap">
+      <p class="kicker">Creator Program</p>
+      <h2 class="h2">Selected creators. Long-term direction.</h2>
+      <p class="lead">
+        Brand, systems and production built for consistency, discretion and conversion.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Brand & Identity</h3>
+          <p>Positioning, visual language, boundaries, tone.</p>
+        </div>
+        <div class="card">
+          <h3>Content System</h3>
+          <p>Formats, pacing, world building, release structure.</p>
+        </div>
+        <div class="card">
+          <h3>Production</h3>
+          <p>Film, photo and motion built for modern attention.</p>
+        </div>
+        <div class="card">
+          <h3>Growth</h3>
+          <p>Consistent output, conversion logic, long-term presence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy">
+    <div class="wrap">
+      <p class="kicker">Philosophy</p>
+      <h2 class="h2">Restraint over noise.</h2>
+      <p class="lead">
+        Direction over randomness. Identity over exposure. Control over chaos.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Identity</h3>
+          <p>Not fast content. Long-term presence.</p>
+        </div>
+        <div class="card">
+          <h3>Boundaries</h3>
+          <p>Defined together. Respected always.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE -->
+  <section id="private">
+    <div class="wrap">
+      <p class="kicker">Private</p>
+      <h2 class="h2">Invite-only. Discreet.</h2>
+      <p class="lead">
+        Access is built over time. Direction remains private.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Production</h3>
+          <p>Editorial pacing. Controlled themes.</p>
+        </div>
+        <div class="card">
+          <h3>Planning</h3>
+          <p>Seasonal structure. Consistent rhythm.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="creator-faq">
+    <div class="wrap">
+      <p class="kicker">FAQ</p>
+      <h2 class="h2">Short answers.</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Do I need experience?</h3>
+          <p>Reliability and boundaries matter more than experience.</p>
+        </div>
+        <div class="card">
+          <h3>Explicit content required?</h3>
+          <p>No. Level is defined together.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -583,7 +688,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -609,7 +713,6 @@
       body.classList.contains('menu-open') ? closeMenu() : openMenu();
     });
 
-    // click outside closes
     document.addEventListener('click', (e) => {
       if (!body.classList.contains('menu-open')) return;
       const inBtn = btn && (e.target === btn || btn.contains(e.target));
@@ -617,12 +720,10 @@
       if (!inBtn && !inDrop) closeMenu();
     });
 
-    // ESC closes
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
     });
 
-    // click link closes
     links.forEach(a => a.addEventListener('click', closeMenu));
   </script>
 </body>
