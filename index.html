@@ -28,14 +28,11 @@
       --text:#fff;
       --muted:rgba(255,255,255,.72);
       --muted2:rgba(255,255,255,.55);
-      --line:rgba(255,255,255,.14);
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius:18px;
-      --radius2:26px;
+      --line:rgba(255,255,255,.10);
       --max:1100px;
 
-      --font-ui: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --font-editorial: "Libre Baskerville", Georgia, serif;
+      --font-ui:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-editorial:"Libre Baskerville", Georgia, serif;
     }
 
     *{ box-sizing:border-box; }
@@ -44,7 +41,7 @@
       margin:0;
       background:var(--bg);
       color:var(--text);
-      font-family: var(--font-ui);
+      font-family:var(--font-ui);
       line-height:1.6;
       overflow-x:hidden;
     }
@@ -63,99 +60,94 @@
     a{ color:inherit; text-decoration:none; }
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
 
-    /* ===== NAV (logo removed, only menu trigger) ===== */
-    .nav{
+    /* ===========================
+       TOP-RIGHT MENU (EWG STYLE)
+       - No header bar
+       - Fixed, does not scroll away
+       =========================== */
+    .topmenu{
       position:fixed;
-      top:0; left:0; right:0;
-      z-index:80;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: linear-gradient(to bottom, rgba(0,0,0,.82), rgba(0,0,0,.25));
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      padding:14px 0;
+      top:26px;
+      right:26px;
+      z-index:9999;
     }
 
-    .menu-btn{
-      appearance:none;
+    .burger{
+      width:46px;
+      height:46px;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      justify-content:center;
+      gap:8px;
+
       border:0;
       background:transparent;
-      color:rgba(255,255,255,.78);
-      font-size:12px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
       cursor:pointer;
-      padding:10px 6px;
+      padding:0;
     }
-    .menu-btn:hover{ color:#fff; }
 
-    /* ===== EWG-STYLE NARROW DROPDOWN BAR ===== */
-    .menu-bar{
-      position:fixed;
-      top:53px; /* sits under nav (nav height ~53px) */
-      left:0; right:0;
-      z-index:75;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(0,0,0,.92), rgba(0,0,0,.72));
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .burger span{
+      display:block;
+      height:3px;
+      background:#fff;
+      border-radius:2px;
+    }
+    .burger span:nth-child(1){ width:28px; }
+    .burger span:nth-child(2){ width:34px; }
+    .burger span:nth-child(3){ width:22px; }
 
-      overflow:hidden;
-      max-height:0;
+    /* dropdown box */
+    .drop{
+      position:absolute;
+      top:58px;
+      right:0;
+      width:220px;
+      padding:14px 16px;
+
+      background:rgba(20,20,20,.88);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 18px 60px rgba(0,0,0,.60);
+
       opacity:0;
-      transform: translateY(-6px);
+      transform:translateY(-6px);
       pointer-events:none;
-      transition: max-height .18s ease, opacity .18s ease, transform .18s ease;
+      transition:opacity .14s ease, transform .14s ease;
     }
 
-    body.menu-open .menu-bar{
-      max-height:160px; /* narrow bar height */
+    .drop a{
+      display:block;
+      padding:10px 0;
+
+      color:rgba(255,255,255,.92);
+      font-family:var(--font-editorial);
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:14px;
+
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .drop a:last-child{ border-bottom:0; }
+    .drop a:hover{ opacity:.70; }
+
+    /* open state */
+    body.menu-open .drop{
       opacity:1;
-      transform: translateY(0);
+      transform:translateY(0);
       pointer-events:auto;
     }
 
-    .menu-bar-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 22px 18px;
-    }
-
-    .menu-links{
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      gap:18px 22px;
-      justify-content:flex-start;
-    }
-
-    .menu-links a{
-      font-family: var(--font-editorial);
-      font-weight:700;
-      font-size: clamp(14px, 1.3vw, 18px);
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.86);
-      padding:6px 2px;
-      transition: opacity .12s ease;
-      white-space:nowrap;
-    }
-
-    .menu-links a:hover{ opacity:.62; }
-
-    /* ===== HERO (video + bottom 10mm fade) ===== */
+    /* ===========================
+       HERO (Video + bottom 10mm fade)
+       =========================== */
     .hero{
       position:relative;
       min-height:100vh;
+      overflow:hidden;
       display:flex;
       align-items:center;
       justify-content:center;
-      overflow:hidden;
-      padding:110px 0 60px; /* space under fixed nav */
       text-align:center;
     }
 
@@ -166,21 +158,22 @@
       pointer-events:none;
       background:#000;
     }
+
     .hero-video{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
-      transform: scale(1.02);
-      filter: contrast(1.12) brightness(1.02);
+      transform:scale(1.02);
+      filter:contrast(1.12) brightness(1.02);
     }
 
-    /* very light global overlay */
+    /* gentle overall darkening */
     .hero-media::before{
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(
+      background:linear-gradient(
         to bottom,
         rgba(0,0,0,.10) 0%,
         rgba(0,0,0,.18) 55%,
@@ -189,41 +182,42 @@
       );
     }
 
-    /* bottom fade (~10mm) */
+    /* bottom fade (~10mm feeling) */
     .hero-media::after{
       content:"";
       position:absolute;
       left:0; right:0; bottom:0;
-      height: clamp(32px, 3.2vh, 56px);
-      background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
+      height:clamp(32px, 3.2vh, 56px);
+      background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
     }
 
     .hero-inner{
       position:relative;
       z-index:2;
       padding:0 22px;
+      text-shadow:0 12px 40px rgba(0,0,0,.75);
     }
 
     .hero-title{
       margin:0;
-      font-size: clamp(34px, 6.2vw, 74px);
+      font-size:clamp(34px, 6.2vw, 74px);
       line-height:1.05;
       letter-spacing:.14em;
       text-transform:uppercase;
-      text-shadow: 0 12px 40px rgba(0,0,0,.75);
     }
 
     .hero-sub{
-      margin:12px 0 0;
-      font-family: var(--font-editorial);
-      font-size: clamp(14px, 1.4vw, 18px);
-      color: rgba(255,255,255,.78);
+      margin:14px 0 0;
+      font-family:var(--font-editorial);
+      font-size:clamp(14px, 1.4vw, 18px);
+      color:rgba(255,255,255,.78);
       letter-spacing:.06em;
       text-transform:lowercase;
-      text-shadow: 0 10px 30px rgba(0,0,0,.65);
     }
 
-    /* ===== SECTIONS ===== */
+    /* ===========================
+       SECTIONS (simple, not "cheap tiles")
+       =========================== */
     section{ padding:84px 0; }
     .section-title{
       display:flex;
@@ -234,7 +228,7 @@
     }
     .section-title h2{
       margin:0;
-      font-size: clamp(22px, 3.2vw, 34px);
+      font-size:clamp(22px, 3.2vw, 34px);
       letter-spacing:.12em;
       text-transform:uppercase;
     }
@@ -245,88 +239,79 @@
       font-size:14px;
     }
 
-    /* keep your existing content styling (simple, no “cheap tiles” yet) */
-    .divider{
-      height:1px;
-      background: rgba(255,255,255,.08);
-      margin:26px 0;
+    .list{
+      display:grid;
+      gap:12px;
+      margin-top:22px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .list-item{
+      padding:14px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .list-item b{
+      display:block;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:13px;
+      color:rgba(255,255,255,.92);
+      margin-bottom:6px;
+    }
+    .list-item span{
+      color:var(--muted);
+      font-size:14px;
     }
 
-    /* Editorial splits (your modern backbone) */
+    /* Editorial split (optional backbone) */
     .editorial{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns:1fr 1fr;
       gap:40px;
       align-items:center;
-      margin:120px 0;
+      margin:90px 0 0;
+      padding-top:22px;
+      border-top:1px solid rgba(255,255,255,.08);
     }
     .editorial.reverse .editorial-img{ order:2; }
     .editorial.reverse .editorial-text{ order:1; }
 
     .editorial-img{
-      aspect-ratio: 4 / 5;
+      aspect-ratio:4/5;
       overflow:hidden;
-      border-radius: var(--radius2);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
     }
     .editorial-img img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
-      transform: scale(1.02);
-      filter: contrast(1.05) saturate(.92);
+      transform:scale(1.02);
+      filter:contrast(1.05) saturate(.92);
     }
-
-    .editorial-text{ max-width:520px; padding: 6px 0; }
+    .editorial-text{ max-width:520px; }
     .editorial-text h3{
-      font-family: var(--font-editorial);
+      font-family:var(--font-editorial);
       font-weight:700;
       font-size:34px;
       line-height:1.1;
-      margin:0 0 18px;
-      letter-spacing:.01em;
-      text-transform:none;
+      margin:0 0 16px;
     }
     .editorial-text p{
-      font-family: var(--font-editorial);
+      font-family:var(--font-editorial);
       font-size:18px;
       line-height:1.75;
-      color: rgba(255,255,255,.86);
+      color:rgba(255,255,255,.86);
       margin:0;
     }
     .editorial-meta{
       margin-top:14px;
-      font-family: var(--font-ui);
+      font-family:var(--font-ui);
       font-size:12px;
       letter-spacing:.14em;
       text-transform:uppercase;
-      color: rgba(255,255,255,.55);
-    }
-
-    /* Simple list blocks (interim until we rebuild sections) */
-    .list{
-      display:grid;
-      gap:12px;
-      margin-top:22px;
-    }
-    .list-item{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:6px;
-      padding:14px 0;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .list-item b{
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      font-size:13px;
-      color: rgba(255,255,255,.92);
-    }
-    .list-item span{
-      color: var(--muted);
-      font-size:14px;
+      color:rgba(255,255,255,.55);
     }
 
     footer{
@@ -337,15 +322,11 @@
       letter-spacing:.06em;
     }
 
-    /* Responsive */
     @media (max-width: 900px){
-      .menu-bar{ top:52px; }
-      body.menu-open .menu-bar{ max-height:220px; }
-      .menu-links{ justify-content:flex-start; }
+      .topmenu{ top:18px; right:18px; }
       .editorial{
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
         gap:28px;
-        margin:80px 0;
       }
       .editorial.reverse .editorial-img,
       .editorial.reverse .editorial-text{ order:unset; }
@@ -356,37 +337,30 @@
 
 <body>
 
-  <!-- NAV -->
-  <div class="nav">
-    <div class="wrap nav-inner">
-      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuBar">
-        Menu
-      </button>
-    </div>
-  </div>
+  <!-- TOP RIGHT MENU -->
+  <div class="topmenu">
+    <button class="burger" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuDrop" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
 
-  <!-- NARROW DROPDOWN BAR -->
-  <div class="menu-bar" id="menuBar" aria-hidden="true">
-    <div class="menu-bar-inner">
-      <nav class="menu-links" aria-label="Site sections">
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#motion">Motion</a>
-        <a href="#creators">Creator Program</a>
-        <a href="#philosophy">Philosophy</a>
-        <a href="#private">Private</a>
-        <a href="#creator-faq">FAQ</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <div class="drop" id="menuDrop" aria-hidden="true">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#motion">Motion</a>
+      <a href="#creators">Creator Program</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#private">Private</a>
+      <a href="#creator-faq">FAQ</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 
   <!-- HERO -->
   <header class="hero" id="top">
     <div class="hero-media" aria-hidden="true">
-      <!-- CHANGE THIS PATH -->
+      <!-- Put your file here. If it's in repo root: hero.mp4 -->
       <video class="hero-video" autoplay muted loop playsinline preload="metadata">
-        <source src="assets/hero.mp4" type="video/mp4">
+        <source src="hero.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -396,7 +370,7 @@
     </div>
   </header>
 
-  <!-- SERVICES (temporary clean list; we’ll modernize later) -->
+  <!-- SERVICES -->
   <section id="services">
     <div class="wrap">
       <div class="section-title">
@@ -405,22 +379,10 @@
       </div>
 
       <div class="list">
-        <div class="list-item">
-          <b>Film Production</b>
-          <span>Concept, direction, shot planning, on-set execution.</span>
-        </div>
-        <div class="list-item">
-          <b>Photography</b>
-          <span>Urban, automotive, portrait & silhouette work.</span>
-        </div>
-        <div class="list-item">
-          <b>Motion & Reels</b>
-          <span>Short-form edits, loops, teasers — restraint and impact.</span>
-        </div>
-        <div class="list-item">
-          <b>Post-Production</b>
-          <span>Editing, color grading, grain, sound polish.</span>
-        </div>
+        <div class="list-item"><b>Film Production</b><span>Concept, direction, shot planning, on-set execution.</span></div>
+        <div class="list-item"><b>Photography</b><span>Urban, automotive, portrait & silhouette work.</span></div>
+        <div class="list-item"><b>Motion & Reels</b><span>Short-form edits, loops, teasers — restraint and impact.</span></div>
+        <div class="list-item"><b>Post-Production</b><span>Editing, color grading, grain, sound polish.</span></div>
       </div>
     </div>
   </section>
@@ -430,23 +392,23 @@
     <div class="wrap">
       <div class="section-title">
         <h2>Work</h2>
-        <p>Replace images in <b>assets/</b>.</p>
+        <p>Replace images in <b>assets/</b> or remove this section.</p>
       </div>
 
       <div class="editorial">
         <div class="editorial-img">
-          <img src="assets/editorial1.jpg" alt="City at night" loading="lazy">
+          <img src="assets/editorial1.jpg" alt="Work image 1" loading="lazy">
         </div>
         <div class="editorial-text">
-          <h3>City at Night</h3>
+          <h3>Editorial</h3>
           <p>Controlled light. Quiet movement. Frames built around presence — not noise.</p>
-          <div class="editorial-meta">night / city</div>
+          <div class="editorial-meta">selected / work</div>
         </div>
       </div>
 
       <div class="editorial reverse">
         <div class="editorial-img">
-          <img src="assets/editorial2.jpg" alt="Silhouette" loading="lazy">
+          <img src="assets/editorial2.jpg" alt="Work image 2" loading="lazy">
         </div>
         <div class="editorial-text">
           <h3>Silhouette</h3>
@@ -465,7 +427,6 @@
         <p>Embed your showreel (replace iframe URL).</p>
       </div>
 
-      <div class="divider"></div>
       <div style="border:1px solid rgba(255,255,255,.10); border-radius:26px; overflow:hidden;">
         <iframe
           title="BLKRØM Showreel"
@@ -487,22 +448,10 @@
       </div>
 
       <div class="list">
-        <div class="list-item">
-          <b>Brand & Identity</b>
-          <span>Positioning, visual language, boundaries.</span>
-        </div>
-        <div class="list-item">
-          <b>Content & Production</b>
-          <span>Cinematic photo and video sessions. Intentional themes.</span>
-        </div>
-        <div class="list-item">
-          <b>Growth & Systems</b>
-          <span>Funnels, releases, offer structure — built as clean systems.</span>
-        </div>
-        <div class="list-item">
-          <b>Safety & Partnership</b>
-          <span>Boundaries defined together. Transparent collaboration.</span>
-        </div>
+        <div class="list-item"><b>Brand & Identity</b><span>Positioning, visual language, boundaries.</span></div>
+        <div class="list-item"><b>Content & Production</b><span>Cinematic photo/video sessions. Intentional themes.</span></div>
+        <div class="list-item"><b>Growth & Systems</b><span>Funnels, releases, offer structure — built as clean systems.</span></div>
+        <div class="list-item"><b>Safety & Partnership</b><span>Boundaries defined together. Transparent collaboration.</span></div>
       </div>
     </div>
   </section>
@@ -516,18 +465,9 @@
       </div>
 
       <div class="list">
-        <div class="list-item">
-          <b>Identity</b>
-          <span>Not fast content. Long-term presence.</span>
-        </div>
-        <div class="list-item">
-          <b>Restraint</b>
-          <span>Less noise. More control.</span>
-        </div>
-        <div class="list-item">
-          <b>Boundaries</b>
-          <span>Always aligned. Always respected.</span>
-        </div>
+        <div class="list-item"><b>Identity</b><span>Not fast content. Long-term presence.</span></div>
+        <div class="list-item"><b>Restraint</b><span>Less noise. More control.</span></div>
+        <div class="list-item"><b>Boundaries</b><span>Always aligned. Always respected.</span></div>
       </div>
     </div>
   </section>
@@ -569,22 +509,13 @@
     <div class="wrap">
       <div class="section-title">
         <h2>Contact</h2>
-        <p>Invite-only. Manual review. Confidential.</p>
+        <p>Manual review. Confidential.</p>
       </div>
 
       <div class="list">
-        <div class="list-item">
-          <b>Email</b>
-          <span><a href="mailto:contact@blkrom-media.com">contact@blkrom-media.com</a></span>
-        </div>
-        <div class="list-item">
-          <b>Instagram</b>
-          <span><a href="https://www.instagram.com/fabian_dos.santos" target="_blank" rel="noreferrer">@fabian_dos.santos</a></span>
-        </div>
-        <div class="list-item">
-          <b>Base</b>
-          <span>Munich (DE) · Perth (AU)</span>
-        </div>
+        <div class="list-item"><b>Email</b><span><a href="mailto:contact@blkrom-media.com">contact@blkrom-media.com</a></span></div>
+        <div class="list-item"><b>Instagram</b><span><a href="https://www.instagram.com/fabian_dos.santos" target="_blank" rel="noreferrer">@fabian_dos.santos</a></span></div>
+        <div class="list-item"><b>Base</b><span>Munich (DE) · Perth (AU)</span></div>
       </div>
     </div>
   </section>
@@ -600,42 +531,43 @@
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // menu toggle (narrow bar)
+    // dropdown (opens ONLY on click)
     const body = document.body;
     const btn = document.getElementById('menuBtn');
-    const bar = document.getElementById('menuBar');
-    const links = bar ? bar.querySelectorAll('a[href^="#"]') : [];
+    const drop = document.getElementById('menuDrop');
+    const links = drop ? drop.querySelectorAll('a[href^="#"]') : [];
 
     function openMenu(){
       body.classList.add('menu-open');
       btn.setAttribute('aria-expanded', 'true');
-      if (bar) bar.setAttribute('aria-hidden', 'false');
+      drop.setAttribute('aria-hidden', 'false');
     }
     function closeMenu(){
       body.classList.remove('menu-open');
       btn.setAttribute('aria-expanded', 'false');
-      if (bar) bar.setAttribute('aria-hidden', 'true');
+      drop.setAttribute('aria-hidden', 'true');
     }
 
-    if (btn) btn.addEventListener('click', () => {
+    if (btn) btn.addEventListener('click', (e) => {
+      e.stopPropagation();
       body.classList.contains('menu-open') ? closeMenu() : openMenu();
     });
 
-    // close on ESC
+    // click outside closes
+    document.addEventListener('click', (e) => {
+      if (!body.classList.contains('menu-open')) return;
+      const inBtn = btn && (e.target === btn || btn.contains(e.target));
+      const inDrop = drop && (e.target === drop || drop.contains(e.target));
+      if (!inBtn && !inDrop) closeMenu();
+    });
+
+    // ESC closes
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
     });
 
-    // close when clicking a menu link
+    // click link closes
     links.forEach(a => a.addEventListener('click', closeMenu));
-
-    // click outside closes (but keeps it “quiet”)
-    document.addEventListener('click', (e) => {
-      if (!body.classList.contains('menu-open')) return;
-      const isBtn = btn && (e.target === btn || btn.contains(e.target));
-      const isBar = bar && (e.target === bar || bar.contains(e.target));
-      if (!isBtn && !isBar) closeMenu();
-    });
   </script>
 </body>
 </html>
