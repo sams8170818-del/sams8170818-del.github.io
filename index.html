@@ -20,7 +20,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Italiana&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -32,7 +32,8 @@
       --max:1100px;
 
       --font-ui:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --font-editorial:"Libre Baskerville", Georgia, serif;
+      --font-editorial: var(--font-ui);
+      --font-script:"Italiana", serif;
     }
 
     *{ box-sizing:border-box; }
@@ -54,22 +55,24 @@
       pointer-events:none;
       opacity:.10;
       mix-blend-mode:overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      background-size:260px 260px;
     }
 
     a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 22px; }
+    .wrap{ width:min(var(--max), calc(100% - 48px)); margin:0 auto; }
 
     /* ===========================
-       TOP-RIGHT MENU (EWG STYLE)
+       TOP RIGHT MENU (Hamburger + Dropdown)
        - No header bar
        - Fixed, does not scroll away
        =========================== */
     .topmenu{
-      position:fixed;
+      position:fixed !important;
       top:26px;
       right:26px;
       z-index:9999;
+      isolation:isolate;
     }
 
     .burger{
@@ -120,8 +123,8 @@
       padding:10px 0;
 
       color:rgba(255,255,255,.92);
-      font-family:var(--font-editorial);
-      font-weight:700;
+      font-family:var(--font-ui);
+      font-weight:500;
       letter-spacing:.06em;
       text-transform:uppercase;
       font-size:14px;
@@ -143,72 +146,63 @@
        =========================== */
     .hero{
       position:relative;
-      min-height:100vh;
-      overflow:hidden;
+      min-height:92vh;
       display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
+      align-items:flex-end;
+      padding:64px 0 64px;
+      overflow:hidden;
     }
 
-    .hero-media{
+    .hero video{
       position:absolute;
       inset:0;
-      z-index:0;
-      pointer-events:none;
-      background:#000;
-    }
-
-    .hero-video{
       width:100%;
       height:100%;
       object-fit:cover;
-      display:block;
-      transform:scale(1.02);
-      filter:contrast(1.12) brightness(1.02);
+      object-position:center;
+      filter:contrast(1.05) saturate(.85) brightness(.85);
+      opacity:.85;
     }
 
-    /* gentle overall darkening */
-    .hero-media::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(
-        to bottom,
-        rgba(0,0,0,.10) 0%,
-        rgba(0,0,0,.18) 55%,
-        rgba(0,0,0,.32) 78%,
-        rgba(0,0,0,.60) 100%
-      );
-    }
-
-    /* bottom fade (~10mm feeling) */
-    .hero-media::after{
+    /* bottom fade (about 10mm / ~38px) */
+    .hero:after{
       content:"";
       position:absolute;
       left:0; right:0; bottom:0;
-      height:clamp(32px, 3.2vh, 56px);
+      height:46px;
       background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
+      pointer-events:none;
+      z-index:1;
     }
 
-    .hero-inner{
+    .hero .inner{
       position:relative;
       z-index:2;
-      padding:0 22px;
-      text-shadow:0 12px 40px rgba(0,0,0,.75);
+      width:min(var(--max), calc(100% - 48px));
+      margin:0 auto;
+      padding-top:80px;
     }
 
-    .hero-title{
+    .hero h1{
       margin:0;
-      font-size:clamp(34px, 6.2vw, 74px);
-      line-height:1.05;
-      letter-spacing:.14em;
+      font-size:clamp(42px, 8vw, 92px);
+      font-weight:500;
+      letter-spacing:.04em;
       text-transform:uppercase;
     }
 
+    .hero-subline{
+      margin:14px 0 0;
+      font-size:clamp(14px, 1.6vw, 18px);
+      color:rgba(255,255,255,.80);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    /* small caption */
     .hero-sub{
       margin:14px 0 0;
-      font-family:var(--font-editorial);
+      font-family:var(--font-ui);
       font-size:clamp(14px, 1.4vw, 18px);
       color:rgba(255,255,255,.78);
       letter-spacing:.06em;
@@ -218,88 +212,130 @@
     /* ===========================
        SECTIONS (simple, not "cheap tiles")
        =========================== */
-    section{ padding:84px 0; }
-    .section-title{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:18px;
-      margin-bottom:24px;
-    }
-    .section-title h2{
-      margin:0;
-      font-size:clamp(22px, 3.2vw, 34px);
-      letter-spacing:.12em;
+    section{ padding:96px 0; border-top:1px solid var(--line); }
+    .kicker{
+      font-size:12px;
+      letter-spacing:.22em;
       text-transform:uppercase;
-    }
-    .section-title p{
-      margin:0;
       color:var(--muted2);
-      max-width:520px;
-      font-size:14px;
+      margin:0 0 18px;
     }
 
-    .list{
-      display:grid;
-      gap:12px;
-      margin-top:22px;
-      border-top:1px solid rgba(255,255,255,.08);
-    }
-    .list-item{
-      padding:14px 0;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .list-item b{
-      display:block;
-      letter-spacing:.10em;
+    .h2{
+      font-size:clamp(24px, 3.3vw, 42px);
+      line-height:1.15;
+      font-weight:500;
+      margin:0 0 16px;
+      letter-spacing:.02em;
       text-transform:uppercase;
-      font-size:13px;
-      color:rgba(255,255,255,.92);
-      margin-bottom:6px;
-    }
-    .list-item span{
-      color:var(--muted);
-      font-size:14px;
     }
 
-    /* Editorial split (optional backbone) */
+    .lead{
+      margin:0 0 24px;
+      color:var(--muted);
+      max-width:760px;
+      font-size:18px;
+      letter-spacing:.01em;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:22px;
+      margin-top:26px;
+    }
+
+    .card{
+      grid-column: span 6;
+      padding:28px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:500;
+      color:rgba(255,255,255,.92);
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    /* shots / work */
+    .shot{
+      grid-column: span 4;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:#0b0b0b;
+      min-height:260px;
+    }
+    .shot img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:contrast(1.05) saturate(.90) brightness(.92);
+      opacity:.92;
+      transition:transform .6s ease, opacity .6s ease;
+    }
+    .shot:hover img{
+      transform:scale(1.03);
+      opacity:1;
+    }
+
+    /* ===========================
+       EDITORIAL SPLIT (Left/Right)
+       =========================== */
     .editorial{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap:40px;
       align-items:center;
-      margin:90px 0 0;
-      padding-top:22px;
-      border-top:1px solid rgba(255,255,255,.08);
+      margin:120px 0;
     }
     .editorial.reverse .editorial-img{ order:2; }
     .editorial.reverse .editorial-text{ order:1; }
 
     .editorial-img{
-      aspect-ratio:4/5;
+      aspect-ratio: 4 / 5;
       overflow:hidden;
-      border-radius:26px;
+      border-radius:18px;
       border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.02);
+      background:#0b0b0b;
     }
     .editorial-img img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
+      opacity:.90;
       transform:scale(1.02);
       filter:contrast(1.05) saturate(.92);
     }
+
     .editorial-text{ max-width:520px; }
     .editorial-text h3{
-      font-family:var(--font-editorial);
-      font-weight:700;
+      font-family:var(--font-script);
+      font-weight:400;
       font-size:34px;
       line-height:1.1;
+      letter-spacing:.02em;
       margin:0 0 16px;
     }
     .editorial-text p{
-      font-family:var(--font-editorial);
+      font-family:var(--font-ui);
       font-size:18px;
       line-height:1.75;
       color:rgba(255,255,255,.86);
@@ -309,197 +345,221 @@
       margin-top:14px;
       font-family:var(--font-ui);
       font-size:12px;
-      letter-spacing:.14em;
+      letter-spacing:.22em;
       text-transform:uppercase;
       color:rgba(255,255,255,.55);
     }
 
-    footer{
-      padding:34px 0 46px;
-      border-top:1px solid rgba(255,255,255,.06);
-      color:var(--muted2);
-      font-size:12px;
-      letter-spacing:.06em;
+    /* ===========================
+       CONTACT (single column)
+       =========================== */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:18px;
     }
 
+    .contact-card{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow:0 18px 60px rgba(0,0,0,.55);
+      padding:28px;
+    }
+
+    .contact-card h3{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:500;
+      color:rgba(255,255,255,.92);
+      font-family:var(--font-ui);
+    }
+
+    .contact-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    .contact-lines{
+      margin-top:18px;
+      display:grid;
+      gap:10px;
+      font-size:15px;
+      color:rgba(255,255,255,.86);
+      font-family:var(--font-ui);
+    }
+    .contact-lines span{
+      color:rgba(255,255,255,.55);
+      display:inline-block;
+      min-width:90px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    /* fallback if blur not supported */
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+      .card,
+      .contact-card{
+        background: rgba(255,255,255,.07);
+      }
+    }
+
+    /* Responsive */
     @media (max-width: 900px){
-      .topmenu{ top:18px; right:18px; }
+      .card{ grid-column: span 12; }
+      .shot{ grid-column: span 12; }
+      .hero{ min-height: 88vh; }
       .editorial{
         grid-template-columns:1fr;
-        gap:28px;
+        gap:22px;
+        margin:90px 0;
       }
-      .editorial.reverse .editorial-img,
-      .editorial.reverse .editorial-text{ order:unset; }
-      .editorial-text h3{ font-size:28px; }
+      .editorial.reverse .editorial-img{ order:1; }
+      .editorial.reverse .editorial-text{ order:2; }
+      .topmenu{ top:18px; right:18px; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- TOP RIGHT MENU -->
-  <div class="topmenu">
-    <button class="burger" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuDrop" aria-label="Open menu">
+  <!-- Top-right hamburger -->
+  <div class="topmenu" aria-label="Site navigation">
+    <button class="burger" id="menuBtn" aria-expanded="false" aria-controls="menuDrop" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
 
-    <div class="drop" id="menuDrop" aria-hidden="true">
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#motion">Motion</a>
-      <a href="#creators">Creator Program</a>
-      <a href="#philosophy">Philosophy</a>
-      <a href="#private">Private</a>
-      <a href="#creator-faq">FAQ</a>
+    <nav class="drop" id="menuDrop" aria-hidden="true">
+      <a href="#about">About us</a>
+      <a href="#network">Our network</a>
       <a href="#contact">Contact</a>
-    </div>
+    </nav>
   </div>
 
   <!-- HERO -->
-  <header class="hero" id="top">
-    <div class="hero-media" aria-hidden="true">
-      <!-- Put your file here. If it's in repo root: hero.mp4 -->
-      <video class="hero-video" autoplay muted loop playsinline preload="metadata">
-        <source src="hero.mp4" type="video/mp4">
-      </video>
-    </div>
+  <header class="hero">
+    <video autoplay muted loop playsinline poster="assets/hero.jpg">
+      <source src="assets/hero.mp4" type="video/mp4" />
+    </video>
 
-    <div class="hero-inner">
-      <h1 class="hero-title">BLKRØM MEDIA</h1>
-      <div class="hero-sub">film · photography · motion · post-production</div>
+    <div class="inner">
+      <h1>BLKRØM MEDIA</h1>
+      <p class="hero-subline">film · photography · motion · post-production</p>
+      <p class="hero-sub">Cinematic visuals. Dark aesthetics. Curated work.</p>
     </div>
   </header>
 
-  <!-- SERVICES -->
-  <section id="services">
+  <!-- ABOUT -->
+  <section id="about">
     <div class="wrap">
-      <div class="section-title">
-        <h2>Services</h2>
-        <p>Clean surface. Controlled undertone. Built for presence.</p>
-      </div>
+      <p class="kicker">About</p>
+      <h2 class="h2">Brand-first creative direction.</h2>
+      <p class="lead">
+        We build visual identities with restraint, precision and intention — designed to hold attention, shape perception,
+        and elevate presence across platforms.
+      </p>
 
-      <div class="list">
-        <div class="list-item"><b>Film Production</b><span>Concept, direction, shot planning, on-set execution.</span></div>
-        <div class="list-item"><b>Photography</b><span>Urban, automotive, portrait & silhouette work.</span></div>
-        <div class="list-item"><b>Motion & Reels</b><span>Short-form edits, loops, teasers — restraint and impact.</span></div>
-        <div class="list-item"><b>Post-Production</b><span>Editing, color grading, grain, sound polish.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <div class="wrap">
-      <div class="section-title">
-        <h2>Work</h2>
-        <p>Replace images in <b>assets/</b> or remove this section.</p>
-      </div>
-
-      <div class="editorial">
-        <div class="editorial-img">
-          <img src="assets/editorial1.jpg" alt="Work image 1" loading="lazy">
+      <div class="grid">
+        <div class="card">
+          <h3>Direction</h3>
+          <p>Clear creative systems: tone, pacing, framing and consistency — so your content feels intentional, not random.</p>
         </div>
+
+        <div class="card">
+          <h3>Production</h3>
+          <p>Film, photography and motion built for modern attention spans — cinematic, minimal, and controlled.</p>
+        </div>
+      </div>
+
+      <!-- Editorial splits -->
+      <div class="editorial">
+        <div class="editorial-img"><img src="assets/editorial1.jpg" alt=""></div>
         <div class="editorial-text">
-          <h3>Editorial</h3>
-          <p>Controlled light. Quiet movement. Frames built around presence — not noise.</p>
-          <div class="editorial-meta">selected / work</div>
+          <h3>Silhouette / Presence</h3>
+          <p>
+            Presence is not built through exposure, but through restraint.<br>
+            We shape identities that feel controlled, intentional,<br>
+            and instantly recognizable — without revealing more than necessary.
+          </p>
+          <div class="editorial-meta">Identity · Restraint · Recognition</div>
         </div>
       </div>
 
       <div class="editorial reverse">
-        <div class="editorial-img">
-          <img src="assets/editorial2.jpg" alt="Work image 2" loading="lazy">
-        </div>
+        <div class="editorial-img"><img src="assets/editorial2.jpg" alt=""></div>
         <div class="editorial-text">
-          <h3>Silhouette</h3>
-          <p>Less skin. More shape. Identity through shadow and restraint.</p>
-          <div class="editorial-meta">silhouette / noir</div>
+          <h3>Motion / Body Language</h3>
+          <p>
+            Character lives in movement.<br>
+            We direct motion to communicate confidence, rhythm and availability —<br>
+            without staged seduction.
+          </p>
+          <div class="editorial-meta">Movement · Rhythm · Control</div>
         </div>
       </div>
+
+      <div class="editorial">
+        <div class="editorial-img"><img src="assets/editorial3.jpg" alt=""></div>
+        <div class="editorial-text">
+          <h3>Detail / Control</h3>
+          <p>
+            Desire is created in fragments.<br>
+            We design content that invites imagination,<br>
+            holds attention longer, and converts through precision.
+          </p>
+          <div class="editorial-meta">Fragments · Precision · Conversion</div>
+        </div>
+      </div>
+
+      <div class="editorial reverse">
+        <div class="editorial-img"><img src="assets/editorial4.jpg" alt=""></div>
+        <div class="editorial-text">
+          <h3>Environment / World</h3>
+          <p>
+            A creator exists in a world — not a feed.<br>
+            We build visual environments that feel real and aspirational,<br>
+            so followers don’t just watch — they enter.
+          </p>
+          <div class="editorial-meta">World · Context · Immersion</div>
+        </div>
+      </div>
+
+      <div class="editorial">
+        <div class="editorial-img"><img src="assets/editorial5.jpg" alt=""></div>
+        <div class="editorial-text">
+          <h3>Stillness / Power</h3>
+          <p>
+            True authority doesn’t ask for attention — it holds it.<br>
+            We position creators in calm, confident stillness,<br>
+            where presence feels expensive and access feels earned.
+          </p>
+          <div class="editorial-meta">Authority · Calm · Access</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- MOTION -->
-  <section id="motion">
+  <!-- NETWORK / WORK -->
+  <section id="network">
     <div class="wrap">
-      <div class="section-title">
-        <h2>Motion</h2>
-        <p>Embed your showreel (replace iframe URL).</p>
-      </div>
+      <p class="kicker">Network</p>
+      <h2 class="h2">Curated collaborations.</h2>
+      <p class="lead">
+        A private network of creators, editors, shooters and operators — built for discretion, consistency and quality.
+      </p>
 
-      <div style="border:1px solid rgba(255,255,255,.10); border-radius:26px; overflow:hidden;">
-        <iframe
-          title="BLKRØM Showreel"
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          style="width:100%; aspect-ratio:16/9; border:0; display:block; background:#000;"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- CREATOR PROGRAM -->
-  <section id="creators">
-    <div class="wrap">
-      <div class="section-title">
-        <h2>Creator Program</h2>
-        <p>Selected creators. Brand, structure and long-term direction.</p>
-      </div>
-
-      <div class="list">
-        <div class="list-item"><b>Brand & Identity</b><span>Positioning, visual language, boundaries.</span></div>
-        <div class="list-item"><b>Content & Production</b><span>Cinematic photo/video sessions. Intentional themes.</span></div>
-        <div class="list-item"><b>Growth & Systems</b><span>Funnels, releases, offer structure — built as clean systems.</span></div>
-        <div class="list-item"><b>Safety & Partnership</b><span>Boundaries defined together. Transparent collaboration.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PHILOSOPHY -->
-  <section id="philosophy">
-    <div class="wrap">
-      <div class="section-title">
-        <h2>Philosophy</h2>
-        <p>Brand over chaos. Direction over randomness.</p>
-      </div>
-
-      <div class="list">
-        <div class="list-item"><b>Identity</b><span>Not fast content. Long-term presence.</span></div>
-        <div class="list-item"><b>Restraint</b><span>Less noise. More control.</span></div>
-        <div class="list-item"><b>Boundaries</b><span>Always aligned. Always respected.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRIVATE -->
-  <section id="private">
-    <div class="wrap">
-      <div class="section-title">
-        <h2>Private</h2>
-        <p>Invite-only. Discreet. Structured.</p>
-      </div>
-
-      <div class="list">
-        <div class="list-item"><b>Cinematic production</b><span>Photo & film. Editorial pacing.</span></div>
-        <div class="list-item"><b>Planning</b><span>Seasonal themes, content rhythm.</span></div>
-        <div class="list-item"><b>Systems</b><span>Membership structure & releases.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="creator-faq">
-    <div class="wrap">
-      <div class="section-title">
-        <h2>FAQ</h2>
-        <p>Short answers. No noise.</p>
-      </div>
-
-      <div class="list">
-        <div class="list-item"><b>Do I need experience?</b><span>Reliability and boundaries matter more than experience.</span></div>
-        <div class="list-item"><b>Explicit content required?</b><span>No. Level is defined together.</span></div>
-        <div class="list-item"><b>How does it start?</b><span>We review fit, then define structure and pace.</span></div>
+      <div class="grid">
+        <div class="shot"><img src="assets/work1.jpg" alt=""></div>
+        <div class="shot"><img src="assets/work2.jpg" alt=""></div>
+        <div class="shot"><img src="assets/work3.jpg" alt=""></div>
       </div>
     </div>
   </section>
@@ -507,33 +567,29 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
-      <div class="section-title">
-        <h2>Contact</h2>
-        <p>Manual review. Confidential.</p>
+      <p class="kicker">Contact</p>
+      <h2 class="h2">Invite-only. Discreet.</h2>
+      <p class="lead">If the fit is right, we align direction, build the system, and execute with clarity.</p>
+
+      <div class="contact">
+        <div class="contact-card">
+          <h3>Contact details</h3>
+          <p>For serious inquiries only. No public pricing. Terms are aligned privately.</p>
+
+          <div class="contact-lines">
+            <div><span>Email</span> contact@blkrom-media.com</div>
+            <div><span>Instagram</span> fabian_dos.santos</div>
+            <div><span>Locations</span> Munich · Perth</div>
+          </div>
+        </div>
       </div>
 
-      <div class="list">
-        <div class="list-item"><b>Email</b><span><a href="mailto:contact@blkrom-media.com">contact@blkrom-media.com</a></span></div>
-        <div class="list-item"><b>Instagram</b><span><a href="https://www.instagram.com/fabian_dos.santos" target="_blank" rel="noreferrer">@fabian_dos.santos</a></span></div>
-        <div class="list-item"><b>Base</b><span>Munich (DE) · Perth (AU)</span></div>
-      </div>
     </div>
   </section>
 
-  <footer>
-    <div class="wrap">
-      © <span id="year"></span> BLKRØM MEDIA · all rights reserved
-    </div>
-  </footer>
-
   <script>
-    // year
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    // dropdown (opens ONLY on click)
     const body = document.body;
-    const btn = document.getElementById('menuBtn');
+    const btn  = document.getElementById('menuBtn');
     const drop = document.getElementById('menuDrop');
     const links = drop ? drop.querySelectorAll('a[href^="#"]') : [];
 
