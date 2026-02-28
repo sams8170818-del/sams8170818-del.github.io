@@ -67,13 +67,13 @@
        - No header bar
        - Fixed, does not scroll away
        =========================== */
-    .topmenu{
-      position:fixed !important;
-      top:26px;
-      right:26px;
-      z-index:9999;
-      isolation:isolate;
-    }
+   .topmenu{
+  position:absolute;
+  top:26px;
+  right:26px;
+  z-index:9999;
+  isolation:isolate;
+}
 
     .burger{
       width:46px;
@@ -101,39 +101,22 @@
     .burger span:nth-child(3){ width:22px; }
 
     /* dropdown box */
-    .drop{
-      position:absolute;
-      top:58px;
-      right:0;
-      width:220px;
-      padding:14px 16px;
+    
 
-      background:rgba(20,20,20,.88);
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow:0 18px 60px rgba(0,0,0,.60);
+   .drop a{
+  display:block;
+  padding:12px 0;
 
-      opacity:0;
-      transform:translateY(-6px);
-      pointer-events:none;
-      transition:opacity .14s ease, transform .14s ease;
-    }
+  color:rgba(255,255,255,.92);
+  font-family:var(--font-ui);
+  font-weight:500;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-size:14px;
 
-    .drop a{
-      display:block;
-      padding:10px 0;
-
-      color:rgba(255,255,255,.92);
-      font-family:var(--font-ui);
-      font-weight:500;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      font-size:14px;
-
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .drop a:last-child{ border-bottom:0; }
-    .drop a:hover{ opacity:.70; }
-
+  border-bottom:0;
+  text-shadow: 0 10px 30px rgba(0,0,0,.55);
+}
     /* open state */
     body.menu-open .drop{
       opacity:1;
@@ -435,7 +418,11 @@
 
 <body>
 
-  <!-- Top-right hamburger -->
+  
+  <!-- HERO -->
+  <header class="hero">
+
+     <!-- Top-right hamburger -->
   <div class="topmenu" aria-label="Site navigation">
     <button class="burger" id="menuBtn" aria-expanded="false" aria-controls="menuDrop" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -453,8 +440,11 @@
     </nav>
   </div>
 
-  <!-- HERO -->
-  <header class="hero">
+  <video autoplay muted loop playsinline poster="assets/hero.jpg">
+    <source src="assets/hero.mp4" type="video/mp4" />
+  </video>
+  ...
+</header>
     <video autoplay muted loop playsinline poster="assets/hero.jpg">
       <source src="assets/hero.mp4" type="video/mp4" />
     </video>
