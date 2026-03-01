@@ -21,8 +21,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Italiana&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
+    
     :root{
       --bg:#000;
       --text:#fff;
@@ -403,65 +404,100 @@
       }
     }
 
-.blkrom-pillars{
-  background:#000;
-  padding:140px 0;
+    /* ===== BLKRØM PILLARS REF ===== */
+
+.blkrom-pillars-ref{
+  background:#fff;
+  padding:110px 0 120px;
 }
 
-.pillars-wrap{
-  width:calc(100% - 120px);
-  max-width:1700px;
+.pillars-ref-wrap{
+  width:min(1400px, calc(100% - 60px));
   margin:0 auto;
 }
 
-.pillars-grid{
+.pillars-ref-grid{
   display:grid;
-  grid-template-columns:repeat(4, minmax(0,1fr));
-  gap:60px;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:26px;
 }
 
-.pillar{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
+.pillars-ref-item{
+  text-align:center;
 }
-    
-.pillar-media{
-  aspect-ratio:4/5;
+
+.pillars-ref-media{
+  width:100%;
+  height:260px;
   overflow:hidden;
-  border-radius:18px;
-  background:#0b0b0b;
+  background:#e9e9e9;
 }
 
-.pillar-media img{
+.pillars-ref-media img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
 }
 
-.pillar-title{
-  margin-top:24px;
-  margin-bottom:8px;
+.pillars-ref-title{
+  margin:26px 0 10px;
 
-  font-size:13px;
-  letter-spacing:.24em;
-  text-transform:uppercase;
+  font-family:"Bebas Neue", sans-serif;
+  font-size:40px;
+  letter-spacing:.08em;
+  font-weight:400;
 
-  font-weight:600;
-
-  color:rgba(255,255,255,.92);
+  color:#000;
 }
 
-.pillar-text{
-  margin:4px 0 0 0;
+.pillars-ref-text{
+  margin:0;
+  font-size:16px;
+  line-height:1.65;
+  color:rgba(0,0,0,.72);
+}
 
-  font-size:15px;
-  line-height:1.7;
+.pillars-ref-text + .pillars-ref-text{
+  margin-top:6px;
+}
 
-  color:rgba(255,255,255,.72);
+/* responsive */
+@media (max-width:1100px){
 
-  max-width:340px;
+  .pillars-ref-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+  }
+
+  .pillars-ref-media{
+    height:240px;
+  }
+
+  .pillars-ref-title{
+    font-size:38px;
+  }
+
+}
+
+@media (max-width:620px){
+
+  .pillars-ref-wrap{
+    width:calc(100% - 44px);
+  }
+
+  .pillars-ref-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pillars-ref-media{
+    height:220px;
+  }
+
+  .pillars-ref-title{
+    font-size:36px;
+  }
+
 }
     /* Responsive */
     @media (max-width: 900px){
@@ -578,44 +614,44 @@
 </section>
 
   <!-- BLKRØM PILLARS -->
-<section class="blkrom-pillars">
-  <div class="pillars-wrap">
-    <div class="pillars-grid">
+<section class="blkrom-pillars-ref" aria-label="BLKRØM Pillars">
+  <div class="pillars-ref-wrap">
+    <div class="pillars-ref-grid">
 
-      <article class="pillar">
-        <div class="pillar-media">
-          <img src="assets/identity.jpg" alt="">
+      <article class="pillars-ref-item">
+        <div class="pillars-ref-media">
+          <img src="assets/identity.jpg" alt="" loading="lazy">
         </div>
-        <h3 class="pillar-title">IDENTITY ARCHITECTURE</h3>
-        <p class="pillar-text">We define how you are seen.</p>
-        <p class="pillar-text">Visual language, tone and presence built with intent.</p>
+        <h3 class="pillars-ref-title">IDENTITY ARCHITECTURE</h3>
+        <p class="pillars-ref-text">We define how you are seen.</p>
+        <p class="pillars-ref-text">Visual language, tone and presence built with intent.</p>
       </article>
 
-      <article class="pillar">
-        <div class="pillar-media">
-          <img src="assets/perception.jpg" alt="">
+      <article class="pillars-ref-item">
+        <div class="pillars-ref-media">
+          <img src="assets/perception.jpg" alt="" loading="lazy">
         </div>
-        <h3 class="pillar-title">PERCEPTION CONTROL</h3>
-        <p class="pillar-text">Every image, every frame, every detail deliberate.</p>
-        <p class="pillar-text">Nothing exists without purpose.</p>
+        <h3 class="pillars-ref-title">PERCEPTION CONTROL</h3>
+        <p class="pillars-ref-text">Every image, every frame, every detail deliberate.</p>
+        <p class="pillars-ref-text">Nothing exists without purpose.</p>
       </article>
 
-      <article class="pillar">
-        <div class="pillar-media">
-          <img src="assets/positioning.jpg" alt="">
+      <article class="pillars-ref-item">
+        <div class="pillars-ref-media">
+          <img src="assets/positioning.jpg" alt="" loading="lazy">
         </div>
-        <h3 class="pillar-title">POSITIONING SYSTEM</h3>
-        <p class="pillar-text">We position you where attention converts into leverage.</p>
-        <p class="pillar-text">Not noise. Not volume. Precision.</p>
+        <h3 class="pillars-ref-title">POSITIONING SYSTEM</h3>
+        <p class="pillars-ref-text">We position you where attention converts into leverage.</p>
+        <p class="pillars-ref-text">Not noise. Not volume. Precision.</p>
       </article>
 
-      <article class="pillar">
-        <div class="pillar-media">
-          <img src="assets/private.jpg" alt="">
+      <article class="pillars-ref-item">
+        <div class="pillars-ref-media">
+          <img src="assets/private.jpg" alt="" loading="lazy">
         </div>
-        <h3 class="pillar-title">PRIVATE MANAGEMENT</h3>
-        <p class="pillar-text">A discreet operational layer behind your presence.</p>
-        <p class="pillar-text">Structured. Private. Effective.</p>
+        <h3 class="pillars-ref-title">PRIVATE MANAGEMENT</h3>
+        <p class="pillars-ref-text">A discreet operational layer behind your presence.</p>
+        <p class="pillars-ref-text">Structured. Private. Effective.</p>
       </article>
 
     </div>
