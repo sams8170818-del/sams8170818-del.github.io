@@ -403,6 +403,48 @@
       }
     }
 
+.blkrom-pillars{
+  background:#000;
+  padding:140px 0;
+}
+
+.pillars-wrap{
+  width:min(1200px, calc(100% - 80px));
+  margin:0 auto;
+}
+
+.pillars-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:40px;
+}
+
+.pillar-media{
+  aspect-ratio:4/5;
+  overflow:hidden;
+  border-radius:18px;
+  background:#0b0b0b;
+}
+
+.pillar-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.pillar-title{
+  margin-top:18px;
+  font-size:12px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.pillar-text{
+  margin:6px 0 0;
+  font-size:14px;
+  color:rgba(255,255,255,.72);
+}
     /* Responsive */
     @media (max-width: 900px){
       .card{ grid-column: span 12; }
@@ -514,6 +556,51 @@
     <video autoplay muted loop playsinline>
       <source src="assets/canvas.mp4" type="video/mp4">
     </video>
+  </div>
+</section>
+
+  <!-- BLKRØM PILLARS -->
+<section class="blkrom-pillars">
+  <div class="pillars-wrap">
+    <div class="pillars-grid">
+
+      <article class="pillar">
+        <div class="pillar-media">
+          <img src="assets/identity.jpg" alt="">
+        </div>
+        <h3 class="pillar-title">IDENTITY ARCHITECTURE</h3>
+        <p class="pillar-text">We define how you are seen.</p>
+        <p class="pillar-text">Visual language, tone and presence built with intent.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar-media">
+          <img src="assets/perception.jpg" alt="">
+        </div>
+        <h3 class="pillar-title">PERCEPTION CONTROL</h3>
+        <p class="pillar-text">Every image, every frame, every detail deliberate.</p>
+        <p class="pillar-text">Nothing exists without purpose.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar-media">
+          <img src="assets/positioning.jpg" alt="">
+        </div>
+        <h3 class="pillar-title">POSITIONING SYSTEM</h3>
+        <p class="pillar-text">We position you where attention converts into leverage.</p>
+        <p class="pillar-text">Not noise. Not volume. Precision.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar-media">
+          <img src="assets/private.jpg" alt="">
+        </div>
+        <h3 class="pillar-title">PRIVATE MANAGEMENT</h3>
+        <p class="pillar-text">A discreet operational layer behind your presence.</p>
+        <p class="pillar-text">Structured. Private. Effective.</p>
+      </article>
+
+    </div>
   </div>
 </section>
   
