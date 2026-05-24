@@ -373,7 +373,33 @@
   .system-icon:after{
     height:20px;
   }
-}
+  
+  .system-item summary span:first-child{
+    transition:
+    transform .28s cubic-bezier(.19,.65,.2,1),
+    text-shadow .28s ease,
+    opacity .28s ease;
+    transform-origin:left center;
+  }
+
+  .system-item summary:hover span:first-child{
+    transform:scale(1.045);
+    text-shadow:0 0 18px rgba(255,255,255,.22);
+    opacity:1;
+  }
+
+  .system-item summary:hover .system-icon{
+    opacity:1;
+  }
+
+  .system-icon{
+    transition:opacity .25s ease, transform .25s ease;
+    opacity:.78;
+  }
+
+  .system-item summary:hover .system-icon{
+    transform:scale(1.08);
+  }
     /* PILLARS */
     .blkrom-pillars-ref{
       background:#fff;
@@ -673,7 +699,7 @@
  <section class="blkrom-system" aria-label="BLKRØM System">
   <div class="system-wrap">
 
-    <details class="system-item" open>
+    <details class="system-item">
       <summary>
         <span>PRESENCE</span>
         <span class="system-icon"></span>
@@ -844,6 +870,20 @@
     });
 
     links.forEach(a => a.addEventListener('click', closeMenu));
+
+    const systemItems = document.querySelectorAll('.system-item');
+
+    systemItems.forEach(item => {
+    item.addEventListener('toggle', () => {
+    if (!item.open) return;
+
+    systemItems.forEach(other => {
+    if (other !== item) {
+    other.removeAttribute('open');
+    }
+    });
+    });
+    });
   </script>
 
 </body>
