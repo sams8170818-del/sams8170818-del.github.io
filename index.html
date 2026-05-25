@@ -298,7 +298,10 @@
 .system-content{
   display:grid;
   grid-template-rows:0fr;
-  transition:grid-template-rows .42s cubic-bezier(.19,.65,.2,1);
+  opacity:0;
+  transition:
+    grid-template-rows .42s cubic-bezier(.19,.65,.2,1),
+    opacity .22s ease;
 }
 
 .system-content p{
@@ -314,6 +317,7 @@
 
 .system-item[open] .system-content{
   grid-template-rows:1fr;
+  opacity:1;
 }
 
 .system-icon{
