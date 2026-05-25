@@ -295,7 +295,14 @@
   text-transform:uppercase;
 }
 
-.system-item p{
+.system-content{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .42s cubic-bezier(.19,.65,.2,1);
+}
+
+.system-content p{
+  overflow:hidden;
   margin:0;
   padding:0 0 34px;
   max-width:760px;
@@ -303,6 +310,10 @@
   line-height:1.45;
   font-weight:500;
   color:rgba(255,255,255,.82);
+}
+
+.system-item[open] .system-content{
+  grid-template-rows:1fr;
 }
 
 .system-icon{
