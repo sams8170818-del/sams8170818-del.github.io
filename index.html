@@ -255,7 +255,7 @@
   background:#000;
   color:#fff;
   border-top:0;
-  padding:90px 0 90px;
+  padding:76px 0 76px;
 }
 
 .system-wrap{
@@ -275,18 +275,21 @@
 .system-summary{
   width:100%;
   border:0;
+  appearance:none;
+  -webkit-appearance:none;
   background:transparent;
   color:inherit;
   font:inherit;
   text-align:left;
   list-style:none;
   cursor:pointer;
-  min-height:86px;
+  min-height:73px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:24px;
   padding:0;
+  margin:0;
 }
 
 .system-summary::-webkit-details-marker{
@@ -295,8 +298,8 @@
 
 .system-summary span:first-child{
   font-family:var(--font-condensed);
-  font-size:clamp(34px, 3.5vw, 58px);
-  line-height:.92;
+  font-size:clamp(29px, 2.975vw, 49px);
+  line-height:1;
   letter-spacing:.06em;
   font-weight:500;
   text-transform:uppercase;
@@ -314,9 +317,9 @@
 .system-content p{
   overflow:hidden;
   margin:0;
-  padding:0 0 34px;
+  padding:0 0 29px;
   max-width:760px;
-  font-size:clamp(16px, 1.4vw, 24px);
+  font-size:clamp(14px, 1.19vw, 20px);
   line-height:1.45;
   font-weight:500;
   color:rgba(255,255,255,.82);
@@ -329,9 +332,9 @@
 
 .system-icon{
   position:relative;
-  width:26px;
-  height:26px;
-  flex:0 0 26px;
+  width:22px;
+  height:22px;
+  flex:0 0 22px;
 }
 
 .system-icon:before,
@@ -346,13 +349,13 @@
 }
 
 .system-icon:before{
-  width:24px;
+  width:20px;
   height:1.5px;
 }
 
 .system-icon:after{
   width:1.5px;
-  height:24px;
+  height:20px;
 }
 
   .system-item.is-open .system-icon:after{
@@ -392,7 +395,7 @@
 @media (max-width:900px){
 
   .blkrom-system{
-    padding:70px 0;
+    padding:60px 0;
   }
 
   .system-wrap{
@@ -400,30 +403,30 @@
   }
 
   .system-summary{
-    min-height:74px;
+    min-height:63px;
   }
 
   .system-summary span:first-child{
-    font-size:42px;
+    font-size:36px;
   }
 
   .system-item p{
-    padding:0 0 28px;
-    font-size:18px;
+    padding:0 0 24px;
+    font-size:15px;
   }
 
   .system-icon{
-    width:22px;
-    height:22px;
-    flex-basis:22px;
+    width:19px;
+    height:19px;
+    flex-basis:19px;
   }
 
   .system-icon:before{
-    width:20px;
+    width:17px;
   }
 
   .system-icon:after{
-    height:20px;
+    height:17px;
   }
   
   }
