@@ -274,6 +274,7 @@
 
 .system-summary{
   width:100%;
+  height:73px;
   border:0;
   appearance:none;
   -webkit-appearance:none;
@@ -283,12 +284,11 @@
   text-align:left;
   list-style:none;
   cursor:pointer;
-  min-height:73px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:24px;
-  padding:0;
+  padding:0 60px;
   margin:0;
 }
 
@@ -309,6 +309,7 @@
   display:grid;
   grid-template-rows:0fr;
   opacity:0;
+  padding:0 60px;
   transition:
     grid-template-rows .42s cubic-bezier(.19,.65,.2,1),
     opacity .22s ease;
@@ -403,11 +404,16 @@
   }
 
   .system-summary{
-    min-height:63px;
+    height:63px;
+    padding:0 22px;
   }
 
   .system-summary span:first-child{
     font-size:36px;
+  }
+
+  .system-content{
+    padding:0 22px;
   }
 
   .system-item p{
