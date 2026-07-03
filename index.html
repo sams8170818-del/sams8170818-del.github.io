@@ -681,7 +681,7 @@
       <div class="tab-item">
         <button class="tab-summary" type="button" aria-expanded="false">STRATEGY</button>
         <div class="tab-content">
-          <p>We plan the long game—positioning your content and business moves precisely where attention converts into asset value.</p>
+          <p>We plan the long game positioning your content and business moves precisely where attention converts into asset value.</p>
         </div>
       </div>
 
@@ -824,7 +824,18 @@
     links.forEach(a => a.addEventListener('click', closeMenu));
 
     const canvasSection = document.querySelector('.canvas');
+    const tabsPanel = document.querySelector('.canvas-tabs');
     const tabItems = document.querySelectorAll('.tab-item');
+    let tabsCloseTimer = null;
+
+    function closeAllTabs(){
+      tabItems.forEach(other => {
+        other.classList.remove('is-open');
+        other.querySelector('.tab-summary').setAttribute('aria-expanded', 'false');
+        other.querySelector('.tab-content').style.maxHeight = '0px';
+      });
+      canvasSection.classList.remove('has-open');
+    }
 
     tabItems.forEach(item => {
       const tabBtn = item.querySelector('.tab-summary');
@@ -833,20 +844,25 @@
       tabBtn.addEventListener('click', () => {
         const willOpen = !item.classList.contains('is-open');
 
-        tabItems.forEach(other => {
-          other.classList.remove('is-open');
-          other.querySelector('.tab-summary').setAttribute('aria-expanded', 'false');
-          other.querySelector('.tab-content').style.maxHeight = '0px';
-        });
+        closeAllTabs();
 
         if (willOpen) {
           item.classList.add('is-open');
           tabBtn.setAttribute('aria-expanded', 'true');
           content.style.maxHeight = content.scrollHeight + 'px';
+          canvasSection.classList.add('has-open');
         }
-
-        canvasSection.classList.toggle('has-open', willOpen);
       });
+    });
+
+    /* Zuklappen, wenn die Maus das Blur-Feld verlässt */
+    tabsPanel.addEventListener('mouseleave', () => {
+      if (!canvasSection.classList.contains('has-open')) return;
+      tabsCloseTimer = setTimeout(closeAllTabs, 260);
+    });
+
+    tabsPanel.addEventListener('mouseenter', () => {
+      clearTimeout(tabsCloseTimer);
     });
   </script>
 
