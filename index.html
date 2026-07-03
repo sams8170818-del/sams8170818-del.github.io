@@ -104,44 +104,87 @@
       height:3px;
       background:#fff;
       border-radius:2px;
+      transition:
+        transform .34s cubic-bezier(.19,.65,.2,1),
+        width .34s cubic-bezier(.19,.65,.2,1),
+        opacity .2s ease;
     }
     .burger span:nth-child(1){ width:28px; }
     .burger span:nth-child(2){ width:34px; }
     .burger span:nth-child(3){ width:22px; }
 
+    /* Burger morpht zum X */
+    body.menu-open .burger span:nth-child(1){
+      width:30px;
+      transform:translateY(11px) rotate(45deg);
+    }
+    body.menu-open .burger span:nth-child(2){
+      opacity:0;
+    }
+    body.menu-open .burger span:nth-child(3){
+      width:30px;
+      transform:translateY(-11px) rotate(-45deg);
+    }
+
     .drop{
       position:absolute;
-      top:58px;
+      top:62px;
       right:0;
-      width:240px;
+      min-width:240px;
       padding:0;
-      background:transparent;
       border:0;
-      box-shadow:none;
+      background:transparent;
       opacity:0;
-      transform:translateY(-6px);
+      transform:translateY(-8px);
       pointer-events:none;
-      transition:opacity .14s ease, transform .14s ease;
+      transition:opacity .22s ease, transform .28s cubic-bezier(.19,.65,.2,1);
     }
 
     .drop a{
       display:block;
-      padding:12px 0;
-      color:rgba(255,255,255,.92);
-      font-family:var(--font-ui);
+      padding:8px 0;
+      color:rgba(255,255,255,.62);
+      text-shadow:0 8px 28px rgba(0,0,0,.55);
+      font-family:var(--font-condensed);
       font-weight:500;
-      letter-spacing:.10em;
+      letter-spacing:.08em;
       text-transform:uppercase;
-      font-size:14px;
-      text-shadow: 0 10px 30px rgba(0,0,0,.55);
+      font-size:27px;
+      line-height:1.15;
+
+      opacity:0;
+      transform:translateY(10px);
+      transition:
+        opacity .32s ease,
+        transform .38s cubic-bezier(.19,.65,.2,1),
+        color .25s ease,
+        text-shadow .3s ease;
     }
-    .drop a:hover{ opacity:.75; }
+
+    .drop a:hover{
+      color:#fff;
+      transform:translateY(0) translateX(6px);
+      text-shadow:
+        0 0 12px rgba(255,255,255,.16),
+        0 0 24px rgba(255,255,255,.10);
+    }
 
     body.menu-open .drop{
       opacity:1;
       transform:translateY(0);
       pointer-events:auto;
     }
+
+    /* Links fliegen gestaffelt ein */
+    body.menu-open .drop a{
+      opacity:1;
+      transform:translateY(0);
+    }
+    body.menu-open .drop a:nth-child(1){ transition-delay:.05s; }
+    body.menu-open .drop a:nth-child(2){ transition-delay:.10s; }
+    body.menu-open .drop a:nth-child(3){ transition-delay:.15s; }
+    body.menu-open .drop a:nth-child(4){ transition-delay:.20s; }
+    body.menu-open .drop a:nth-child(5){ transition-delay:.25s; }
 
     /* HERO */
     .hero{
@@ -564,49 +607,180 @@
       .scale-item:nth-child(n){ transition-delay:0s; }
     }
 
-    /* PILLARS */
+    /* PARTNERSHIP */
 
     .blkrom-perks{
-      border-top:0;
-      display:grid;
-      grid-template-columns:40% 1fr;
-      min-height:640px;
-    }
-
-    .perks-image{
       position:relative;
       overflow:hidden;
-    }
-
-    .perks-image img,
-    .perks-image video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center top;
-      display:block;
-      filter:contrast(1.05) saturate(.75) brightness(.82);
-    }
-
-    .perks-content{
       background:#fff;
+      color:#000;
+      border-top:0;
+      min-height:780px;
       display:flex;
-      flex-direction:column;
       align-items:center;
       justify-content:center;
-      padding:80px 60px;
+      padding:clamp(140px, 18vh, 200px) 24px;
+    }
+
+    /* Diagonale Staedte-Baender: 45 Grad, drei Reihen pro Ecke */
+    .perks-corner{
+      position:absolute;
+      width:170%;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .perks-corner.tl{
+      top:10%;
+      left:-65%;
+      transform:rotate(-45deg);
+    }
+
+    .perks-corner.br{
+      bottom:10%;
+      right:-65%;
+      transform:rotate(-45deg);
+    }
+
+    .perks-row + .perks-row{
+      margin-top:12px;
+    }
+
+    .perks-row.r1{ font-size:clamp(52px, 6.5vw, 100px); }
+    .perks-row.r2{ font-size:clamp(32px, 4vw, 62px); }
+    .perks-row.r3{ font-size:clamp(42px, 5.2vw, 80px); }
+
+    .perks-track{
+      display:flex;
+      width:max-content;
+      animation:perksMove 90s linear infinite;
+    }
+
+    .perks-row.r2 .perks-track{
+      animation-duration:62s;
+    }
+
+    .perks-row.r3 .perks-track{
+      animation-duration:76s;
+    }
+
+    /* Reihen versetzt starten, damit die Namen nicht untereinander kleben */
+    .perks-row.r2 .perks-track{ animation-delay:-18s; }
+    .perks-row.r3 .perks-track{ animation-delay:-41s; }
+
+    @keyframes perksMove{
+      from{ transform:translateX(-50%); }
+      to{ transform:translateX(0); }
+    }
+
+    .perks-group{
+      display:flex;
+      align-items:center;
+      white-space:nowrap;
+    }
+
+    .perks-group .city{
+      font-family:var(--font-condensed);
+      font-weight:500;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      line-height:1;
+      color:#000;
+    }
+
+    .perks-group .sep{
+      font-family:var(--font-condensed);
+      font-weight:400;
+      line-height:1;
+      color:rgba(0,0,0,.25);
+      margin:0 .55em;
+      font-size:.5em;
+      align-self:center;
+    }
+
+    /* stark unterschiedliche Namensgroessen */
+    .perks-group .city.s-xs{ font-size:.5em; }
+    .perks-group .city.s-sm{ font-size:.68em; }
+    .perks-group .city.s-md{ font-size:1em; }
+    .perks-group .city.s-lg{ font-size:1.3em; }
+    .perks-group .city.s-xl{ font-size:1.65em; }
+
+    /* gestapelte Doppel-Staedte */
+    .perks-group .stack{
+      display:inline-flex;
+      flex-direction:column;
+      justify-content:center;
+      font-family:var(--font-condensed);
+      font-weight:500;
+      font-size:.44em;
+      line-height:1.08;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:#000;
+      text-align:left;
+    }
+
+    .perks-group .stack span{
+      white-space:nowrap;
+    }
+
+    /* Zentrierter Content ueber den Baendern */
+    .perks-content{
+      position:relative;
+      z-index:2;
+      width:100%;
+      display:flex;
+      justify-content:center;
+    }
+
+    .perks-inner{
+      max-width:640px;
+      width:100%;
       text-align:center;
+      background:radial-gradient(closest-side, #fff 62%, rgba(255,255,255,0) 100%);
+      padding:clamp(36px, 5vw, 64px) clamp(24px, 4vw, 56px);
+
+      opacity:0;
+      transform:translateY(24px);
+      transition:
+        opacity .8s cubic-bezier(.19,.65,.2,1),
+        transform .8s cubic-bezier(.19,.65,.2,1);
+    }
+
+    .perks-inner.in-view{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .perks-kicker{
+      display:inline-block;
+      font-family:var(--font-ui);
+      font-size:12px;
+      font-weight:500;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.45);
+      margin-bottom:20px;
     }
 
     .perks-heading{
       font-family:var(--font-condensed);
-      font-size:clamp(28px, 3vw, 48px);
-      letter-spacing:.08em;
+      font-size:clamp(38px, 3.6vw, 58px);
+      letter-spacing:.06em;
       text-transform:uppercase;
       color:#000;
-      line-height:1;
-      margin:0 0 52px;
-      font-weight:400;
+      line-height:1.05;
+      margin:0 0 18px;
+      font-weight:500;
+    }
+
+    .perks-intro{
+      margin:0 auto 48px;
+      font-family:var(--font-ui);
+      font-size:16px;
+      line-height:1.6;
+      color:rgba(0,0,0,.55);
+      max-width:420px;
     }
 
     .perks-services{
@@ -615,23 +789,52 @@
       margin:0;
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:20px 60px;
-      width:100%;
+      gap:18px 48px;
     }
 
     .perks-services li{
-      font-size:clamp(14px, 1.2vw, 18px);
-      color:rgba(0,0,0,.75);
-      font-weight:400;
       font-family:var(--font-ui);
-      letter-spacing:.02em;
+      font-size:13px;
+      font-weight:500;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.65);
+      transition:color .25s ease;
+    }
+
+    .perks-services li:hover{
+      color:#000;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .perks-inner{
+        opacity:1;
+        transform:none;
+        transition:none;
+      }
+      .perks-track{
+        animation:none;
+      }
     }
 
     @media (max-width:900px){
-      .blkrom-perks{ grid-template-columns:1fr; }
-      .perks-image{ height:60vw; min-height:300px; }
-      .perks-content{ padding:56px 28px; }
-      .perks-services{ grid-template-columns:1fr; gap:14px; }
+      .blkrom-perks{
+        min-height:640px;
+        padding:120px 20px;
+      }
+      .perks-corner{ width:220%; }
+      .perks-corner.tl{ left:-92%; top:8%; }
+      .perks-corner.br{ right:-92%; bottom:8%; }
+      .perks-row.r1{ font-size:44px; }
+      .perks-row.r2{ font-size:28px; }
+      .perks-row.r3{ font-size:36px; }
+      .perks-row + .perks-row{ margin-top:8px; }
+      .perks-intro{ margin-bottom:40px; }
+      .perks-services{ gap:16px 28px; }
+    }
+
+    @media (max-width:480px){
+      .perks-services{ grid-template-columns:1fr; }
     }
 
 
@@ -820,9 +1023,9 @@
 
       <nav class="drop" id="menuDrop" aria-hidden="true">
         <a href="#top">Home</a>
-        <a href="work.html">Work</a>
-        <a href="creator-program.html">Creator Program</a>
-        <a href="private.html">Private</a>
+        <a href="#canvas">System</a>
+        <a href="#scale">Capabilities</a>
+        <a href="#partnership">Partnership</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -889,7 +1092,7 @@
 
       <div class="scale-head">
         <span class="scale-kicker">Capabilities</span>
-        <h2 class="scale-title">How We Scale<br>Your Business</h2>
+        <h2 class="scale-title">How We Scale<br>Your Brand</h2>
       </div>
 
       <div class="scale-grid">
@@ -935,29 +1138,70 @@
     </div>
   </section>
 
-  <section class="blkrom-perks" aria-label="Working with BLKRØM">
+  <section class="blkrom-perks" id="partnership" aria-label="Inside the partnership">
 
-    <div class="perks-image">
-      <img src="assets/hero.jpg" alt="">
+    <div class="perks-corner tl" aria-hidden="true">
+      <div class="perks-row r1">
+        <div class="perks-track">
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+        </div>
+      </div>
+      <div class="perks-row r2">
+        <div class="perks-track">
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+        </div>
+      </div>
+      <div class="perks-row r3">
+        <div class="perks-track">
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="perks-corner br" aria-hidden="true">
+      <div class="perks-row r1">
+        <div class="perks-track">
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+        </div>
+      </div>
+      <div class="perks-row r2">
+        <div class="perks-track">
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+        </div>
+      </div>
+      <div class="perks-row r3">
+        <div class="perks-track">
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+          <div class="perks-group"><span class="city s-xl">New York</span><span class="sep">Ø</span><span class="stack"><span>Berlin</span><span>London</span></span><span class="sep">Ø</span><span class="city s-md">Tokyo</span><span class="sep">Ø</span><span class="city s-xs">Miami</span><span class="sep">Ø</span><span class="city s-lg">Sydney</span><span class="sep">Ø</span><span class="stack"><span>Paris</span><span>Milan</span></span><span class="sep">Ø</span><span class="city s-sm">Dubai</span><span class="sep">Ø</span><span class="city s-lg">Los Angeles</span><span class="sep">Ø</span><span class="stack"><span>Monaco</span><span>Zurich</span></span><span class="sep">Ø</span><span class="city s-xs">Hong Kong</span><span class="sep">Ø</span><span class="city s-xl">Singapore</span><span class="sep">Ø</span><span class="city s-sm">Madrid</span><span class="sep">Ø</span><span class="stack"><span>Amsterdam</span><span>Vienna</span></span><span class="sep">Ø</span><span class="city s-md">Ibiza</span><span class="sep">Ø</span></div>
+        </div>
+      </div>
     </div>
 
     <div class="perks-content">
+      <div class="perks-inner">
 
-      <h2 class="perks-heading">Working With BLKRØM</h2>
+        <span class="perks-kicker">Scope</span>
+        <h2 class="perks-heading">Inside The Partnership</h2>
+        <p class="perks-intro">One private partnership covering every layer of your brand.</p>
 
-      <ul class="perks-services">
-        <li>Visual Identity</li>
-        <li>Platform Partnerships</li>
-        <li>Content Direction</li>
-        <li>Contract Negotiations</li>
-        <li>Brand Strategy</li>
-        <li>Events &amp; Trips</li>
-        <li>Monetization Funnels</li>
-        <li>Copyright Protection</li>
-      </ul>
+        <ul class="perks-services">
+          <li>Visual Identity</li>
+          <li>Platform Partnerships</li>
+          <li>Content Direction</li>
+          <li>Contract Negotiations</li>
+          <li>Brand Strategy</li>
+          <li>Events &amp; Trips</li>
+          <li>Monetization Funnels</li>
+          <li>Copyright Protection</li>
+        </ul>
 
+      </div>
     </div>
-
   </section>
 
   <footer class="blkrom-footer" id="contact">
@@ -968,10 +1212,9 @@
 
         <div class="footer-left">
           <a class="footer-link" href="#top">BLKRØM MEDIA</a>
-          <a class="footer-link" href="creator-program.html">CREATOR PROGRAM</a>
-          <a class="footer-link" href="private.html">PRIVATE</a>
-          <a class="footer-link" href="work.html">WORK</a>
-          <a class="footer-link" href="contact.html">CONTACT</a>
+          <a class="footer-link" href="#canvas">SYSTEM</a>
+          <a class="footer-link" href="#scale">CAPABILITIES</a>
+          <a class="footer-link" href="#partnership">PARTNERSHIP</a>
           <a class="footer-link" href="https://instagram.com/" target="_blank" rel="noopener">INSTAGRAM</a>
         </div>
 
@@ -1055,6 +1298,24 @@
 
     links.forEach(a => a.addEventListener('click', closeMenu));
 
+    /* Menü schließt, wenn die Maus den Menübereich verlässt */
+    const topmenu = document.querySelector('.topmenu');
+    let menuCloseTimer = null;
+
+    topmenu.addEventListener('mouseleave', () => {
+      if (!body.classList.contains('menu-open')) return;
+      menuCloseTimer = setTimeout(closeMenu, 320);
+    });
+
+    topmenu.addEventListener('mouseenter', () => {
+      clearTimeout(menuCloseTimer);
+    });
+
+    /* Menü schließt beim Scrollen */
+    window.addEventListener('scroll', () => {
+      if (body.classList.contains('menu-open')) closeMenu();
+    }, { passive: true });
+
     const canvasSection = document.querySelector('.canvas');
     const tabsPanel = document.querySelector('.canvas-tabs');
     const tabItems = document.querySelectorAll('.tab-item');
@@ -1069,21 +1330,36 @@
       canvasSection.classList.remove('has-open');
     }
 
+    function openTab(item){
+      tabItems.forEach(other => {
+        if (other === item) return;
+        other.classList.remove('is-open');
+        other.querySelector('.tab-summary').setAttribute('aria-expanded', 'false');
+        other.querySelector('.tab-content').style.maxHeight = '0px';
+      });
+      item.classList.add('is-open');
+      item.querySelector('.tab-summary').setAttribute('aria-expanded', 'true');
+      const content = item.querySelector('.tab-content');
+      content.style.maxHeight = content.scrollHeight + 'px';
+      canvasSection.classList.add('has-open');
+    }
+
     tabItems.forEach(item => {
       const tabBtn = item.querySelector('.tab-summary');
-      const content = item.querySelector('.tab-content');
 
       tabBtn.addEventListener('click', () => {
-        const willOpen = !item.classList.contains('is-open');
-
-        closeAllTabs();
-
-        if (willOpen) {
-          item.classList.add('is-open');
-          tabBtn.setAttribute('aria-expanded', 'true');
-          content.style.maxHeight = content.scrollHeight + 'px';
-          canvasSection.classList.add('has-open');
+        if (item.classList.contains('is-open')) {
+          closeAllTabs();
+        } else {
+          openTab(item);
         }
+      });
+
+      /* Solange ein Tab offen ist, reicht Hover zum Wechseln */
+      tabBtn.addEventListener('mouseenter', () => {
+        if (!canvasSection.classList.contains('has-open')) return;
+        if (item.classList.contains('is-open')) return;
+        openTab(item);
       });
     });
 
@@ -1098,7 +1374,7 @@
     });
 
     /* Scale-Sektion: Einblenden beim Scrollen */
-    const scaleItems = document.querySelectorAll('.scale-item');
+    const scaleItems = document.querySelectorAll('.scale-item, .perks-inner');
 
     if ('IntersectionObserver' in window) {
       const scaleObserver = new IntersectionObserver((entries) => {
