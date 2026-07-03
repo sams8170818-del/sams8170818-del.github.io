@@ -61,7 +61,7 @@
     }
 
     a{ color:inherit; text-decoration:none; }
-    section{ padding:96px 0; border-top:1px solid var(--line); }
+    section{ padding:96px 0; border-top:0; }
 
    .hero-logo{
     position:absolute;
@@ -229,7 +229,7 @@
       position:relative;
       width:100%;
       background:#000;
-      border-top:1px solid rgba(0,0,0,.10);
+      border-top:0;
       padding:0;
       overflow:hidden;
     }
@@ -385,9 +385,189 @@
       }
     }
 
+    /* HOW WE SCALE */
+    .blkrom-scale{
+      background:#000;
+      color:#fff;
+      border-top:0;
+      padding:clamp(110px, 14vh, 160px) 0;
+    }
+
+    .scale-wrap{
+      width:min(1400px, calc(100% - 80px));
+      margin:0 auto;
+    }
+
+    .scale-head{
+      margin-bottom:clamp(56px, 8vh, 88px);
+    }
+
+    .scale-kicker{
+      display:inline-block;
+      font-family:var(--font-ui);
+      font-size:12px;
+      font-weight:500;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.45);
+      margin-bottom:22px;
+    }
+
+    .scale-title{
+      font-family:var(--font-condensed);
+      font-size:clamp(46px, 5.4vw, 88px);
+      font-weight:500;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      line-height:1.04;
+      margin:0;
+    }
+
+    .scale-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .scale-item{
+      position:relative;
+      overflow:hidden;
+      border-radius:18px;
+      background:#0a0a0a;
+      min-height:340px;
+      padding:clamp(34px, 3.2vw, 46px) clamp(26px, 2.6vw, 40px);
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+
+      opacity:0;
+      transform:translateY(22px);
+      transition:
+        opacity .7s cubic-bezier(.19,.65,.2,1),
+        transform .7s cubic-bezier(.19,.65,.2,1);
+    }
+
+    .scale-item.in-view{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* gestaffeltes Einblenden */
+    .scale-item:nth-child(2){ transition-delay:.08s; }
+    .scale-item:nth-child(3){ transition-delay:.16s; }
+    .scale-item:nth-child(4){ transition-delay:.10s; }
+    .scale-item:nth-child(5){ transition-delay:.18s; }
+    .scale-item:nth-child(6){ transition-delay:.26s; }
+
+    /* Geblurrtes Portraet als Kachel-Hintergrund */
+    .scale-media{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center 20%;
+      filter:blur(14px) brightness(.42) saturate(.8);
+      transform:scale(1.14);
+      transition:
+        filter .6s cubic-bezier(.19,.65,.2,1),
+        transform .6s cubic-bezier(.19,.65,.2,1);
+      will-change:filter, transform;
+      z-index:0;
+    }
+
+    /* Verlauf fuer Lesbarkeit */
+    .scale-item:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.30) 55%, rgba(0,0,0,.18) 100%);
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .scale-item h3,
+    .scale-item p{
+      position:relative;
+      z-index:2;
+    }
+
+    .scale-item h3{
+      font-family:var(--font-condensed);
+      font-size:clamp(24px, 2vw, 32px);
+      font-weight:500;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+      line-height:1.1;
+      margin:0 0 14px;
+      transition:text-shadow .34s ease;
+    }
+
+    .scale-item p{
+      margin:0;
+      max-width:340px;
+      font-family:var(--font-ui);
+      font-size:15px;
+      line-height:1.6;
+      font-weight:400;
+      color:rgba(255,255,255,.72);
+      transition:color .3s ease;
+      text-shadow:0 2px 12px rgba(0,0,0,.35);
+    }
+
+    .scale-item:hover .scale-media{
+      filter:blur(7px) brightness(.55) saturate(.9);
+      transform:scale(1.08);
+    }
+
+    .scale-item:hover h3{
+      text-shadow:
+        0 0 12px rgba(255,255,255,.16),
+        0 0 24px rgba(255,255,255,.10);
+    }
+
+    .scale-item:hover p{
+      color:rgba(255,255,255,.88);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .scale-item{
+        opacity:1;
+        transform:none;
+        transition:none;
+      }
+      .scale-media{
+        transition:none;
+      }
+    }
+
+    @media (max-width:1100px){
+      .scale-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width:700px){
+      .scale-wrap{
+        width:calc(100% - 44px);
+      }
+      .scale-grid{
+        grid-template-columns:1fr;
+        gap:14px;
+      }
+      .scale-item{
+        min-height:260px;
+        padding:28px 22px;
+        border-radius:14px;
+      }
+      .scale-item p{
+        max-width:none;
+      }
+      .scale-item:nth-child(n){ transition-delay:0s; }
+    }
+
     /* PILLARS */
 
     .blkrom-perks{
+      border-top:0;
       display:grid;
       grid-template-columns:40% 1fr;
       min-height:640px;
@@ -704,7 +884,57 @@
     </div>
   </section>
 
-  
+  <section class="blkrom-scale" id="scale" aria-label="How we scale your business">
+    <div class="scale-wrap">
+
+      <div class="scale-head">
+        <span class="scale-kicker">Capabilities</span>
+        <h2 class="scale-title">How We Scale<br>Your Business</h2>
+      </div>
+
+      <div class="scale-grid">
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-01.jpg')"></div>
+          <h3>Premium Monetization</h3>
+          <p>Maximize revenue streams and backend funnels. Optimize for high-tier retention and predictable recurring capital.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-02.jpg')"></div>
+          <h3>Traffic Architecture</h3>
+          <p>Guide audiences seamlessly from raw awareness to conversions with calculated content deployment and retargeting systems.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-03.jpg')"></div>
+          <h3>Brand Perception</h3>
+          <p>Data-driven image positioning to scale reach, command premium authority, and eliminate fast-moving algorithmic noise.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-04.jpg')"></div>
+          <h3>Copyright Protection</h3>
+          <p>Safeguard your digital assets and identity with relentless content tracking and rapid DMCA takedown infrastructure.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-05.jpg')"></div>
+          <h3>Growth Mechanics</h3>
+          <p>Expand target distribution and organic reach across primary platforms using high-converting, scalable distribution frameworks.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-06.jpg')"></div>
+          <h3>Infrastructure Recovery</h3>
+          <p>Maintain permanent operational security with dedicated emergency support for compromised accounts, bans, or access issues.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
   <section class="blkrom-perks" aria-label="Working with BLKRØM">
 
     <div class="perks-image">
@@ -866,6 +1096,24 @@
     tabsPanel.addEventListener('mouseenter', () => {
       clearTimeout(tabsCloseTimer);
     });
+
+    /* Scale-Sektion: Einblenden beim Scrollen */
+    const scaleItems = document.querySelectorAll('.scale-item');
+
+    if ('IntersectionObserver' in window) {
+      const scaleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            scaleObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      scaleItems.forEach(item => scaleObserver.observe(item));
+    } else {
+      scaleItems.forEach(item => item.classList.add('in-view'));
+    }
   </script>
 
 </body>
