@@ -224,19 +224,20 @@
       color:#000;
     }
 
-    /* CANVAS */
+    /* CANVAS + TABS (Unruly style) */
     .canvas{
       position:relative;
       width:100%;
       background:#000;
       border-top:1px solid rgba(0,0,0,.10);
       padding:0;
+      overflow:hidden;
     }
 
     .canvas-media{
       width:100%;
-      height:72vh;
-      min-height:520px;
+      height:88vh;
+      min-height:620px;
       overflow:hidden;
     }
 
@@ -248,193 +249,140 @@
       display:block;
     }
 
+    /* Dezenter Verlauf unten, damit die Titel auf dem Video lesbar sind */
+    .canvas:before{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:55%;
+      background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+      pointer-events:none;
+      z-index:1;
+    }
 
-/* BLKRØM SYSTEM ACCORDION */
+    .canvas-tabs{
+      position:absolute;
+      left:clamp(26px, 5vw, 72px);
+      bottom:clamp(28px, 6vh, 64px);
+      z-index:2;
+      max-width:min(640px, calc(100% - 52px));
 
-.blkrom-system{
-  background:#000;
-  color:#fff;
-  border-top:0;
-  padding:91px 0 91px;
-}
+      /* konstantes Innen-Padding, damit beim Öffnen nichts springt */
+      padding:22px 28px 18px 24px;
+      margin-left:-24px;
+      margin-bottom:-18px;
 
-.system-wrap{
-  width:min(1400px, calc(100% - 80px));
-  margin:0 auto;
-}
+      background:rgba(0,0,0,0);
+      -webkit-backdrop-filter:blur(0px);
+      backdrop-filter:blur(0px);
+      transition:
+        background .45s ease,
+        -webkit-backdrop-filter .45s ease,
+        backdrop-filter .45s ease;
+    }
 
-.system-item{
-  border-bottom:1px solid rgba(255,255,255,.18);
-  padding:0;
-}
+    /* Blur nur auf dem Textbereich, wenn ein Tab offen ist */
+    .canvas.has-open .canvas-tabs{
+      background:rgba(0,0,0,.28);
+      -webkit-backdrop-filter:blur(18px) saturate(.9);
+      backdrop-filter:blur(18px) saturate(.9);
+    }
 
-.system-item:first-child{
-  border-top:1px solid rgba(255,255,255,.18);
-}
+    .tab-item{
+      border:0;
+      padding:0;
+    }
 
-.system-summary{
-  width:100%;
-  height:88px;
-  border:0;
-  appearance:none;
-  -webkit-appearance:none;
-  background:transparent;
-  color:inherit;
-  font:inherit;
-  text-align:left;
-  list-style:none;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:29px;
-  padding:0 72px 0 0;
-  margin:0;
-}
+    .tab-summary{
+      display:block;
+      width:100%;
+      border:0;
+      appearance:none;
+      -webkit-appearance:none;
+      background:transparent;
+      color:rgba(255,255,255,.55);
+      font-family:var(--font-condensed);
+      font-size:clamp(34px, 4vw, 56px);
+      font-weight:500;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      line-height:1.15;
+      text-align:left;
+      cursor:pointer;
+      padding:6px 0;
+      margin:0;
+      text-shadow:0 6px 24px rgba(0,0,0,.45);
+      transition:
+        color .3s ease,
+        transform .34s cubic-bezier(.19,.65,.2,1);
+      transform-origin:left center;
+      will-change:transform;
+    }
 
-.system-summary::-webkit-details-marker{
-  display:none;
-}
+    .tab-summary:hover{
+      color:#fff;
+      transform:translateZ(0) scale(1.03);
+    }
 
-.system-summary span:first-child{
-  font-family:var(--font-condensed);
-  font-size:clamp(35px, 3.57vw, 59px);
-  letter-spacing:.06em;
-  font-weight:500;
-  text-transform:uppercase;
-}
+    .tab-item.is-open .tab-summary{
+      color:#fff;
+    }
 
-.system-content{
-  overflow:hidden;
-  max-height:0;
-  opacity:0;
-  padding:0 72px 0 0;
-  transition:
-    max-height .42s cubic-bezier(.19,.65,.2,1),
-    opacity .22s ease;
-}
+    /* Wenn ein Tab offen ist, treten die anderen Titel zurück */
+    .canvas.has-open .tab-item:not(.is-open) .tab-summary{
+      color:rgba(255,255,255,.35);
+    }
 
-.system-content p{
-  overflow:hidden;
-  margin:0;
-  min-height:0;
-  padding:0 0 35px;
-  max-width:910px;
-  font-size:clamp(17px, 1.43vw, 24px);
-  line-height:1.45;
-  font-weight:500;
-  color:rgba(255,255,255,.82);
-}
+    .tab-content{
+      overflow:hidden;
+      max-height:0;
+      opacity:0;
+      transition:
+        max-height .42s cubic-bezier(.19,.65,.2,1),
+        opacity .26s ease;
+    }
 
-.system-item.is-open .system-content{
-  opacity:1;
-}
+    .tab-content p{
+      overflow:hidden;
+      margin:0;
+      min-height:0;
+      padding:6px 0 18px;
+      max-width:560px;
+      font-family:var(--font-ui);
+      font-size:clamp(15px, 1.2vw, 18px);
+      line-height:1.55;
+      font-weight:400;
+      color:rgba(255,255,255,.88);
+      text-shadow:0 4px 18px rgba(0,0,0,.35);
+    }
 
-.system-icon{
-  position:relative;
-  width:26px;
-  height:26px;
-  flex:0 0 26px;
-}
+    .tab-item.is-open .tab-content{
+      opacity:1;
+    }
 
-.system-icon:before,
-.system-icon:after{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  background:#fff;
-  transform:translate(-50%, -50%);
-  transition:opacity .2s ease;
-}
+    @media (max-width:900px){
+      .canvas-media{
+        height:82vh;
+        min-height:540px;
+      }
+      .canvas-tabs{
+        left:22px;
+        bottom:26px;
+        max-width:calc(100% - 44px);
+        padding:16px 18px 14px 16px;
+        margin-left:-16px;
+        margin-bottom:-14px;
+      }
+      .tab-summary{
+        font-size:36px;
+        padding:5px 0;
+      }
+      .tab-content p{
+        font-size:15px;
+        padding:4px 0 14px;
+      }
+    }
 
-.system-icon:before{
-  width:24px;
-  height:1.8px;
-}
-
-.system-icon:after{
-  width:1.8px;
-  height:24px;
-}
-
-  .system-item.is-open .system-icon:after{
-  opacity:0;
-}
-
-  .system-summary span:first-child{
-  transition:
-  transform .34s cubic-bezier(.19,.65,.2,1),
-  text-shadow .34s ease,
-  opacity .34s ease;
-  transform-origin:left center;
-  will-change:transform;
-}
-
-.system-summary:hover span:first-child{
-  transform:translateZ(0) scale(1.035);
-  text-shadow:
-  0 0 12px rgba(255,255,255,.16),
-  0 0 24px rgba(255,255,255,.10);
-  opacity:1;
-}
-
-  .system-icon{
-  transition:
-  opacity .28s ease,
-  transform .28s cubic-bezier(.19,.65,.2,1);
-  opacity:.75;
-  will-change:transform;
-}
-
-  .system-summary:hover .system-icon{
-  transform:scale(1.06);
-  opacity:1;
-}
-    
-@media (max-width:900px){
-
-  .blkrom-system{
-    padding:72px 0;
-  }
-
-  .system-wrap{
-    width:calc(100% - 44px);
-  }
-
-  .system-summary{
-    height:76px;
-    padding:0 26px 0 0;
-  }
-
-  .system-summary span:first-child{
-    font-size:43px;
-  }
-
-  .system-content{
-    padding:0 26px 0 0;
-  }
-
-  .system-item p{
-    padding:0 0 29px;
-    font-size:18px;
-  }
-
-  .system-icon{
-    width:23px;
-    height:23px;
-    flex-basis:23px;
-  }
-
-  .system-icon:before{
-    width:20px;
-  }
-
-  .system-icon:after{
-    height:20px;
-  }
-  
-  }
     /* PILLARS */
 
     .blkrom-perks{
@@ -714,59 +662,46 @@
     </div>
   </section>
 
-  <section class="canvas" id="canvas">
+  <section class="canvas" id="canvas" aria-label="BLKRØM System">
     <div class="canvas-media">
       <video autoplay muted loop playsinline>
         <source src="assets/canvas.mp4" type="video/mp4">
       </video>
     </div>
+
+    <div class="canvas-tabs">
+
+      <div class="tab-item">
+        <button class="tab-summary" type="button" aria-expanded="false">PRESENCE</button>
+        <div class="tab-content">
+          <p>We shape your identity, elevate your visual ecosystem, and build an unmistakable brand that is impossible to replicate.</p>
+        </div>
+      </div>
+
+      <div class="tab-item">
+        <button class="tab-summary" type="button" aria-expanded="false">STRATEGY</button>
+        <div class="tab-content">
+          <p>We plan the long game—positioning your content and business moves precisely where attention converts into asset value.</p>
+        </div>
+      </div>
+
+      <div class="tab-item">
+        <button class="tab-summary" type="button" aria-expanded="false">SYSTEM</button>
+        <div class="tab-content">
+          <p>We build the underlying operational architecture, transforming daily operations into a high-performance digital pipeline.</p>
+        </div>
+      </div>
+
+      <div class="tab-item">
+        <button class="tab-summary" type="button" aria-expanded="false">DISCRETION</button>
+        <div class="tab-content">
+          <p>We act as a private, protective layer behind your brand, managing high-stakes execution with absolute confidentiality.</p>
+        </div>
+      </div>
+
+    </div>
   </section>
 
- <section class="blkrom-system" aria-label="BLKRØM System">
-  <div class="system-wrap">
-
-    <div class="system-item">
-      <button class="system-summary" type="button" aria-expanded="false">
-        <span>PRESENCE</span>
-        <span class="system-icon"></span>
-      </button>
-      <div class="system-content">
-      <p>We turn creators into recognisable brands through visuals, identity, and absolute consistency. True presence is not about chasing algorithmic trends; it is about building an unmistakable aesthetic and atomic clarity. We construct a premium visual ecosystem and a distinct brand voice around your persona. By aligning every digital touchpoint, we ensure that your identity is immediately recognized, universally respected, and impossible to replicate.</p>
-      </div>
-    </div>
-
-    <div class="system-item">
-      <button class="system-summary" type="button" aria-expanded="false">
-        <span>STRATEGY</span>
-        <span class="system-icon"></span>
-      </button>
-      <div class="system-content">
-      <p>Every platform, release, and public appearance follows calculated, long-term positioning. We do not chase temporary attention or viral noise. Every piece of content, every platform expansion, and every commercial move is treated as a strategic deployment designed to build permanent market authority. We engineer the long game—positioning you precisely where attention naturally converts into institutional leverage, sustainable revenue, and long-term asset value.</p>
-      </div>
-    </div>
-
-    <div class="system-item">
-      <button class="system-summary" type="button" aria-expanded="false">
-        <span>SYSTEM</span>
-        <span class="system-icon"></span>
-      </button>
-      <div class="system-content">
-      <p>Content, backend funnels, and daily execution aligned into one high-performance, scalable system. Influence without infrastructure is a liability. We replace chaotic day-to-day operations with a streamlined digital pipeline. From seamless multi-platform content distribution to high-converting monetization funnels, we build the operational architecture. This allows you to operate entirely within your creative genius while the system quietly scales your business and distribution in the background.</p>
-      </div>
-    </div>
-
-    <div class="system-item">
-      <button class="system-summary" type="button" aria-expanded="false">
-        <span>PRIVATE</span>
-        <span class="system-icon"></span>
-      </button>
-      <div class="system-content">
-      <p>Every partnership is anchored in absolute trust, operational clarity, and long-term direction. Elite performance requires total discretion. BLKRØM operates as a private, highly protective management layer behind your brand. We handle the heavy lifting, high-stakes negotiations, and structural decisions with complete transparency. By limiting our roster to a selected group of creators, we guarantee the focus, privacy, and dedicated alignment needed to protect your interests and build a legacy that lasts.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
   
   <section class="blkrom-perks" aria-label="Working with BLKRØM">
 
@@ -849,6 +784,8 @@
   </div>
 </div>
 
+    </div><!-- /footer-wrap -->
+
   </footer>
 
   <script>
@@ -886,26 +823,29 @@
 
     links.forEach(a => a.addEventListener('click', closeMenu));
 
-    const systemItems = document.querySelectorAll('.system-item');
+    const canvasSection = document.querySelector('.canvas');
+    const tabItems = document.querySelectorAll('.tab-item');
 
-    systemItems.forEach(item => {
-      const btn = item.querySelector('.system-summary');
-      const content = item.querySelector('.system-content');
+    tabItems.forEach(item => {
+      const tabBtn = item.querySelector('.tab-summary');
+      const content = item.querySelector('.tab-content');
 
-      btn.addEventListener('click', () => {
+      tabBtn.addEventListener('click', () => {
         const willOpen = !item.classList.contains('is-open');
 
-        systemItems.forEach(other => {
+        tabItems.forEach(other => {
           other.classList.remove('is-open');
-          other.querySelector('.system-summary').setAttribute('aria-expanded', 'false');
-          other.querySelector('.system-content').style.maxHeight = '0px';
+          other.querySelector('.tab-summary').setAttribute('aria-expanded', 'false');
+          other.querySelector('.tab-content').style.maxHeight = '0px';
         });
 
         if (willOpen) {
           item.classList.add('is-open');
-          btn.setAttribute('aria-expanded', 'true');
+          tabBtn.setAttribute('aria-expanded', 'true');
           content.style.maxHeight = content.scrollHeight + 'px';
         }
+
+        canvasSection.classList.toggle('has-open', willOpen);
       });
     });
   </script>
