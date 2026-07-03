@@ -622,23 +622,46 @@
       padding:clamp(140px, 18vh, 200px) 24px;
     }
 
-    /* Diagonale Staedte-Baender: 45 Grad, drei Reihen pro Ecke */
-    .perks-corner{
+    /* Aufgehelltes Architektur-Bild als Hintergrund */
+    .blkrom-perks:before{
+      content:"";
       position:absolute;
-      width:170%;
+      inset:0;
+      background-image:url('assets/partnership-bg.jpg');
+      background-size:cover;
+      background-position:center;
+      filter:blur(3px) brightness(1.8) contrast(.9);
+      transform:scale(1.04);
+      z-index:0;
+    }
+
+    /* zusaetzliche weisse Aufhellung fuer Lesbarkeit */
+    .blkrom-perks:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(255,255,255,.42);
       z-index:0;
       pointer-events:none;
     }
 
+    /* Diagonale Staedte-Baender: 45 Grad, drei Reihen pro Ecke */
+    .perks-corner{
+      position:absolute;
+      width:170%;
+      z-index:1;
+      pointer-events:none;
+    }
+
     .perks-corner.tl{
-      top:10%;
-      left:-65%;
+      top:0;
+      left:-78%;
       transform:rotate(-45deg);
     }
 
     .perks-corner.br{
-      bottom:10%;
-      right:-65%;
+      bottom:0;
+      right:-78%;
       transform:rotate(-45deg);
     }
 
@@ -734,10 +757,10 @@
     }
 
     .perks-inner{
-      max-width:640px;
+      max-width:720px;
       width:100%;
       text-align:center;
-      background:radial-gradient(closest-side, #fff 62%, rgba(255,255,255,0) 100%);
+      background:radial-gradient(closest-side, rgba(255,255,255,.96) 58%, rgba(255,255,255,.75) 78%, rgba(255,255,255,0) 100%);
       padding:clamp(36px, 5vw, 64px) clamp(24px, 4vw, 56px);
 
       opacity:0;
@@ -823,8 +846,8 @@
         padding:120px 20px;
       }
       .perks-corner{ width:220%; }
-      .perks-corner.tl{ left:-92%; top:8%; }
-      .perks-corner.br{ right:-92%; bottom:8%; }
+      .perks-corner.tl{ left:-104%; top:0; }
+      .perks-corner.br{ right:-104%; bottom:0; }
       .perks-row.r1{ font-size:44px; }
       .perks-row.r2{ font-size:28px; }
       .perks-row.r3{ font-size:36px; }
