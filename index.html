@@ -128,10 +128,12 @@
 
     .drop{
       position:absolute;
-      top:62px;
+      top:44px;
       right:0;
-      min-width:240px;
-      padding:0;
+      min-width:380px;
+      /* grosszuegige unsichtbare Hover-Flaeche: oben zum Burger,
+         links fuer den Weg vom X zu den Links */
+      padding:18px 12px 36px 140px;
       border:0;
       background:transparent;
       opacity:0;
@@ -153,20 +155,21 @@
       line-height:1.15;
 
       opacity:0;
-      transform:translateY(10px);
+      /* Reihenfolge: opacity, color, transform, text-shadow */
       transition:
-        opacity .32s ease,
-        transform .38s cubic-bezier(.19,.65,.2,1),
+        opacity .3s ease,
         color .25s ease,
+        transform .3s cubic-bezier(.19,.65,.2,1),
         text-shadow .3s ease;
     }
 
     .drop a:hover{
       color:#fff;
-      transform:translateY(0) translateX(6px);
+      transform:translateX(6px);
       text-shadow:
         0 0 12px rgba(255,255,255,.16),
-        0 0 24px rgba(255,255,255,.10);
+        0 0 24px rgba(255,255,255,.10),
+        0 8px 28px rgba(0,0,0,.55);
     }
 
     body.menu-open .drop{
@@ -175,16 +178,16 @@
       pointer-events:auto;
     }
 
-    /* Links fliegen gestaffelt ein */
     body.menu-open .drop a{
       opacity:1;
-      transform:translateY(0);
     }
-    body.menu-open .drop a:nth-child(1){ transition-delay:.05s; }
-    body.menu-open .drop a:nth-child(2){ transition-delay:.10s; }
-    body.menu-open .drop a:nth-child(3){ transition-delay:.15s; }
-    body.menu-open .drop a:nth-child(4){ transition-delay:.20s; }
-    body.menu-open .drop a:nth-child(5){ transition-delay:.25s; }
+
+    /* Stagger nur auf dem Einblenden (opacity), nie auf dem Hover */
+    body.menu-open .drop a:nth-child(1){ transition-delay:.05s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(2){ transition-delay:.10s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(3){ transition-delay:.15s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(4){ transition-delay:.20s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(5){ transition-delay:.25s, 0s, 0s, 0s; }
 
     /* HERO */
     .hero{
@@ -760,7 +763,6 @@
       max-width:720px;
       width:100%;
       text-align:center;
-      background:radial-gradient(closest-side, rgba(255,255,255,.96) 58%, rgba(255,255,255,.75) 78%, rgba(255,255,255,0) 100%);
       padding:clamp(36px, 5vw, 64px) clamp(24px, 4vw, 56px);
 
       opacity:0;
