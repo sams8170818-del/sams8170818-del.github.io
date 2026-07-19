@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="BLKRØM" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PRIVACY POLICY — BLKRØM MEDIA</title>
+  <meta name="description" content="How BLKRØM Media handles information on blkrom-media.com." />
+  <meta name="robots" content="noindex, follow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Italiana&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#000;
+      --text:#fff;
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.55);
+      --line:rgba(255,255,255,.10);
+      --font-ui:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-script:"Italiana", serif;
+      --font-condensed:"Bebas Neue", sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--font-ui);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.10;
+      mix-blend-mode:overlay;
+      z-index:9999;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      background-size:260px 260px;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+
+    /* TOPBAR */
+    .topbar{
+      position:absolute;
+      top:0; left:0; right:0;
+      z-index:20;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:26px clamp(24px, 5vw, 60px);
+    }
+    .brand{
+      font-family:var(--font-condensed);
+      font-size:26px;
+      letter-spacing:.14em;
+      color:#fff;
+    }
+    .back-link{
+      font-family:var(--font-ui);
+      font-size:12px;
+      font-weight:500;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.7);
+      transition:color .2s ease;
+    }
+    .back-link:hover{ color:#fff; }
+
+    /* HERO */
+    .legal-hero{
+      position:relative;
+      height:56vh;
+      min-height:420px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+      background:#000;
+    }
+    .legal-hero video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:0;
+      -webkit-mask-image:linear-gradient(to bottom, #000 35%, rgba(0,0,0,.4) 68%, rgba(0,0,0,0) 92%);
+      mask-image:linear-gradient(to bottom, #000 35%, rgba(0,0,0,.4) 68%, rgba(0,0,0,0) 92%);
+    }
+    .legal-hero:before{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:34%;
+      z-index:1;
+      -webkit-backdrop-filter:blur(22px);
+      backdrop-filter:blur(22px);
+      -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 60%, #000 100%);
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 60%, #000 100%);
+      pointer-events:none;
+    }
+    .legal-hero:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(ellipse at center, rgba(0,0,0,0) 30%, rgba(0,0,0,.4) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,.3), rgba(0,0,0,.15) 40%, rgba(0,0,0,.4) 75%, rgba(0,0,0,.72) 100%);
+      z-index:1;
+    }
+    .legal-hero-inner{
+      position:relative;
+      z-index:2;
+      padding:0 24px;
+    }
+    .legal-kicker{
+      display:inline-block;
+      font-family:var(--font-ui);
+      font-size:12px;
+      font-weight:500;
+      letter-spacing:.4em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.7);
+      margin-bottom:22px;
+    }
+    .legal-hero h1{
+      font-family:var(--font-condensed);
+      font-size:clamp(46px, 7vw, 108px);
+      font-weight:500;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      line-height:.96;
+      margin:0;
+      text-shadow:0 20px 60px rgba(0,0,0,.5);
+    }
+    .legal-hero p{
+      margin:22px auto 0;
+      max-width:520px;
+      font-family:var(--font-ui);
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      line-height:2;
+      color:rgba(255,255,255,.55);
+    }
+
+    /* CONTENT */
+    .legal-section{
+      position:relative;
+      margin-top:-14vh;
+      padding:clamp(200px, 28vh, 320px) 24px clamp(110px, 14vh, 170px);
+      overflow:hidden;
+    }
+    .legal-section-bg{
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:#000;
+    }
+    .blobs{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      overflow:hidden;
+      pointer-events:none;
+      -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 18%, #000 32%, #000 100%);
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 18%, #000 32%, #000 100%);
+    }
+    .blob{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(70px);
+      opacity:.42;
+      will-change:transform;
+    }
+    .blob-1{
+      width:440px; height:440px;
+      left:-100px; top:6%;
+      background:radial-gradient(circle at 35% 35%, rgba(150,150,168,.75), rgba(60,60,70,0) 70%);
+      animation:wave1 19s ease-in-out infinite;
+    }
+    .blob-2{
+      width:360px; height:360px;
+      left:0; top:44%;
+      background:radial-gradient(circle at 40% 40%, rgba(120,120,142,.7), rgba(50,50,60,0) 70%);
+      animation:wave2 23s ease-in-out infinite;
+    }
+    .blob-3{
+      width:320px; height:320px;
+      left:-60px; top:78%;
+      background:radial-gradient(circle at 40% 40%, rgba(130,130,150,.65), rgba(50,50,60,0) 70%);
+      animation:wave3 26s ease-in-out infinite;
+    }
+    .blob-4{
+      width:440px; height:440px;
+      right:-100px; top:10%;
+      background:radial-gradient(circle at 60% 35%, rgba(150,150,168,.75), rgba(60,60,70,0) 70%);
+      animation:wave2 21s ease-in-out infinite;
+    }
+    .blob-5{
+      width:360px; height:360px;
+      right:0; top:48%;
+      background:radial-gradient(circle at 60% 40%, rgba(120,120,142,.7), rgba(50,50,60,0) 70%);
+      animation:wave3 24s ease-in-out infinite;
+    }
+    .blob-6{
+      width:320px; height:320px;
+      right:-60px; top:80%;
+      background:radial-gradient(circle at 60% 40%, rgba(130,130,150,.65), rgba(50,50,60,0) 70%);
+      animation:wave1 28s ease-in-out infinite;
+    }
+    @keyframes wave1{
+      0%,100%{ transform:translate(0,0) scale(1); }
+      25%{ transform:translate(60px,-70px) scale(1.12); }
+      50%{ transform:translate(95px,50px) scale(1.2); }
+      75%{ transform:translate(30px,100px) scale(1.08); }
+    }
+    @keyframes wave2{
+      0%,100%{ transform:translate(0,0) scale(1.02); }
+      25%{ transform:translate(-75px,60px) scale(1.16); }
+      50%{ transform:translate(-40px,-60px) scale(1.24); }
+      75%{ transform:translate(55px,-25px) scale(1.1); }
+    }
+    @keyframes wave3{
+      0%,100%{ transform:translate(0,0) scale(1); }
+      33%{ transform:translate(70px,-55px) scale(1.2); }
+      66%{ transform:translate(-60px,75px) scale(1.14); }
+    }
+
+    .legal-card{
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width:820px;
+      margin:0 auto;
+      padding:clamp(38px, 5vw, 72px);
+      border-radius:26px;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.14);
+      -webkit-backdrop-filter:blur(34px) saturate(1.2);
+      backdrop-filter:blur(34px) saturate(1.2);
+      box-shadow:
+        0 50px 140px rgba(0,0,0,.6),
+        inset 0 1px 0 rgba(255,255,255,.14);
+      overflow:hidden;
+    }
+    .legal-card:before{
+      content:"";
+      position:absolute;
+      top:0; left:10%; right:10%;
+      height:1px;
+      background:linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,.5), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .legal-body{ position:relative; z-index:1; }
+
+    .legal-updated{
+      display:block;
+      font-family:var(--font-ui);
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.45);
+      margin-bottom:38px;
+    }
+    .legal-body h2{
+      font-family:var(--font-condensed);
+      font-size:clamp(24px, 2.4vw, 32px);
+      font-weight:500;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+      line-height:1.1;
+      margin:44px 0 14px;
+    }
+    .legal-body h2:first-of-type{ margin-top:0; }
+    .legal-body p{
+      margin:0 0 16px;
+      font-size:15px;
+      line-height:1.75;
+      color:rgba(255,255,255,.72);
+    }
+    .legal-body ul{
+      margin:0 0 16px;
+      padding-left:20px;
+      color:rgba(255,255,255,.72);
+      font-size:15px;
+      line-height:1.75;
+    }
+    .legal-body li{ margin-bottom:8px; }
+    .legal-body strong{ color:#fff; font-weight:500; }
+    .legal-body a{
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.35);
+      transition:border-color .2s ease;
+    }
+    .legal-body a:hover{ border-color:#fff; }
+    .placeholder{
+      color:rgba(255,255,255,.9);
+      background:rgba(255,255,255,.10);
+      padding:1px 7px;
+      border-radius:4px;
+      font-size:14px;
+    }
+
+    /* FOOTER */
+    .blkrom-footer{ background:#000; color:#fff; padding:120px 0 64px; }
+    .footer-wrap{ width:min(1400px, calc(100% - 60px)); margin:0 auto; }
+    .footer-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+    .footer-left{ display:flex; flex-direction:column; gap:18px; }
+    .footer-link{
+      font-family:var(--font-condensed);
+      font-size:22px; letter-spacing:.08em; text-transform:uppercase;
+      color:#fff; display:inline-block; line-height:1.1;
+    }
+    .footer-link:hover{ opacity:.65; }
+    .footer-right{ text-align:right; }
+    .footer-title{
+      font-family:var(--font-condensed);
+      font-size:clamp(36px, 9vw, 54px); letter-spacing:.08em; margin:0 0 14px;
+      text-transform:uppercase; line-height:1;
+    }
+    .footer-sub{
+      margin:0 0 26px; font-size:14px; color:rgba(255,255,255,.65);
+      max-width:420px; margin-left:auto;
+    }
+    .footer-cta{ display:flex; justify-content:flex-end; }
+    .footer-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:16px 28px; border:1px solid rgba(255,255,255,.45);
+      background:transparent; color:#fff;
+      font-family:var(--font-condensed); font-size:18px;
+      letter-spacing:.08em; text-transform:uppercase; cursor:pointer;
+      transition:background .18s ease, color .18s ease, border-color .18s ease;
+    }
+    .footer-btn:hover{ background:#fff; color:#000; border-color:#fff; }
+    .footer-bottom{ margin-top:80px; }
+    .footer-socials{ display:flex; align-items:center; justify-content:center; gap:28px; }
+    .footer-socials a{ display:inline-flex; color:#fff; opacity:.9; transition:opacity .18s ease, transform .18s ease; }
+    .footer-socials a:hover{ opacity:.65; transform:translateY(-1px); }
+    .footer-socials svg{ width:30px; height:30px; fill:none; stroke:currentColor; stroke-width:1.8; }
+    .footer-socials a:nth-child(2) svg{ fill:currentColor; stroke:none; }
+    .footer-baseline{ margin-top:56px; padding-top:26px; }
+    .footer-copy{ font-size:12px; color:rgba(255,255,255,.50); letter-spacing:.04em; text-transform:uppercase; }
+
+    @media (max-width:900px){
+      .footer-grid{ grid-template-columns:1fr; gap:40px; }
+      .footer-right{ text-align:left; }
+      .footer-sub{ margin-left:0; }
+      .footer-cta{ justify-content:flex-start; }
+    }
+    /* Mobile: Nebelwolken kleiner, damit sie nicht ueber dem Inhalt liegen */
+    @media (max-width:700px){
+      .blob{ filter:blur(50px); opacity:.38; }
+      .blob-1, .blob-4{ width:260px; height:260px; }
+      .blob-2, .blob-5{ width:210px; height:210px; }
+      .blob-3, .blob-6{ width:190px; height:190px; }
+      .blob-1, .blob-2, .blob-3{ left:-70px; }
+      .blob-4, .blob-5, .blob-6{ right:-70px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .blob{ animation:none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">BLKRØM</a>
+    <a class="back-link" href="index.html">← Back</a>
+  </header>
+
+  <section class="legal-hero">
+    <video autoplay muted loop playsinline poster="assets/hero.jpg">
+      <source src="assets/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="legal-hero-inner">
+      <span class="legal-kicker">Privacy</span>
+      <h1>Privacy<br>Policy</h1>
+      <p>How we handle information on this site</p>
+    </div>
+  </section>
+
+  <section class="legal-section">
+    <div class="legal-section-bg" aria-hidden="true"></div>
+    <div class="blobs" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+      <span class="blob blob-3"></span>
+      <span class="blob blob-4"></span>
+      <span class="blob blob-5"></span>
+      <span class="blob blob-6"></span>
+    </div>
+
+    <div class="legal-card">
+      <div class="legal-body">
+        <span class="legal-updated">Last updated — JULY 2025</span>
+        <h2>Who We Are</h2>
+        <p><strong>BLKRØM Media LLC</strong> ("BLKRØM", "we", "us") operates this website at blkrom-media.com. Registered office: <span class="placeholder">[REGISTERED ADDRESS]</span>, <span class="placeholder">[STATE]</span>, United States.</p>
+        <p>This notice explains what happens to information when you visit this website. It is short because this site collects very little.</p>
+
+        <h2>What This Site Collects</h2>
+        <p><strong>Nothing you don't send us yourself.</strong> This website has no accounts, no shopping cart, no analytics tools, no advertising pixels and no tracking cookies. We do not build profiles of visitors and we do not sell data to anyone.</p>
+        <p>Three things are worth knowing:</p>
+        <ul>
+          <li><strong>Applications.</strong> The application form does not send anything to us on its own. When you press submit, it opens your own email programme with your answers filled in, addressed to us. Nothing is transmitted until you choose to send that email. What you write in it — typically your name, email address, phone number, social links, location and a short description of your goals — then reaches our inbox.</li>
+          <li><strong>Hosting logs.</strong> This site is hosted on GitHub Pages. Like any web host, GitHub's servers record technical data such as your IP address, browser type and the time of your visit. We do not have access to these logs in an identifiable form. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a>.</li>
+          <li><strong>Fonts.</strong> The typefaces are loaded from Google Fonts, which means your browser connects to Google's servers and your IP address is visible to them in the process.</li>
+        </ul>
+
+        <h2>Why We Use It</h2>
+        <p>We use what you send us for one purpose only: to read your application, assess whether there is a fit, and reply to you. We do not add applicants to marketing lists and we do not send newsletters.</p>
+
+        <h2>Who Sees It</h2>
+        <p>Only people working for BLKRØM who need to review applications. We do not sell, rent or trade personal information. The only third parties involved are the infrastructure providers named above — our website host and our email provider — who process data on our behalf.</p>
+
+        <h2>How Long We Keep It</h2>
+        <p>Applications are kept while we are considering them and for a reasonable period afterwards in case circumstances change. If you would rather we deleted your application immediately, write to us and we will do so.</p>
+
+        <h2>Your Rights</h2>
+        <p>Depending on where you live, you may have the right to ask what information we hold about you, to have it corrected, to have it deleted, or to object to how we use it. To exercise any of these, email <a href="mailto:contact@blkrom-media.com">contact@blkrom-media.com</a>.</p>
+        <p>If you are in the European Economic Area or the United Kingdom, you also have the right to complain to your local data protection authority. If you are in Australia, you may contact the Office of the Australian Information Commissioner.</p>
+
+        <h2>Links To Other Sites</h2>
+        <p>This site links to external platforms such as Instagram. Once you follow those links, their own privacy policies apply — not this one.</p>
+
+        <h2>Age</h2>
+        <p>This website and our services are intended for adults aged 18 and over. We do not knowingly collect information from anyone under 18.</p>
+
+        <h2>Changes</h2>
+        <p>If our practices change, we will update this page and revise the date above.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this notice: <a href="mailto:contact@blkrom-media.com">contact@blkrom-media.com</a>.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="blkrom-footer" id="contact">
+    <div class="footer-wrap">
+
+      <div class="footer-grid">
+        <div class="footer-left">
+          <a class="footer-link" href="index.html">BLKRØM MEDIA</a>
+          <a class="footer-link" href="index.html#canvas">SYSTEM</a>
+          <a class="footer-link" href="index.html#scale">CAPABILITIES</a>
+          <a class="footer-link" href="index.html#partnership">PARTNERSHIP</a>
+          <a class="footer-link" href="https://www.instagram.com/blkrom_media/" target="_blank" rel="noopener">INSTAGRAM</a>
+          <a class="footer-link" href="privacy.html">PRIVACY POLICY</a>
+          <a class="footer-link" href="terms.html">TERMS OF SERVICE</a>
+        </div>
+
+        <div class="footer-right">
+          <h2 class="footer-title">WORK WITH BLKRØM</h2>
+          <p class="footer-sub">Private creator partnerships. Work begins with alignment.</p>
+          <div class="footer-cta">
+            <a class="footer-btn" href="work-with-blkrom.html">APPLY NOW</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-socials" aria-label="Social links">
+          <a href="https://www.instagram.com/blkrom_media/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle>
+            </svg>
+          </a>
+          <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <path d="M26 22h17.5l18.2 26.1L83.5 22H94L66.3 53.7 97 98H79.5L59 68.7 33.2 98H22.7l30.5-34.6L26 22z"></path>
+            </svg>
+          </a>
+          <a href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3c.3 2.1 1.5 3.8 3.7 4.3v3.1c-1.3 0-2.5-.4-3.7-1.1v5.3c0 3.3-2.2 5.4-5.3 5.4-2.8 0-5-2-5-4.8 0-3 2.3-5 5.5-5.1v3c-1.3.1-2.4.7-2.4 2 0 1.1.8 1.9 1.9 1.9 1.2 0 2.1-.8 2.1-2.5V3H14z"></path>
+            </svg>
+          </a>
+          <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M13.5 21v-7h2.3l.4-3h-2.7V9.1c0-.9.3-1.5 1.6-1.5H16V5.1c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.9V11H8v3h2.1v7h3.4z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-baseline">
+        <span class="footer-copy">© 2025 BLKRØM MEDIA — ALL RIGHTS RESERVED.</span>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
