@@ -1,0 +1,1751 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="BLKRØM" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BLKRØM MEDIA</title>
+  <meta name="description" content="BLKRØM MEDIA — film · photography · motion · post-production. Cinematic visuals, dark aesthetics, curated work." />
+
+  <meta property="og:title" content="BLKRØM MEDIA" />
+  <meta property="og:description" content="film · photography · motion · post-production" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/hero.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Italiana&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#000;
+      --text:#fff;
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.55);
+      --line:rgba(255,255,255,.10);
+      --max:1100px;
+
+      --font-ui:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-script:"Italiana", serif;
+      --font-condensed:"Bebas Neue", sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--font-ui);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.10;
+      mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      background-size:260px 260px;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    section{ padding:96px 0; border-top:0; }
+
+   .hero-logo{
+    position:absolute;
+    top:26px;
+    left:26px;
+    z-index:9999;
+    }
+
+   .hero-logo img{
+    height:38px;
+    width:auto;
+    display:block;
+    }
+  
+    /* TOP RIGHT MENU */
+    .topmenu{
+      position:absolute;
+      top:26px;
+      right:26px;
+      z-index:9999;
+      isolation:isolate;
+    }
+
+    .burger{
+      width:46px;
+      height:46px;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      justify-content:center;
+      gap:8px;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      padding:0;
+    }
+
+    .burger span{
+      display:block;
+      height:3px;
+      background:#fff;
+      border-radius:2px;
+      transition:
+        transform .34s cubic-bezier(.19,.65,.2,1),
+        width .34s cubic-bezier(.19,.65,.2,1),
+        opacity .2s ease;
+    }
+    .burger span:nth-child(1){ width:28px; }
+    .burger span:nth-child(2){ width:34px; }
+    .burger span:nth-child(3){ width:22px; }
+
+    /* Burger morpht zum X */
+    body.menu-open .burger span:nth-child(1){
+      width:30px;
+      transform:translateY(11px) rotate(45deg);
+    }
+    body.menu-open .burger span:nth-child(2){
+      opacity:0;
+    }
+    body.menu-open .burger span:nth-child(3){
+      width:30px;
+      transform:translateY(-11px) rotate(-45deg);
+    }
+
+    .drop{
+      position:absolute;
+      top:44px;
+      right:0;
+      min-width:380px;
+      /* grosszuegige unsichtbare Hover-Flaeche: oben zum Burger,
+         links fuer den Weg vom X zu den Links */
+      padding:18px 12px 36px 140px;
+      border:0;
+      background:transparent;
+      opacity:0;
+      transform:translateY(-8px);
+      pointer-events:none;
+      transition:opacity .22s ease, transform .28s cubic-bezier(.19,.65,.2,1);
+    }
+
+    .drop a{
+      display:block;
+      padding:8px 0;
+      color:rgba(255,255,255,.62);
+      text-shadow:0 8px 28px rgba(0,0,0,.55);
+      font-family:var(--font-condensed);
+      font-weight:500;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:27px;
+      line-height:1.15;
+
+      opacity:0;
+      /* Reihenfolge: opacity, color, transform, text-shadow */
+      transition:
+        opacity .3s ease,
+        color .25s ease,
+        transform .3s cubic-bezier(.19,.65,.2,1),
+        text-shadow .3s ease;
+    }
+
+    .drop a:hover{
+      color:#fff;
+      transform:translateX(6px);
+      text-shadow:
+        0 0 12px rgba(255,255,255,.16),
+        0 0 24px rgba(255,255,255,.10),
+        0 8px 28px rgba(0,0,0,.55);
+    }
+
+    body.menu-open .drop{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+
+    body.menu-open .drop a{
+      opacity:1;
+    }
+
+    /* Stagger nur auf dem Einblenden (opacity), nie auf dem Hover */
+    body.menu-open .drop a:nth-child(1){ transition-delay:.05s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(2){ transition-delay:.10s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(3){ transition-delay:.15s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(4){ transition-delay:.20s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(5){ transition-delay:.25s, 0s, 0s, 0s; }
+    body.menu-open .drop a:nth-child(6){ transition-delay:.30s, 0s, 0s, 0s; }
+
+    /* Mobile: Vollbild-Menue wie bei grossen Agenturen */
+    @media (max-width:900px){
+      .burger{
+        position:relative;
+        z-index:3;
+      }
+      .drop{
+        position:fixed;
+        inset:0;
+        min-width:0;
+        padding:0 32px;
+        background:rgba(0,0,0,.96);
+        -webkit-backdrop-filter:blur(20px);
+        backdrop-filter:blur(20px);
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:4px;
+        text-align:center;
+        transform:none;
+        z-index:2;
+      }
+      .drop a{
+        font-size:36px;
+        padding:12px 0;
+        text-shadow:none;
+      }
+      .drop a:hover{
+        transform:none;
+      }
+      /* letzter Punkt (Work With Us) als Button, wie in der Referenz */
+      .drop a:last-child{
+        margin-top:36px;
+        padding:16px 40px;
+        border:1px solid rgba(255,255,255,.55);
+        font-size:24px;
+        color:#fff;
+      }
+      /* lebendiger Menue-Hintergrund: zwei treibende Nebelschwaden */
+      .drop:before,
+      .drop:after{
+        content:"";
+        position:absolute;
+        border-radius:50%;
+        filter:blur(70px);
+        pointer-events:none;
+        z-index:0;
+      }
+      .drop a{
+        position:relative;
+        z-index:1;
+      }
+      .drop:before{
+        width:340px; height:340px;
+        top:-60px; left:-120px;
+        background:radial-gradient(circle at 40% 40%, rgba(140,140,158,.5), rgba(0,0,0,0) 70%);
+        animation:menuDrift1 16s ease-in-out infinite;
+      }
+      .drop:after{
+        width:300px; height:300px;
+        bottom:-40px; right:-100px;
+        background:radial-gradient(circle at 60% 50%, rgba(120,120,140,.45), rgba(0,0,0,0) 70%);
+        animation:menuDrift2 20s ease-in-out infinite;
+      }
+      /* Seite dahinter nicht scrollbar, damit das Menue offen bleibt */
+      body.menu-open{
+        overflow:hidden;
+      }
+    }
+
+    @keyframes menuDrift1{
+      0%,100%{ transform:translate(0,0) scale(1); }
+      50%{ transform:translate(60px,80px) scale(1.2); }
+    }
+    @keyframes menuDrift2{
+      0%,100%{ transform:translate(0,0) scale(1.05); }
+      50%{ transform:translate(-70px,-60px) scale(1.22); }
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      min-height:92vh;
+      min-height:92svh;
+      display:flex;
+      align-items:center;
+      padding:0;
+      overflow:hidden;
+    }
+
+    .hero video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      filter:contrast(1.05) saturate(.85) brightness(.85);
+      opacity:.85;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-1px;
+      height:40px;
+      background:linear-gradient(to bottom, rgba(0,0,0,0.04), rgba(0,0,0,1));
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .hero .inner{
+      position:relative;
+      z-index:2;
+      width:min(var(--max), calc(100% - 48px));
+      margin:0 auto;
+      text-align:center;
+    }
+
+    .hero h1{
+      font-family:var(--font-condensed);
+      margin:0;
+      font-size:clamp(63px, 12vw, 138px);
+      font-weight:500;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .hero h1 span{ display:inline; }
+
+    .hero-presence{
+      font-family:var(--font-condensed);
+      margin:18px 0 0;
+      font-size:clamp(16px, 1.8vw, 22px);
+      color:rgba(255,255,255,.82);
+      letter-spacing:.08em;
+      font-weight:400;
+    }
+
+      /* STATEMENT */
+    .statement{
+      background:#fff;
+      color:#000;
+      border-top:0;
+      padding:clamp(120px, 14vh, 170px) 0;
+    }
+
+    .statement-inner{
+      width:min(980px, calc(100% - 120px));
+      margin-left:clamp(60px, 10vw, 140px);
+      margin-right:auto;
+
+      font-family:var(--font-condensed);
+      font-weight:400;
+      font-size:clamp(44px, 4.2vw, 68px);
+      line-height:1.18;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:#000;
+    }
+
+    @media (max-width:700px){
+      /* stark gecroppter Hero wie bei Unruly */
+      .hero{
+        min-height:76vh;
+        min-height:76svh;
+        align-items:center;
+        padding-bottom:0;
+      }
+      .hero .inner{
+        text-align:center;
+        width:calc(100% - 44px);
+      }
+      .hero h1{
+        font-size:44px;
+        line-height:1;
+        letter-spacing:.05em;
+        white-space:nowrap;
+      }
+      .hero h1 span{
+        display:inline;
+      }
+      .hero-presence{
+        font-size:11px;
+        letter-spacing:.26em;
+        text-transform:uppercase;
+        margin-top:12px;
+        color:rgba(255,255,255,.7);
+      }
+      /* Logo + Burger proportional kleiner */
+      .hero-logo{
+        top:20px;
+        left:20px;
+      }
+      .hero-logo img{
+        height:28px;
+      }
+      .topmenu{
+        top:16px;
+        right:16px;
+      }
+      .burger{
+        transform:scale(.8);
+        transform-origin:top right;
+      }
+      .statement{
+        padding:80px 0;
+      }
+      .statement-inner{
+        width:calc(100% - 48px);
+        margin-left:24px;
+        font-size:29px;
+        line-height:1.28;
+      }
+    }
+
+    /* CANVAS + TABS (Unruly style) */
+    .canvas{
+      position:relative;
+      width:100%;
+      background:#000;
+      border-top:0;
+      padding:0;
+      overflow:hidden;
+    }
+
+    .canvas-media{
+      width:100%;
+      height:88vh;
+      min-height:620px;
+      overflow:hidden;
+    }
+
+    .canvas-media video,
+    .canvas-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* Dezenter Verlauf unten, damit die Titel auf dem Video lesbar sind */
+    .canvas:before{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:55%;
+      background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .canvas-tabs{
+      position:absolute;
+      left:clamp(26px, 5vw, 72px);
+      bottom:clamp(28px, 6vh, 64px);
+      z-index:2;
+      max-width:min(640px, calc(100% - 52px));
+
+      /* konstantes Innen-Padding, damit beim Öffnen nichts springt */
+      padding:22px 28px 18px 24px;
+      margin-left:-24px;
+      margin-bottom:-18px;
+      border-radius:18px;
+
+      background:rgba(0,0,0,0);
+      -webkit-backdrop-filter:blur(0px);
+      backdrop-filter:blur(0px);
+      transition:
+        background .45s ease,
+        -webkit-backdrop-filter .45s ease,
+        backdrop-filter .45s ease;
+    }
+
+    /* Blur nur auf dem Textbereich, wenn ein Tab offen ist */
+    .canvas.has-open .canvas-tabs{
+      background:rgba(0,0,0,.28);
+      -webkit-backdrop-filter:blur(18px) saturate(.9);
+      backdrop-filter:blur(18px) saturate(.9);
+    }
+
+    .tab-item{
+      border:0;
+      padding:0;
+    }
+
+    .tab-summary{
+      display:block;
+      width:100%;
+      border:0;
+      appearance:none;
+      -webkit-appearance:none;
+      background:transparent;
+      color:rgba(255,255,255,.55);
+      font-family:var(--font-condensed);
+      font-size:clamp(34px, 4vw, 56px);
+      font-weight:500;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      line-height:1.15;
+      text-align:left;
+      cursor:pointer;
+      padding:6px 0;
+      margin:0;
+      text-shadow:0 6px 24px rgba(0,0,0,.45);
+      transition:
+        color .3s ease,
+        transform .34s cubic-bezier(.19,.65,.2,1);
+      transform-origin:left center;
+      will-change:transform;
+    }
+
+    .tab-summary:hover{
+      color:#fff;
+      transform:translateZ(0) scale(1.03);
+    }
+
+    .tab-item.is-open .tab-summary{
+      color:#fff;
+    }
+
+    /* Wenn ein Tab offen ist, treten die anderen Titel zurück */
+    .canvas.has-open .tab-item:not(.is-open) .tab-summary{
+      color:rgba(255,255,255,.35);
+    }
+
+    .tab-content{
+      overflow:hidden;
+      max-height:0;
+      opacity:0;
+      transition:
+        max-height .42s cubic-bezier(.19,.65,.2,1),
+        opacity .26s ease;
+    }
+
+    .tab-content p{
+      overflow:hidden;
+      margin:0;
+      min-height:0;
+      padding:6px 0 18px;
+      max-width:560px;
+      font-family:var(--font-ui);
+      font-size:clamp(15px, 1.2vw, 18px);
+      line-height:1.55;
+      font-weight:400;
+      color:rgba(255,255,255,.88);
+      text-shadow:0 4px 18px rgba(0,0,0,.35);
+    }
+
+    .tab-item.is-open .tab-content{
+      opacity:1;
+    }
+
+    @media (max-width:900px){
+      .canvas-media{
+        height:68vh;
+        height:68svh;
+        min-height:480px;
+      }
+      .canvas-tabs{
+        left:22px;
+        bottom:26px;
+        max-width:calc(100% - 44px);
+        padding:16px 18px 14px 16px;
+        margin-left:-16px;
+        margin-bottom:-14px;
+        border-radius:14px;
+      }
+      .tab-summary{
+        font-size:36px;
+        padding:5px 0;
+      }
+      .tab-content p{
+        font-size:15px;
+        padding:4px 0 14px;
+      }
+    }
+
+    /* HOW WE SCALE */
+    .blkrom-scale{
+      background:#000;
+      color:#fff;
+      border-top:0;
+      padding:clamp(218px, 26vh, 298px) 0 clamp(110px, 14vh, 160px);
+    }
+
+    .scale-wrap{
+      width:min(1400px, calc(100% - 80px));
+      margin:0 auto;
+    }
+
+    .scale-head{
+      margin-bottom:clamp(56px, 8vh, 88px);
+    }
+
+    .scale-kicker{
+      display:inline-block;
+      font-family:var(--font-ui);
+      font-size:12px;
+      font-weight:500;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.45);
+      margin-bottom:22px;
+    }
+
+    .scale-title{
+      font-family:var(--font-condensed);
+      font-size:clamp(46px, 5.4vw, 88px);
+      font-weight:500;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      line-height:1.04;
+      margin:0;
+    }
+
+    .scale-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .scale-item{
+      position:relative;
+      overflow:hidden;
+      border-radius:0;
+      background:#0a0a0a;
+      min-height:340px;
+      padding:clamp(34px, 3.2vw, 46px) clamp(26px, 2.6vw, 40px);
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+
+      opacity:0;
+      transform:translateY(22px);
+      transition:
+        opacity .7s cubic-bezier(.19,.65,.2,1),
+        transform .7s cubic-bezier(.19,.65,.2,1);
+    }
+
+    .scale-item.in-view{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* gestaffeltes Einblenden */
+    .scale-item:nth-child(2){ transition-delay:.08s; }
+    .scale-item:nth-child(3){ transition-delay:.16s; }
+    .scale-item:nth-child(4){ transition-delay:.10s; }
+    .scale-item:nth-child(5){ transition-delay:.18s; }
+    .scale-item:nth-child(6){ transition-delay:.26s; }
+
+    /* Geblurrtes Portraet als Kachel-Hintergrund */
+    .scale-media{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center 20%;
+      filter:blur(7px) brightness(.55) grayscale(1);
+      transform:scale(1.08);
+      transition:
+        filter .6s cubic-bezier(.19,.65,.2,1),
+        transform .6s cubic-bezier(.19,.65,.2,1);
+      will-change:filter, transform;
+      z-index:0;
+    }
+
+    /* Verlauf fuer Lesbarkeit */
+    .scale-item:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.30) 55%, rgba(0,0,0,.18) 100%);
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .scale-item h3,
+    .scale-item p{
+      position:relative;
+      z-index:2;
+    }
+
+    /* Heft-Nummerierung: gleiche Sprache wie das Inhaltsverzeichnis */
+    .scale-num{
+      position:absolute;
+      top:clamp(22px, 2.4vw, 32px);
+      left:clamp(26px, 2.6vw, 40px);
+      z-index:2;
+      font-family:var(--font-condensed);
+      font-size:15px;
+      font-weight:500;
+      letter-spacing:.1em;
+      color:rgba(255,255,255,.4);
+      transition:color .3s ease;
+    }
+
+    .scale-item:hover .scale-num{
+      color:rgba(255,255,255,.75);
+    }
+
+    .scale-item h3{
+      font-family:var(--font-condensed);
+      font-size:clamp(24px, 2vw, 32px);
+      font-weight:500;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+      line-height:1.1;
+      margin:0 0 14px;
+      transition:text-shadow .34s ease;
+    }
+
+    .scale-item p{
+      margin:0;
+      max-width:340px;
+      font-family:var(--font-ui);
+      font-size:15px;
+      line-height:1.6;
+      font-weight:400;
+      color:rgba(255,255,255,.72);
+      transition:color .3s ease;
+      text-shadow:0 2px 12px rgba(0,0,0,.35);
+    }
+
+    .scale-item:hover .scale-media{
+      filter:blur(2px) brightness(.68) grayscale(1);
+      transform:scale(1.03);
+    }
+
+    .scale-item:hover h3{
+      text-shadow:
+        0 0 12px rgba(255,255,255,.16),
+        0 0 24px rgba(255,255,255,.10);
+    }
+
+    .scale-item:hover p{
+      color:rgba(255,255,255,.88);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .scale-item{
+        opacity:1;
+        transform:none;
+        transition:none;
+      }
+      .scale-media{
+        transition:none;
+      }
+    }
+
+    /* Touch-Geraete: kein Hover moeglich, daher Bilder von vornherein klarer */
+    @media (hover: none){
+      .scale-media{
+        filter:blur(3px) brightness(.62) saturate(.9);
+        transform:scale(1.04);
+      }
+    }
+
+    @media (max-width:1100px){
+      .scale-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
+    }
+
+    .scale-dots{ display:none; }
+
+    @media (max-width:700px){
+      .scale-dots{
+        display:flex;
+        justify-content:center;
+        gap:8px;
+        margin-top:6px;
+      }
+      .scale-dots span{
+        width:6px;
+        height:6px;
+        border-radius:100px;
+        background:rgba(255,255,255,.25);
+        transition:background .25s ease, width .3s cubic-bezier(.19,.65,.2,1);
+      }
+      .scale-dots span.active{
+        width:22px;
+        background:#fff;
+      }
+      .blkrom-scale{
+        padding:110px 0 90px;
+      }
+      .scale-head{
+        margin-bottom:44px;
+      }
+      .scale-wrap{
+        width:calc(100% - 44px);
+      }
+      /* Kacheln als horizontales Swipe-Carousel */
+      .scale-grid{
+        display:flex;
+        grid-template-columns:none;
+        gap:14px;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        -webkit-overflow-scrolling:touch;
+        padding:4px 22px 20px;
+        margin:0 -22px;
+        scrollbar-width:none;
+      }
+      .scale-grid::-webkit-scrollbar{ display:none; }
+      .scale-item{
+        flex:0 0 82%;
+        scroll-snap-align:center;
+        min-height:380px;
+        padding:28px 22px;
+        border-radius:0;
+      }
+      .scale-item p{
+        max-width:none;
+      }
+      .scale-item:nth-child(n){ transition-delay:0s; }
+    }
+
+    /* FOLIO DIVIDER — Umblaettern zwischen den Sektionen */
+    .blkrom-folio{
+      background:#000;
+      padding:clamp(100px, 12vh, 140px) 24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:26px;
+    }
+
+    .blkrom-folio .folio-line{
+      flex:1;
+      max-width:220px;
+      height:1px;
+      background:rgba(255,255,255,.18);
+    }
+
+    .blkrom-folio .folio-mark{
+      font-family:var(--font-ui);
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.4);
+      white-space:nowrap;
+    }
+
+    /* PARTNERSHIP — MAGAZINE */
+
+    .blkrom-mag{
+      position:relative;
+      background:#f4f3f0;
+      color:#000;
+      padding:clamp(120px, 16vh, 180px) 24px;
+      margin-top:0;
+    }
+
+    .mag-wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(300px, 420px) 1fr;
+      gap:clamp(48px, 7vw, 110px);
+      align-items:center;
+    }
+
+    /* ---------- cover ---------- */
+    .mag-cover{
+      position:relative;
+      container-type:inline-size;
+      aspect-ratio:3 / 4.3;
+      background:#0a0a0a;
+      overflow:hidden;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,.18),
+        0 24px 60px rgba(0,0,0,.30);
+    }
+
+    .mag-cover img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:30% center;
+      filter:grayscale(1) contrast(1.05);
+    }
+
+    .mag-cover:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom,
+        rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 20%,
+        rgba(0,0,0,0) 62%, rgba(0,0,0,.6) 100%);
+      z-index:1;
+    }
+
+    /* seam highlight on the left edge — printed spine */
+    .mag-cover:after{
+      content:"";
+      position:absolute;
+      top:0; bottom:0; left:0;
+      width:10px;
+      background:linear-gradient(to right, rgba(255,255,255,.16), transparent);
+      z-index:2;
+    }
+
+    .mag-cover-ui{
+      position:relative;
+      z-index:2;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:6.6cqw;
+      color:#f5f5f2;
+    }
+
+    .mag-issue-row{
+      display:flex;
+      justify-content:space-between;
+      font-family:var(--font-ui);
+      font-size:2.15cqw;
+      font-weight:500;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      opacity:.85;
+      margin-bottom:2.4cqw;
+    }
+
+    .mag-masthead{
+      font-family:var(--font-script);
+      font-size:12.8cqw;
+      letter-spacing:.14em;
+      line-height:1;
+      text-align:center;
+      text-transform:uppercase;
+    }
+
+    .mag-cover-kicker{
+      font-family:var(--font-ui);
+      font-size:2.4cqw;
+      font-weight:500;
+      letter-spacing:.35em;
+      text-transform:uppercase;
+      opacity:.85;
+      margin-bottom:1.9cqw;
+    }
+
+    .mag-cover-headline{
+      font-family:var(--font-script);
+      font-size:8.1cqw;
+      line-height:1.06;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .mag-cover-sub{
+      font-family:var(--font-ui);
+      font-size:1.8cqw;
+      font-weight:500;
+      line-height:1.5;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      opacity:.85;
+      margin-top:2.9cqw;
+      display:flex;
+      justify-content:space-between;
+      gap:1ch;
+      white-space:nowrap;
+    }
+
+    /* cover lines in the free corners */
+    .mag-lines{
+      position:absolute;
+      top:24%;
+      left:6.6cqw;
+      right:6.6cqw;
+      display:flex;
+      justify-content:space-between;
+      z-index:2;
+      color:#f5f5f2;
+      pointer-events:none;
+    }
+
+    .mag-line{
+      font-family:var(--font-ui);
+      font-size:2.4cqw;
+      font-weight:500;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      line-height:1.4;
+      opacity:.9;
+      max-width:11ch;
+    }
+
+    .mag-line.right{ text-align:right; }
+
+    /* footer strip with barcode */
+    .mag-cover-foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:3.8cqw;
+      padding-top:2.4cqw;
+      border-top:1px solid rgba(245,245,242,.28);
+      font-family:var(--font-ui);
+      font-size:1.9cqw;
+      font-weight:500;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      opacity:.8;
+    }
+
+    .mag-barcode{
+      display:flex;
+      gap:0.45cqw;
+      align-items:stretch;
+      height:3.2cqw;
+    }
+
+    .mag-barcode span{
+      display:block;
+      width:0.4cqw;
+      background:#f5f5f2;
+    }
+    .mag-barcode span:nth-child(3n){ width:0.85cqw; }
+    .mag-barcode span:nth-child(4n){ width:0.28cqw; }
+    .mag-barcode span:nth-child(7n){ width:0.7cqw; }
+
+    /* ---------- contents ---------- */
+    .mag-content{
+      opacity:0;
+      transform:translateY(24px);
+      transition:
+        opacity .8s cubic-bezier(.19,.65,.2,1),
+        transform .8s cubic-bezier(.19,.65,.2,1);
+    }
+
+    .mag-content.in-view{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .mag-kicker{
+      display:inline-block;
+      font-family:var(--font-ui);
+      font-size:12px;
+      font-weight:500;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.45);
+      margin-bottom:18px;
+    }
+
+    .mag-heading{
+      font-family:var(--font-condensed);
+      font-size:clamp(38px, 3.6vw, 58px);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      line-height:1.05;
+      margin:0 0 14px;
+      font-weight:500;
+    }
+
+    .mag-intro{
+      margin:0 0 44px;
+      font-family:var(--font-ui);
+      font-size:16px;
+      line-height:1.6;
+      color:rgba(0,0,0,.55);
+      max-width:420px;
+    }
+
+    .mag-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+      border-top:1px solid rgba(0,0,0,.85);
+    }
+
+    .mag-list li{
+      display:flex;
+      align-items:baseline;
+      gap:clamp(18px, 2.5vw, 32px);
+      padding:13px 2px;
+      border-bottom:1px solid rgba(0,0,0,.14);
+      transition:padding-left .3s cubic-bezier(.19,.65,.2,1), background .3s ease;
+    }
+
+    .mag-list li:hover{
+      padding-left:14px;
+      background:rgba(0,0,0,.03);
+    }
+
+    .mag-num{
+      font-family:var(--font-condensed);
+      font-size:15px;
+      letter-spacing:.08em;
+      color:rgba(0,0,0,.35);
+      min-width:2.2ch;
+    }
+
+    .mag-name{
+      font-family:var(--font-ui);
+      font-size:13px;
+      font-weight:500;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.75);
+    }
+
+    .mag-list li:hover .mag-name{ color:#000; }
+
+    .mag-foot{
+      margin-top:22px;
+      display:flex;
+      justify-content:space-between;
+      font-family:var(--font-ui);
+      font-size:10px;
+      font-weight:500;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(0,0,0,.4);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .mag-content{
+        opacity:1;
+        transform:none;
+        transition:none;
+      }
+    }
+
+    @media (max-width:900px){
+      .blkrom-mag{
+        padding:90px 24px;
+        margin-top:0;
+      }
+      .blkrom-folio{
+        padding:70px 24px;
+      }
+      .mag-wrap{
+        grid-template-columns:1fr;
+        gap:56px;
+        max-width:440px;
+      }
+      .mag-heading{ font-size:34px; }
+      .mag-intro{ margin-bottom:32px; font-size:15px; }
+      .mag-list li{ padding:11px 2px; }
+    }
+
+
+    .blkrom-footer{
+      background:#000;
+      color:#fff;
+      padding:120px 0 64px;
+      border-top:0;
+    }
+
+    .footer-wrap{
+      width:min(1400px, calc(100% - 60px));
+      margin:0 auto;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:start;
+    }
+
+    .footer-left{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .footer-link{
+      font-family:var(--font-condensed);
+      font-size:22px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff;
+      display:inline-block;
+      line-height:1.1;
+    }
+    .footer-link:hover{ opacity:.65; }
+
+    /* kleinere Rechtstexte am Ende der Liste */
+    .footer-link-sm{
+      font-size:15px;
+      letter-spacing:.12em;
+      margin-top:6px;
+      color:rgba(255,255,255,.75);
+    }
+
+    .footer-baseline{
+      margin-top:56px;
+      padding-top:26px;
+    }
+
+    .footer-right{
+      text-align:right;
+    }
+
+    .footer-title{
+      font-family:var(--font-condensed);
+      font-size:54px;
+      letter-spacing:.08em;
+      margin:0 0 14px;
+      text-transform:uppercase;
+      line-height:1;
+    }
+
+    .footer-sub{
+      margin:0 0 26px;
+      font-size:14px;
+      color:rgba(255,255,255,.65);
+      max-width:420px;
+      margin-left:auto;
+    }
+
+    .footer-cta{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:12px;
+    }
+
+    .footer-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px 28px;
+      border:1px solid rgba(255,255,255,.45);
+      background:transparent;
+      color:#fff;
+      font-family:var(--font-condensed);
+      font-size:18px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:background .18s ease, color .18s ease, border-color .18s ease, opacity .18s ease;
+    }
+
+    .footer-btn:hover{
+      background:#fff;
+      color:#000;
+      border-color:#fff;
+    }
+
+    .footer-socials{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:28px;
+    }
+
+    .footer-socials a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      opacity:.9;
+      transition:opacity .18s ease, transform .18s ease;
+    }
+
+    .footer-socials a:hover{
+      opacity:.65;
+      transform:translateY(-1px);
+    }
+    
+   .footer-socials svg{
+      width:30px;
+      height:30px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.8;
+    }
+
+    .footer-socials a:nth-child(2) svg{
+      fill:currentColor;
+      stroke:none;
+    }
+    
+    .footer-copy{
+      font-size:12px;
+      color:rgba(255,255,255,.50);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .footer-meta{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+      font-size:12px;
+      color:rgba(255,255,255,.50);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+
+    .footer-meta a{
+      color:rgba(255,255,255,.70);
+    }
+    .footer-meta a:hover{ color:#fff; }
+
+    /* RESPONSIVE */
+    @media (max-width:900px){
+      .topmenu{ top:18px; right:18px; }
+
+      .footer-grid{
+        grid-template-columns:1fr;
+        gap:84px;
+      }
+      .footer-right{ text-align:left; }
+      .footer-sub{ margin-left:0; }
+      .footer-cta{ justify-content:flex-start; }
+      .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        margin-top:70px;
+      }
+    }
+
+    @media (max-width:620px){
+      .footer-wrap{ width:calc(100% - 44px); }
+      .footer-title{ font-size:46px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="hero" id="top">
+
+  <a href="#top" class="hero-logo">
+  <img src="assets/logo.png" alt="BLKRØM">
+  </a>
+
+    <div class="topmenu" aria-label="Site navigation">
+      <button class="burger" id="menuBtn" aria-expanded="false" aria-controls="menuDrop" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="drop" id="menuDrop" aria-hidden="true">
+        <a href="#top">Home</a>
+        <a href="#canvas">System</a>
+        <a href="#scale">Capabilities</a>
+        <a href="#partnership">Partnership</a>
+        <a href="#contact">Contact</a>
+        <a href="work-with-blkrom.html">Work With Us</a>
+      </nav>
+    </div>
+
+    <video autoplay muted loop playsinline poster="assets/hero.jpg">
+      <source src="assets/hero.mp4" type="video/mp4" />
+    </video>
+
+    <div class="inner">
+      <h1><span>BLKRØM</span> <span>MEDIA</span></h1>
+      <p class="hero-presence">We build presence, not profiles.</p>
+    </div>
+
+  </header>
+
+  <section class="statement" id="statement">
+    <div class="statement-inner">
+      AT BLKRØM WE WORK WITH SELECTED CREATORS TO BUILD PRESENCE WITH INTENTION, CONTROL, AND LONG TERM DIRECTION. EVERYTHING WE CREATE IS DESIGNED TO LAST.
+    </div>
+  </section>
+
+  <section class="canvas" id="canvas" aria-label="BLKRØM System">
+    <div class="canvas-media">
+      <video autoplay muted loop playsinline>
+        <source src="assets/canvas.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="canvas-tabs">
+
+      <div class="tab-item">
+        <button class="tab-summary" type="button" aria-expanded="false">PRESENCE</button>
+        <div class="tab-content">
+          <p>We shape your identity, elevate your visual ecosystem, and build an unmistakable brand that is impossible to replicate.</p>
+        </div>
+      </div>
+
+      <div class="tab-item">
+        <button class="tab-summary" type="button" aria-expanded="false">STRATEGY</button>
+        <div class="tab-content">
+          <p>We plan the long game positioning your content and business moves precisely where attention converts into asset value.</p>
+        </div>
+      </div>
+
+      <div class="tab-item">
+        <button class="tab-summary" type="button" aria-expanded="false">SYSTEM</button>
+        <div class="tab-content">
+          <p>We build the underlying operational architecture, transforming daily operations into a high-performance digital pipeline.</p>
+        </div>
+      </div>
+
+      <div class="tab-item">
+        <button class="tab-summary" type="button" aria-expanded="false">DISCRETION</button>
+        <div class="tab-content">
+          <p>We act as a private, protective layer behind your brand, managing high-stakes execution with absolute confidentiality.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="blkrom-scale" id="scale" aria-label="How we scale your business">
+    <div class="scale-wrap">
+
+      <div class="scale-head">
+        <span class="scale-kicker">Capabilities</span>
+        <h2 class="scale-title">How We Scale<br>Your Brand</h2>
+      </div>
+
+      <div class="scale-grid">
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-01.jpg')"></div>
+          <span class="scale-num">01</span>
+          <h3>Premium Monetization</h3>
+          <p>Maximize revenue streams and backend funnels. Optimize for high-tier retention and predictable recurring capital.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-02.jpg')"></div>
+          <span class="scale-num">02</span>
+          <h3>Traffic Architecture</h3>
+          <p>Guide audiences seamlessly from raw awareness to conversions with calculated content deployment and retargeting systems.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-03.jpg')"></div>
+          <span class="scale-num">03</span>
+          <h3>Brand Perception</h3>
+          <p>Data-driven image positioning to scale reach, command premium authority, and eliminate fast-moving algorithmic noise.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-04.jpg')"></div>
+          <span class="scale-num">04</span>
+          <h3>Copyright Protection</h3>
+          <p>Safeguard your digital assets and identity with relentless content tracking and rapid DMCA takedown infrastructure.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-05.jpg')"></div>
+          <span class="scale-num">05</span>
+          <h3>Growth Mechanics</h3>
+          <p>Expand target distribution and organic reach across primary platforms using high-converting, scalable distribution frameworks.</p>
+        </div>
+
+        <div class="scale-item">
+          <div class="scale-media" style="background-image:url('assets/scale-06.jpg')"></div>
+          <span class="scale-num">06</span>
+          <h3>Infrastructure Recovery</h3>
+          <p>Maintain permanent operational security with dedicated emergency support for compromised accounts, bans, or access issues.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="blkrom-folio" aria-hidden="true">
+    <span class="folio-line"></span>
+    <span class="folio-mark">BLKR&Oslash;M &middot; MMXXVI</span>
+    <span class="folio-line"></span>
+  </div>
+
+  <section class="blkrom-mag" id="partnership" aria-label="Inside the partnership">
+    <div class="mag-wrap">
+
+      <div class="mag-cover" aria-hidden="true">
+        <img src="assets/cover.jpg" alt="">
+        <div class="mag-lines">
+          <div class="mag-line">The Creator Economy, Managed</div>
+          <div class="mag-line right">Private Partnerships Only</div>
+        </div>
+        <div class="mag-cover-ui">
+          <div>
+            <div class="mag-issue-row">
+              <span>Issue No. 01</span>
+              <span>MMXXVI</span>
+            </div>
+            <div class="mag-masthead">BLKR&Oslash;M</div>
+          </div>
+          <div>
+            <div class="mag-cover-kicker">Scope</div>
+            <div class="mag-cover-headline">Inside the<br>Partnership</div>
+            <div class="mag-cover-sub"><span>One private partnership</span><span>covering every layer of your brand.</span></div>
+            <div class="mag-cover-foot">
+              <span>BLKR&Oslash;M Media</span>
+              <div class="mag-barcode" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <span>MMXXVI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mag-content">
+        <span class="mag-kicker">Scope</span>
+        <h2 class="mag-heading">Inside The Partnership</h2>
+        <p class="mag-intro">One private partnership covering every layer of your brand.</p>
+
+        <ul class="mag-list">
+          <li><span class="mag-num">01</span><span class="mag-name">Visual Identity</span></li>
+          <li><span class="mag-num">02</span><span class="mag-name">Content Direction</span></li>
+          <li><span class="mag-num">03</span><span class="mag-name">Brand Strategy</span></li>
+          <li><span class="mag-num">04</span><span class="mag-name">Monetization Funnels</span></li>
+          <li><span class="mag-num">05</span><span class="mag-name">Platform Partnerships</span></li>
+          <li><span class="mag-num">06</span><span class="mag-name">Contract Negotiations</span></li>
+          <li><span class="mag-num">07</span><span class="mag-name">Events &amp; Trips</span></li>
+          <li><span class="mag-num">08</span><span class="mag-name">Copyright Protection</span></li>
+        </ul>
+
+        <div class="mag-foot">
+          <span>BLKR&Oslash;M Media</span>
+          <span>Issue No. 01</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="blkrom-footer" id="contact">
+
+    <div class="footer-wrap">
+
+      <div class="footer-grid">
+
+        <div class="footer-left">
+          <a class="footer-link" href="#top">BLKRØM MEDIA</a>
+          <a class="footer-link" href="#canvas">SYSTEM</a>
+          <a class="footer-link" href="#scale">CAPABILITIES</a>
+          <a class="footer-link" href="#partnership">PARTNERSHIP</a>
+          <a class="footer-link" href="https://www.instagram.com/blkrom_media/" target="_blank" rel="noopener">INSTAGRAM</a>
+          <a class="footer-link" href="privacy.html">PRIVACY POLICY</a>
+          <a class="footer-link" href="terms.html">TERMS OF SERVICE</a>
+        </div>
+
+        <div class="footer-right">
+          <h2 class="footer-title">WORK WITH BLKRØM</h2>
+          <p class="footer-sub">Private creator partnerships. Work begins with alignment.</p>
+
+          <div class="footer-cta">
+            <a class="footer-btn" href="work-with-blkrom.html">APPLY NOW</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+  <div class="footer-socials" aria-label="Social links">
+    <a href="https://www.instagram.com/blkrom_media/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle>
+      </svg>
+    </a>
+
+ <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M26 22h17.5l18.2 26.1L83.5 22H94L66.3 53.7 97 98H79.5L59 68.7 33.2 98H22.7l30.5-34.6L26 22z"></path>
+  </svg>
+</a>
+
+    <a href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M14 3c.3 2.1 1.5 3.8 3.7 4.3v3.1c-1.3 0-2.5-.4-3.7-1.1v5.3c0 3.3-2.2 5.4-5.3 5.4-2.8 0-5-2-5-4.8 0-3 2.3-5 5.5-5.1v3c-1.3.1-2.4.7-2.4 2 0 1.1.8 1.9 1.9 1.9 1.2 0 2.1-.8 2.1-2.5V3H14z"></path>
+      </svg>
+    </a>
+
+    <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M13.5 21v-7h2.3l.4-3h-2.7V9.1c0-.9.3-1.5 1.6-1.5H16V5.1c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.9V11H8v3h2.1v7h3.4z"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+      <div class="footer-baseline">
+        <span class="footer-copy">© 2025 BLKRØM MEDIA — ALL RIGHTS RESERVED.</span>
+      </div>
+
+    </div><!-- /footer-wrap -->
+
+  </footer>
+
+  <script>
+    const body = document.body;
+    const btn  = document.getElementById('menuBtn');
+    const drop = document.getElementById('menuDrop');
+    const links = drop ? drop.querySelectorAll('a') : [];
+
+    function openMenu(){
+      body.classList.add('menu-open');
+      btn.setAttribute('aria-expanded', 'true');
+      drop.setAttribute('aria-hidden', 'false');
+    }
+    function closeMenu(){
+      body.classList.remove('menu-open');
+      btn.setAttribute('aria-expanded', 'false');
+      drop.setAttribute('aria-hidden', 'true');
+    }
+
+    if (btn) btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      body.classList.contains('menu-open') ? closeMenu() : openMenu();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!body.classList.contains('menu-open')) return;
+      const inBtn = btn && (e.target === btn || btn.contains(e.target));
+      const inDrop = drop && (e.target === drop || drop.contains(e.target));
+      if (!inBtn && !inDrop) closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+    });
+
+    links.forEach(a => a.addEventListener('click', closeMenu));
+
+    /* Menü schließt, wenn die Maus den Menübereich verlässt */
+    const topmenu = document.querySelector('.topmenu');
+    let menuCloseTimer = null;
+
+    topmenu.addEventListener('mouseleave', () => {
+      if (!body.classList.contains('menu-open')) return;
+      menuCloseTimer = setTimeout(closeMenu, 320);
+    });
+
+    topmenu.addEventListener('mouseenter', () => {
+      clearTimeout(menuCloseTimer);
+    });
+
+    /* Menü schließt beim Scrollen */
+    window.addEventListener('scroll', () => {
+      if (body.classList.contains('menu-open')) closeMenu();
+    }, { passive: true });
+
+    const canvasSection = document.querySelector('.canvas');
+    const tabsPanel = document.querySelector('.canvas-tabs');
+    const tabItems = document.querySelectorAll('.tab-item');
+    let tabsCloseTimer = null;
+
+    function closeAllTabs(){
+      tabItems.forEach(other => {
+        other.classList.remove('is-open');
+        other.querySelector('.tab-summary').setAttribute('aria-expanded', 'false');
+        other.querySelector('.tab-content').style.maxHeight = '0px';
+      });
+      canvasSection.classList.remove('has-open');
+    }
+
+    function openTab(item){
+      tabItems.forEach(other => {
+        if (other === item) return;
+        other.classList.remove('is-open');
+        other.querySelector('.tab-summary').setAttribute('aria-expanded', 'false');
+        other.querySelector('.tab-content').style.maxHeight = '0px';
+      });
+      item.classList.add('is-open');
+      item.querySelector('.tab-summary').setAttribute('aria-expanded', 'true');
+      const content = item.querySelector('.tab-content');
+      content.style.maxHeight = content.scrollHeight + 'px';
+      canvasSection.classList.add('has-open');
+    }
+
+    tabItems.forEach(item => {
+      const tabBtn = item.querySelector('.tab-summary');
+
+      tabBtn.addEventListener('click', () => {
+        if (item.classList.contains('is-open')) {
+          closeAllTabs();
+        } else {
+          openTab(item);
+        }
+      });
+
+      /* Solange ein Tab offen ist, reicht Hover zum Wechseln (nur Desktop) */
+      tabBtn.addEventListener('mouseenter', () => {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        if (!canvasSection.classList.contains('has-open')) return;
+        if (item.classList.contains('is-open')) return;
+        openTab(item);
+      });
+    });
+
+    /* Zuklappen, wenn die Maus das Blur-Feld verlässt */
+    tabsPanel.addEventListener('mouseleave', () => {
+      if (!window.matchMedia('(hover: hover)').matches) return;
+      if (!canvasSection.classList.contains('has-open')) return;
+      tabsCloseTimer = setTimeout(closeAllTabs, 260);
+    });
+
+    tabsPanel.addEventListener('mouseenter', () => {
+      clearTimeout(tabsCloseTimer);
+    });
+
+    /* Scale-Sektion: Einblenden beim Scrollen */
+    const scaleItems = document.querySelectorAll('.scale-item, .mag-content');
+
+    /* Swipe-Punkte unter dem Mobile-Carousel */
+    const scaleGrid = document.querySelector('.scale-grid');
+    const scaleTiles = document.querySelectorAll('.scale-item');
+    if (scaleGrid && scaleTiles.length){
+      const dotsWrap = document.createElement('div');
+      dotsWrap.className = 'scale-dots';
+      dotsWrap.setAttribute('aria-hidden', 'true');
+      scaleTiles.forEach((_, i) => {
+        const d = document.createElement('span');
+        if (i === 0) d.classList.add('active');
+        dotsWrap.appendChild(d);
+      });
+      scaleGrid.after(dotsWrap);
+      const dots = dotsWrap.children;
+      scaleGrid.addEventListener('scroll', () => {
+        const w = scaleTiles[0].offsetWidth + 14;
+        const idx = Math.min(scaleTiles.length - 1, Math.max(0, Math.round(scaleGrid.scrollLeft / w)));
+        for (let j = 0; j < dots.length; j++) dots[j].classList.toggle('active', j === idx);
+      }, { passive: true });
+    }
+
+    if ('IntersectionObserver' in window) {
+      const scaleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            scaleObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      scaleItems.forEach(item => scaleObserver.observe(item));
+    } else {
+      scaleItems.forEach(item => item.classList.add('in-view'));
+    }
+  </script>
+
+</body>
+</html>
