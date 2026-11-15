@@ -297,7 +297,7 @@ legend{padding:0 0 8px}
 <div class="pledges"><span>No obligation</span><span>Handled discreetly</span><span>Written terms first</span></div>
 </div>
 </div>
-<form class="apply-form" id="apply" action="https://formspree.io/f/xkodlbap" method="POST">
+<form class="apply-form" id="apply" action="https://formspree.io/f/xjyvdzrq" method="POST">
 <a class="back" href="index.html">← Back to home</a>
 <input type="hidden" name="_subject" value="New application — BLKRØM Media">
 <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
@@ -354,7 +354,7 @@ legend{padding:0 0 8px}
         btn.disabled=false;btn.textContent='Send application';
         var body='Name: '+data.get('name')+'\nEmail: '+data.get('email')+'\nPhone: '+(data.get('phone')||'')+'\nLocation: '+(data.get('location')||'')+'\nLinks: '+(data.get('socials')||'')+'\nInterested in: '+data.getAll('interest').join(', ')+'\n\n'+(data.get('message')||'');
         show('Something went wrong sending the form. Your email app will open with your answers filled in, so you can send them to us directly.');
-        window.location.href='mailto:info@blkrom-media.com?subject='+encodeURIComponent('Application — BLKRØM Media')+'&body='+encodeURIComponent(body);
+        window.location.href='mailto:contact@blkrom-media.com?subject='+encodeURIComponent('Application — BLKRØM Media')+'&body='+encodeURIComponent(body);
       });
   });
 })();
