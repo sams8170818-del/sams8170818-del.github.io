@@ -280,6 +280,27 @@ legend{padding:0 0 8px}
 .apply-form{background:linear-gradient(to bottom,#3A0B10 0%,#3A0B10 50%,#161618 100%)}
 @media (max-width:1000px){.apply-form{background:linear-gradient(to bottom,#3A0B10 0%,#3A0B10 50%,#161618 100%)}}
 
+.done{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(10,3,6,.94);overflow:auto}
+.done[hidden]{display:none}
+.done-glow{position:absolute;left:50%;bottom:-180px;width:720px;height:420px;margin-left:-360px;background:radial-gradient(ellipse at center,rgba(176,10,30,.65) 0%,rgba(176,10,30,0) 70%);animation:glow 3.2s ease-in-out infinite;pointer-events:none}
+.done-card{position:relative;background:var(--bg);border:1px solid rgba(240,201,205,.22);border-top:2px solid var(--accent);max-width:460px;width:100%;padding:52px 40px 40px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.done-card svg{margin-bottom:26px}
+.done-eye{font-family:var(--cond);font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:#E6B8BD}
+.done-card h2{font-family:var(--cond);font-weight:300;text-transform:uppercase;font-size:clamp(52px,17vw,76px);line-height:.9;letter-spacing:.01em;margin-top:12px;color:#fff}
+.done-card h2 span{display:block}
+.done-card h2 .o{color:transparent;-webkit-text-stroke:1px #E6B8BD;margin-top:4px}
+.done-card hr{width:100%;border:0;height:1px;background:rgba(240,201,205,.2);margin:30px 0 22px}
+.done-p{font-size:15px;line-height:1.65;color:var(--soft);max-width:340px;margin-bottom:26px}
+.done-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;font-family:var(--cond);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#E6B8BD;margin-bottom:30px}
+.done-btn{display:inline-flex;align-items:center;min-height:48px;padding:0 42px;background:var(--accent);border:1px solid var(--accent);color:#fff;text-decoration:none;font-family:var(--cond);font-size:15px;letter-spacing:.24em;text-transform:uppercase}
+.done-btn:hover{background:transparent}
+@keyframes ring{from{stroke-dashoffset:176}to{stroke-dashoffset:0}}
+@keyframes tick{from{stroke-dashoffset:34}to{stroke-dashoffset:0}}
+@keyframes glow{0%,100%{opacity:.75}50%{opacity:1}}
+.rg{stroke-dasharray:176;stroke-dashoffset:176;animation:ring 1.1s .2s ease-out forwards}
+.tk{stroke-dasharray:34;stroke-dashoffset:34;animation:tick .5s 1.1s ease-out forwards}
+.done-card h2{font-size:clamp(40px,12vw,64px)}.done-card h2 span{white-space:nowrap}
+
 </style>
 </head>
 <body>
@@ -335,10 +356,28 @@ legend{padding:0 0 8px}
 </nav>
 </div>
 </div>
+<div class="done" id="done" role="dialog" aria-modal="true" aria-labelledby="done-t" hidden>
+<div class="done-glow"></div>
+<div class="done-card">
+<svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="28" fill="none" stroke="rgba(240,201,205,.15)" stroke-width="1.5"/><circle class="rg" cx="36" cy="36" r="28" fill="none" stroke="#D01530" stroke-width="1.5" transform="rotate(-90 36 36)"/><path class="tk" d="M24 37 L32 45 L48 28" fill="none" stroke="#F0C9CD" stroke-width="2" stroke-linecap="square"/></svg>
+<p class="done-eye">Application</p>
+<h2 id="done-t"><span>Received</span><span class="o">Thank you.</span></h2>
+<hr>
+<p class="done-p">We review every application personally. If there is alignment, you will hear from us.</p>
+<p class="done-tags"><span>No obligation</span><span>Handled discreetly</span></p>
+<a class="done-btn" href="index.html">Back to home</a>
+</div>
+</div>
 <script>
 (function(){
   var form=document.getElementById('apply'),status=document.getElementById('status'),btn=form.querySelector('.send');
   function show(msg){status.textContent=msg;status.hidden=false;}
+  var done=document.getElementById('done');
+  function openDone(){status.hidden=true;done.hidden=false;document.body.style.overflow='hidden';done.querySelector('.done-btn').focus();}
+  function closeDone(){done.hidden=true;document.body.style.overflow='';}
+  done.addEventListener('click',function(e){if(e.target===done||e.target.classList.contains('done-glow'))closeDone();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!done.hidden)closeDone();});
+  if(location.hash==='#preview-done')openDone();
   form.addEventListener('submit',function(e){
     e.preventDefault();
     if(!form.reportValidity())return;
@@ -347,8 +386,8 @@ legend{padding:0 0 8px}
     fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}})
       .then(function(r){
         if(!r.ok)throw new Error('failed');
-        form.reset();btn.textContent='Sent';
-        show('Thank you. Your application is with us, and we will reply to you personally.');
+        form.reset();btn.textContent='Send application';btn.disabled=false;
+        openDone();
       })
       .catch(function(){
         btn.disabled=false;btn.textContent='Send application';
