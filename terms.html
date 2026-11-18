@@ -271,7 +271,6 @@ legend{padding:0 0 8px}
  .step h3{font-size:18px;margin-bottom:8px}
  .step p{font-size:13px;line-height:1.5}
 }
-@media (max-width:640px){.step{justify-content:flex-start}.step>div:last-child{margin-top:auto}}
 .legal-page .bar{background:var(--accent);border-top-color:rgba(255,255,255,.25);color:#fff}
 .legal-page .bar a{color:#fff}
 .apply-form{background:linear-gradient(to bottom,#8A0A1B 0%,#6A0914 50%,#161618 100%)}
@@ -300,6 +299,60 @@ legend{padding:0 0 8px}
 .rg{stroke-dasharray:176;stroke-dashoffset:176;animation:ring 1.1s .2s ease-out forwards}
 .tk{stroke-dasharray:34;stroke-dashoffset:34;animation:tick .5s 1.1s ease-out forwards}
 .done-card h2{font-size:clamp(40px,12vw,64px)}.done-card h2 span{white-space:nowrap}
+.hero .bgimg{filter:grayscale(1) contrast(1.05) brightness(1.15)}
+.cinema .bgimg{filter:grayscale(1) contrast(1.2) brightness(1.9)}
+@media (max-width:640px){.cinema .bgimg{filter:grayscale(1) contrast(1.2) brightness(1.4)}}
+.cinema{background:#0A0204}
+.slides{position:absolute;top:0;bottom:0;right:0;width:58%;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 38%);mask-image:linear-gradient(to right,transparent 0%,#000 38%)}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 32%;opacity:0;animation:slide 18s infinite ease-in-out;transform:scale(1)}
+.slides img:nth-child(1){animation-delay:0s}
+.slides img:nth-child(2){animation-delay:6s}
+.slides img:nth-child(3){animation-delay:12s}
+@keyframes slide{0%{opacity:0;transform:scale(1)}14%{opacity:1}33.4%{opacity:1}47%{opacity:0;transform:scale(1.03)}100%{opacity:0;transform:scale(1)}}
+.cinema .shade{background:linear-gradient(to top,rgba(10,2,4,.85) 0%,rgba(10,2,4,0) 45%)}
+@media (max-width:1000px){.slides{width:100%;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 30%,rgba(0,0,0,.35) 75%);mask-image:linear-gradient(to bottom,#000 0%,#000 30%,rgba(0,0,0,.35) 75%)}}
+@media (max-width:1000px){.slides img{object-position:60% 25%;filter:brightness(.72)}}
+/* text revision */
+.statement-text{max-width:980px;display:flex;flex-direction:column;gap:32px}
+.statement p{font-size:clamp(24px,2.5vw,36px);line-height:1.3}
+.yours-head{display:flex;flex-direction:column;gap:22px}
+.yours .sub{max-width:560px;font-size:18px;line-height:1.6;color:var(--soft)}
+.contact-side .contact-cta{align-self:flex-start;margin-top:8px}
+@media (max-width:640px){.statement-text{gap:24px}.statement p{font-size:clamp(20px,5.6vw,26px)}.yours .sub{font-size:16px}}
+.contact h2{font-size:clamp(56px,7vw,112px)}
+.yours-head{gap:0}
+.yours .second{margin-top:18px;font-family:var(--cond);font-weight:500;font-size:clamp(24px,2.6vw,38px);line-height:1.1;letter-spacing:.06em;text-transform:uppercase;color:#F3E6E7}
+.yours .sub{margin-top:28px;max-width:34ch}
+@media (min-width:1001px){.hero{min-height:100vh;min-height:100svh}.hero .bgimg{object-position:50% 22%!important}}
+@media (max-width:640px){.yours .second{margin-top:14px;font-size:clamp(20px,6vw,26px);letter-spacing:.04em}.yours .sub{margin-top:20px}}
+/* statement A2 */
+.statement-text{max-width:980px;gap:0;align-items:center;text-align:center}
+.statement .st-eye{font-family:var(--cond);font-size:14px;line-height:1;letter-spacing:.4em;color:#E6B8BD;margin-bottom:28px}
+.statement .st-lead{font-family:var(--cond);font-weight:500;font-size:clamp(28px,3.1vw,46px);line-height:1.08;letter-spacing:.01em;max-width:900px}
+.statement .st-line{display:block;width:56px;height:1px;background:var(--accent);margin:40px auto}
+.statement .st-small{font-family:var(--cond);font-weight:400;font-size:clamp(16px,1.35vw,19px);line-height:1.7;letter-spacing:.16em;color:#E6B8BD;max-width:640px}
+.statement .st-strong{color:#fff;font-weight:500;margin-top:20px}
+@media (max-width:640px){.statement .st-eye{font-size:12px;margin-bottom:22px}.statement .st-lead{font-size:clamp(24px,7vw,30px)}.statement .st-line{margin:30px auto}.statement .st-small{font-size:15px;letter-spacing:.12em}}
+.step{justify-content:flex-start;gap:0}
+.step-top{margin-bottom:clamp(40px,5vw,88px)}
+@media (max-width:640px){.step-top{margin-bottom:22px}}
+.contact{align-items:flex-start}
+.contact-side{padding-top:calc(35px + clamp(56px,7vw,112px) * .26)}
+@media (max-width:900px){.contact-side{padding-top:0}}
+/* mobile polish */
+@media (max-width:640px){
+ .steps{grid-template-columns:1fr;gap:10px}
+ .step{padding:22px 22px 24px}
+ .step-top{margin-bottom:18px}
+ .step-top b{font-size:44px}
+ .step h3{font-size:22px;margin-bottom:8px}
+ .step p{font-size:15px;line-height:1.6}
+ .statement{padding:72px 24px}
+ .statement .st-lead{font-size:clamp(21px,5.8vw,25px);line-height:1.12}
+ .about-text{padding:48px var(--pad) 40px}
+ .contact{padding:56px var(--pad) 64px}
+}
+.nw{white-space:nowrap}
 
 </style>
 </head>
@@ -320,7 +373,7 @@ legend{padding:0 0 8px}
 </header>
 <main class="legal"><section><p class="num">01</p><h2>Agreement</h2><div class="body"><p>These terms govern your use of blkrom-media.com, operated by BLKRØM Media ("BLKRØM", "we", "us"), ABN 52 263 267 911, Australia. By using this site, you accept them. If you do not, please do not use the site.</p></div></section><section><p class="num">02</p><h2>Eligibility</h2><div class="body"><p>This website and our services are intended solely for adults aged 18 and over. By using the site or submitting an application, you confirm that you are at least 18 years old.</p></div></section><section><p class="num">03</p><h2>What this site is</h2><div class="body"><p>This website presents information about BLKRØM and allows interested creators to apply to work with us. It is informational. Nothing on this site is an offer, a contract, or a guarantee of any result, income or outcome.</p></div></section><section><p class="num">04</p><h2>Applications</h2><div class="body"><p>Submitting an application does not create a business relationship between us. We review applications at our own discretion and are under no obligation to reply to, accept, or explain a decision on any application.</p><p>You agree that the information you send is accurate, that it is yours to share, and that you are entitled to enter into a working relationship. Any working relationship that follows will be governed by a separate written agreement between us.</p></div></section><section><p class="num">05</p><h2>Content and intellectual property</h2><div class="body"><p>All material on this site — the BLKRØM name and mark, text, layout, design, video and images — belongs to BLKRØM or is used with permission. You may view and share the site as it is intended, but you may not copy, reproduce, adapt or reuse its content for your own commercial purposes without our written consent.</p></div></section><section><p class="num">06</p><h2>Acceptable use</h2><div class="body"><p>You agree not to misuse this site — for example by attempting to gain unauthorised access, interfering with its operation, scraping it at scale, or using it for anything unlawful.</p></div></section><section><p class="num">07</p><h2>External links</h2><div class="body"><p>This site links to third-party platforms. We do not control them and are not responsible for their content, practices or availability.</p></div></section><section><p class="num">08</p><h2>No warranty</h2><div class="body"><p>This site is provided as it is. We do our best to keep it accurate and available, but we do not warrant that it will be uninterrupted, error-free, or that the information on it is complete or current at all times.</p></div></section><section><p class="num">09</p><h2>Limitation of liability</h2><div class="body"><p>To the fullest extent permitted by law, BLKRØM is not liable for any indirect or consequential loss arising from your use of this site, including lost profits or lost opportunity. Nothing in these terms limits any liability that cannot lawfully be limited.</p></div></section><section><p class="num">10</p><h2>Governing law</h2><div class="body"><p>These terms are governed by the laws of Western Australia, Australia, and any dispute will be handled by the courts of that jurisdiction.</p></div></section><section><p class="num">11</p><h2>Changes</h2><div class="body"><p>We may update these terms from time to time. The version published here, with the date shown above, is the one that applies.</p></div></section><section><p class="num">12</p><h2>Contact</h2><div class="body"><p>Questions about these terms: contact@blkrom-media.com.</p></div></section></main>
 <div class="bar">
-<span>© 2026 BLKROM MEDIA · Perth, Western Australia · ABN 52 263 267 911</span>
+<span>© 2026 BLKROM MEDIA · <span class="nw">Perth, Western Australia</span> · <span class="nw">ABN 52 263 267 911</span></span>
 <nav aria-label="Footer">
 <a href="https://www.instagram.com/blkrom_media/" rel="noopener">Instagram</a>
 <a href="privacy.html">Privacy</a>

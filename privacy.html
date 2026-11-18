@@ -271,7 +271,6 @@ legend{padding:0 0 8px}
  .step h3{font-size:18px;margin-bottom:8px}
  .step p{font-size:13px;line-height:1.5}
 }
-@media (max-width:640px){.step{justify-content:flex-start}.step>div:last-child{margin-top:auto}}
 .legal-page .bar{background:var(--accent);border-top-color:rgba(255,255,255,.25);color:#fff}
 .legal-page .bar a{color:#fff}
 .apply-form{background:linear-gradient(to bottom,#8A0A1B 0%,#6A0914 50%,#161618 100%)}
@@ -300,6 +299,60 @@ legend{padding:0 0 8px}
 .rg{stroke-dasharray:176;stroke-dashoffset:176;animation:ring 1.1s .2s ease-out forwards}
 .tk{stroke-dasharray:34;stroke-dashoffset:34;animation:tick .5s 1.1s ease-out forwards}
 .done-card h2{font-size:clamp(40px,12vw,64px)}.done-card h2 span{white-space:nowrap}
+.hero .bgimg{filter:grayscale(1) contrast(1.05) brightness(1.15)}
+.cinema .bgimg{filter:grayscale(1) contrast(1.2) brightness(1.9)}
+@media (max-width:640px){.cinema .bgimg{filter:grayscale(1) contrast(1.2) brightness(1.4)}}
+.cinema{background:#0A0204}
+.slides{position:absolute;top:0;bottom:0;right:0;width:58%;-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 38%);mask-image:linear-gradient(to right,transparent 0%,#000 38%)}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 32%;opacity:0;animation:slide 18s infinite ease-in-out;transform:scale(1)}
+.slides img:nth-child(1){animation-delay:0s}
+.slides img:nth-child(2){animation-delay:6s}
+.slides img:nth-child(3){animation-delay:12s}
+@keyframes slide{0%{opacity:0;transform:scale(1)}14%{opacity:1}33.4%{opacity:1}47%{opacity:0;transform:scale(1.03)}100%{opacity:0;transform:scale(1)}}
+.cinema .shade{background:linear-gradient(to top,rgba(10,2,4,.85) 0%,rgba(10,2,4,0) 45%)}
+@media (max-width:1000px){.slides{width:100%;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 30%,rgba(0,0,0,.35) 75%);mask-image:linear-gradient(to bottom,#000 0%,#000 30%,rgba(0,0,0,.35) 75%)}}
+@media (max-width:1000px){.slides img{object-position:60% 25%;filter:brightness(.72)}}
+/* text revision */
+.statement-text{max-width:980px;display:flex;flex-direction:column;gap:32px}
+.statement p{font-size:clamp(24px,2.5vw,36px);line-height:1.3}
+.yours-head{display:flex;flex-direction:column;gap:22px}
+.yours .sub{max-width:560px;font-size:18px;line-height:1.6;color:var(--soft)}
+.contact-side .contact-cta{align-self:flex-start;margin-top:8px}
+@media (max-width:640px){.statement-text{gap:24px}.statement p{font-size:clamp(20px,5.6vw,26px)}.yours .sub{font-size:16px}}
+.contact h2{font-size:clamp(56px,7vw,112px)}
+.yours-head{gap:0}
+.yours .second{margin-top:18px;font-family:var(--cond);font-weight:500;font-size:clamp(24px,2.6vw,38px);line-height:1.1;letter-spacing:.06em;text-transform:uppercase;color:#F3E6E7}
+.yours .sub{margin-top:28px;max-width:34ch}
+@media (min-width:1001px){.hero{min-height:100vh;min-height:100svh}.hero .bgimg{object-position:50% 22%!important}}
+@media (max-width:640px){.yours .second{margin-top:14px;font-size:clamp(20px,6vw,26px);letter-spacing:.04em}.yours .sub{margin-top:20px}}
+/* statement A2 */
+.statement-text{max-width:980px;gap:0;align-items:center;text-align:center}
+.statement .st-eye{font-family:var(--cond);font-size:14px;line-height:1;letter-spacing:.4em;color:#E6B8BD;margin-bottom:28px}
+.statement .st-lead{font-family:var(--cond);font-weight:500;font-size:clamp(28px,3.1vw,46px);line-height:1.08;letter-spacing:.01em;max-width:900px}
+.statement .st-line{display:block;width:56px;height:1px;background:var(--accent);margin:40px auto}
+.statement .st-small{font-family:var(--cond);font-weight:400;font-size:clamp(16px,1.35vw,19px);line-height:1.7;letter-spacing:.16em;color:#E6B8BD;max-width:640px}
+.statement .st-strong{color:#fff;font-weight:500;margin-top:20px}
+@media (max-width:640px){.statement .st-eye{font-size:12px;margin-bottom:22px}.statement .st-lead{font-size:clamp(24px,7vw,30px)}.statement .st-line{margin:30px auto}.statement .st-small{font-size:15px;letter-spacing:.12em}}
+.step{justify-content:flex-start;gap:0}
+.step-top{margin-bottom:clamp(40px,5vw,88px)}
+@media (max-width:640px){.step-top{margin-bottom:22px}}
+.contact{align-items:flex-start}
+.contact-side{padding-top:calc(35px + clamp(56px,7vw,112px) * .26)}
+@media (max-width:900px){.contact-side{padding-top:0}}
+/* mobile polish */
+@media (max-width:640px){
+ .steps{grid-template-columns:1fr;gap:10px}
+ .step{padding:22px 22px 24px}
+ .step-top{margin-bottom:18px}
+ .step-top b{font-size:44px}
+ .step h3{font-size:22px;margin-bottom:8px}
+ .step p{font-size:15px;line-height:1.6}
+ .statement{padding:72px 24px}
+ .statement .st-lead{font-size:clamp(21px,5.8vw,25px);line-height:1.12}
+ .about-text{padding:48px var(--pad) 40px}
+ .contact{padding:56px var(--pad) 64px}
+}
+.nw{white-space:nowrap}
 
 </style>
 </head>
@@ -320,7 +373,7 @@ legend{padding:0 0 8px}
 </header>
 <main class="legal"><section><p class="num">01</p><h2>Who we are</h2><div class="body"><p>This website at blkrom-media.com is operated by BLKRØM Media ("BLKRØM", "we", "us"), ABN 52 263 267 911, Australia.</p><p>For any matter concerning this notice, including data requests, the contact point is contact@blkrom-media.com. A postal address will be provided on request where a written response is required.</p><p>This notice explains what happens to information when you visit this website. It is short because this site collects very little.</p></div></section><section><p class="num">02</p><h2>What this site collects</h2><div class="body"><p>Nothing you don't send us yourself. This website has no accounts, no shopping cart, no analytics tools, no advertising pixels and no tracking cookies. We do not build profiles of visitors and we do not sell data to anyone.</p><p>Three things are worth knowing:</p><ul><li><strong>Applications.</strong> When you press submit, the form sends your answers to us through Formspree, a form-handling service that receives the submission and forwards it to our inbox. What you enter — typically your name, email address, phone number, social links, location and a short description of your goals — passes through and is stored on Formspree's systems in the process. See Formspree's privacy policy. If the submission fails, the form falls back to opening your own email programme with your answers filled in, addressed to us; in that case nothing is transmitted until you choose to send the email yourself.</li><li><strong>Hosting logs.</strong> This site is hosted on GitHub Pages. Like any web host, GitHub's servers record technical data such as your IP address, browser type and the time of your visit. We do not have access to these logs in an identifiable form. See GitHub's privacy statement.</li><li><strong>Fonts.</strong> The typefaces are loaded from Google Fonts, which means your browser connects to Google's servers and your IP address is visible to them in the process.</li></ul></div></section><section><p class="num">03</p><h2>Why we use it</h2><div class="body"><p>We use what you send us for one purpose only: to read your application, assess whether there is a fit, and reply to you. We do not add applicants to marketing lists and we do not send newsletters.</p></div></section><section><p class="num">04</p><h2>Who sees it</h2><div class="body"><p>The operator of BLKRØM and anyone he expressly authorises to review applications. We do not sell, rent or trade personal information. The only third parties involved are the infrastructure providers named above — our website host, our form provider and our email provider — who process data on our behalf.</p></div></section><section><p class="num">05</p><h2>How long we keep it</h2><div class="body"><p>Applications are kept while we are considering them and for a reasonable period afterwards in case circumstances change. If you would rather we deleted your application immediately, write to us and we will do so.</p></div></section><section><p class="num">06</p><h2>Your rights</h2><div class="body"><p>Depending on where you live, you may have the right to ask what information we hold about you, to have it corrected, to have it deleted, or to object to how we use it. To exercise any of these, email contact@blkrom-media.com.</p><p>If you are in the European Economic Area or the United Kingdom, you also have the right to complain to your local data protection authority. If you are in Australia, you may contact the Office of the Australian Information Commissioner.</p></div></section><section><p class="num">07</p><h2>Links to other sites</h2><div class="body"><p>This site links to external platforms such as Instagram. Once you follow those links, their own privacy policies apply — not this one.</p></div></section><section><p class="num">08</p><h2>Age</h2><div class="body"><p>This website and our services are intended for adults aged 18 and over. We do not knowingly collect information from anyone under 18.</p></div></section><section><p class="num">09</p><h2>Changes</h2><div class="body"><p>If our practices change, we will update this page and revise the date above.</p></div></section><section><p class="num">10</p><h2>Contact</h2><div class="body"><p>Questions about this notice: contact@blkrom-media.com.</p></div></section></main>
 <div class="bar">
-<span>© 2026 BLKROM MEDIA · Perth, Western Australia · ABN 52 263 267 911</span>
+<span>© 2026 BLKROM MEDIA · <span class="nw">Perth, Western Australia</span> · <span class="nw">ABN 52 263 267 911</span></span>
 <nav aria-label="Footer">
 <a href="https://www.instagram.com/blkrom_media/" rel="noopener">Instagram</a>
 <a href="privacy.html">Privacy</a>
